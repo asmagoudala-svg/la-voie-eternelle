@@ -1401,6 +1401,14 @@ button,a{transition:opacity .12s}
 .tl.t3 b,.tl.t3 em{z-index:2;text-shadow:0 2px 10px rgba(0,0,0,.55)}
 .sq .pic.p3:before{background:linear-gradient(180deg,rgba(12,20,16,.1),rgba(12,20,16,.6))}
 .chh .pic.p3:before{background:linear-gradient(180deg,rgba(12,20,16,.25),rgba(12,20,16,.65))}
+
+/* v81 objectifs chiffrés */
+.dlnum{display:flex;align-items:center;gap:4px;margin-left:auto;flex:none}
+.dlnum button{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:inherit;font:700 16px Mulish;line-height:1;padding:0}
+.dlnum input{width:64px;text-align:center;padding:6px 4px;border-radius:10px;border:1px solid var(--line);font:700 15px Mulish;-moz-appearance:textfield}
+.dlnum input::-webkit-outer-spin-button,.dlnum input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.dlnum small{font-size:11.5px;color:var(--mute);min-width:40px;white-space:nowrap}
+.obsum small{font-weight:600;font-size:12px;opacity:.75}
 </style>
 </head>
 <body>
@@ -1494,7 +1502,7 @@ function renderNav(tab){const sp=tab==='coran'?'coran':DAYTABS.includes(tab)?'da
  nav.querySelectorAll('a[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===cur));$('#navc').classList.toggle('on',tab==='accueil')}
 function hubMenu(){}
 /* ---------- v44 Engagement : checklist journalière, série et objectif ---------- */
-const DLG=[['coran','📖','Lire le Coran','versets',[5,10,20,50,100],10,'#sourate-1'],['priere','🕌','Les 5 prières','',null,0,'#priere'],['matin','🌅','Adhkâr du matin','',null,0,'#obj-matin'],['soir','🌙','Adhkâr du soir','',null,0,'#obj-soir'],['hadith','📜','Méditer le hadith du jour','',null,0,'#hadith'],['nom','✨','Découvrir ou réviser un nom d’Allah','',null,0,'#parcours'],['tasbih','📿','Tasbih','dhikr',[10,33,100,300,1000],100,'#tasbih']];
+const DLG=[['coran','📖','Lire le Coran','versets',[5,10,20,50,100],10,'#sourate-1'],['priere','🕌','Les 5 prières','',null,0,'#priere'],['matin','🌅','Adhkâr du matin','invocations',[],0,'#obj-matin'],['soir','🌙','Adhkâr du soir','invocations',[],0,'#obj-soir'],['hadith','📜','Méditer le hadith du jour','',null,0,'#hadith'],['nom','✨','Découvrir ou réviser un nom d’Allah','',null,0,'#parcours'],['tasbih','📿','Tasbih','dhikr',[10,33,100,300,1000],100,'#tasbih']];
 const PRN=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
 function DL(){if(!S.dl)S.dl={on:{coran:1,priere:1,matin:1,soir:1,hadith:1,nom:1},tg:{coran:10,tasbih:100},eng:{dur:40,start:today()},hist:{},best:0,log:{}};const d=S.dl;d.log=d.log||{};d.hist=d.hist||{};d.tg=d.tg||{};return d}
 function dlDay(k){const d=DL(),t=k||today();return d.log[t]||(d.log[t]={})}
@@ -1502,7 +1510,9 @@ function dlMark(k,v){const x=dlDay();x[k]=v===undefined?1:v;save()}
 function dlRead(id){const x=dlDay();x.r=x.r||[];if(!x.r.includes(id)){x.r.push(id);if(x.r.length>400)x.r=x.r.slice(-400);x.rn=(x.rn||0)+1}}
 const nN=d=>d.n||1,dOk=(cid,i,d)=>(S.cnt[today()+'|'+cid+'-'+i]||0)>=nN(d);
 function dlSel(id){const d=DL(),c=CATS.find(x=>x.id===id);d.sel=d.sel||{};if(!d.sel[id])d.sel[id]=c.items.map((x,i)=>x.n?i:-1).filter(i=>i>=0);d.sel[id]=d.sel[id].filter(i=>c.items[i]);return d.sel[id]}
-function dlCatDone(id){const c=CATS.find(c=>c.id===id);if(!c)return [0,0];const L=dlSel(id);return [L.filter(i=>dOk(id,i,c.items[i])).length,L.length]}
+const dlMax={coran:6236,tasbih:100000};
+const dlTgt=k=>{const d=DL();if(k==='matin'||k==='soir'){const L=dlSel(k).length;return Math.max(1,Math.min(L||1,d.tg[k]||L||1))}return d.tg[k]||(DLG.find(g=>g[0]===k)||[])[5]||1};
+function dlCatDone(id){const c=CATS.find(c=>c.id===id);if(!c)return [0,0];const L=dlSel(id);return [Math.min(L.filter(i=>dOk(id,i,c.items[i])).length,dlTgt(id)),dlTgt(id)]}
 const ivNext=(c,from=0)=>{const L=c.items.length;for(let k=0;k<L;k++){const j=(from+k)%L;if(!dOk(c.id,j,c.items[j]))return j}return -1};
 function dlState(g){const d=DL(),x=dlDay(),k=g[0],tg=d.tg[k]||g[5];
  if(k==='coran'){const n=x.rn||0;return {ok:n>=tg,p:`${Math.min(n,tg)}/${tg}`}}
@@ -1522,10 +1532,10 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const done=tot&&n===tot,fin=day>E.dur;
  const msg=!tot?'Choisis au moins un objectif pour commencer.':done?`Journée tenue, al-hamdulillah ! ${st>1?`Ta série continue : ${st} jours.`:'Ta série commence aujourd’hui.'}`:n===0?(st?`Ta série de ${st} jour${st>1?'s':''} t’attend : commence par une petite action.`:'Bismillah : une petite action suffit pour commencer.'):`Plus que ${tot-n} objectif${tot-n>1?'s':''} pour tenir ta journée.`;
  const wk=[...Array(7)].map((_,i)=>{const z=new Date(now);z.setUTCDate(z.getUTCDate()-6+i);const k=z.toISOString().slice(0,10),h=d.hist[k],isT=i===6,cl=dlOK(h)?'ok':h&&h.n>0?'mid':isT?'now':'ko';return `<span class="dlw ${cl}"><i>${'LMMJVSD'[(z.getUTCDay()+6)%7]}</i><b>${dlOK(h)?'✓':h&&h.n>0?'•':''}</b></span>`}).join('');
- const rows=G.map(g=>{const [k,ic,l,u]=g,x=dlState(g),tg=d.tg[k]||g[5];
+ const rows=G.map(g=>{const [k,ic,l,u]=g,x=dlState(g),tg=dlTgt(k);
   if(k==='priere'){const p=dlDay().p||[];return `<div class="dli${x.ok?' ok':''}"><span class="dlc">${x.ok?'✓':''}</span><span class="dlx"><b>${ic} ${l}</b><span class="dlpr">${PRN.map((nm,i)=>`<button type="button" class="${p[i]?'on':''}" data-dlp="${i}" aria-pressed="${!!p[i]}">${nm}</button>`).join('')}</span></span><em>${x.p}</em></div>`}
   return `<a class="dli${x.ok?' ok':''}" href="${k==='coran'&&S.ql?'#sourate-'+S.ql.s:g[6]}" ${k==='coran'&&S.ql?'data-qjump="1"':''}><span class="dlc">${x.ok?'✓':''}</span><span class="dlx"><b>${ic} ${l}</b>${u?`<small>Objectif : ${tg} ${u}</small>`:''}</span><em>${x.p}</em></a>`}).join('');
- const ed=dlCard.edit?`<div class="dled"><h4>Mes objectifs quotidiens</h4>${DLG.map(([k,ic,l,u,opts,def])=>`<div class="dlo"><button type="button" class="dlsw${d.on[k]?' on':''}" data-dlt="${k}" aria-pressed="${!!d.on[k]}" aria-label="${l}"><i></i></button><span>${ic} ${l}</span>${opts?`<select data-dlg="${k}" aria-label="Objectif ${l}">${opts.map(o=>`<option value="${o}"${(d.tg[k]||def)===o?' selected':''}>${o} ${u}</option>`).join('')}</select>`:''}</div>`).join('')}
+ const ed=dlCard.edit?`<div class="dled"><h4>Mes objectifs quotidiens</h4>${DLG.map(([k,ic,l,u,opts,def])=>`<div class="dlo"><button type="button" class="dlsw${d.on[k]?' on':''}" data-dlt="${k}" aria-pressed="${!!d.on[k]}" aria-label="${l}"><i></i></button><span>${ic} ${l}</span>${opts?`<span class="dlnum"><button type="button" data-dlstep="${k}:-1" aria-label="Moins">−</button><input type="number" inputmode="numeric" min="1" max="${k==='matin'||k==='soir'?dlSel(k).length:dlMax[k]}" data-dlg="${k}" value="${dlTgt(k)}" aria-label="Objectif ${l}"><button type="button" data-dlstep="${k}:1" aria-label="Plus">+</button><small>${k==='matin'||k==='soir'?`sur ${dlSel(k).length}`:u}</small></span>`:''}</div>`).join('')}
   <h4>Je m’engage pendant</h4><div class="dldur">${[7,21,40,90].map(v=>`<button type="button" class="${E.dur===v?'on':''}" data-dld="${v}">${v} jours</button>`).join('')}</div>
   <button type="button" class="btn gold wide" data-dlsave="1">Valider mes objectifs</button><button type="button" class="dlrs" data-dlrestart="1">Recommencer les objectifs à partir d’aujourd’hui</button></div>`:'';
  return `<section class="dlcard" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div><div class="dlfl${st?'':' off'}"><span>🔥</span><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div></div>
@@ -1535,16 +1545,17 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  <div class="dlweek">${wk}</div>
  <div class="dlstats"><span><b>${inE}<small>/${E.dur}</small></b><small>jours d’engagement</small></span><span><b>${won}</b><small>journées tenues</small></span><span><b>${Math.max(d.best||0,st)}</b><small>meilleure série</small></span></div>
  <button type="button" class="dledit" data-dledit="1">${dlCard.edit?'Fermer':'⚙️ Modifier mes objectifs'}</button>${ed}</section>`}
-function dlRefresh(){const c=$('#dlc');if(c)c.outerHTML=dlCard()}
-V.addEventListener('click',e=>{const b=e.target.closest('[data-dlp],[data-dlt],[data-dld],[data-dlsave],[data-dledit],[data-dlrestart]');if(!b)return;e.preventDefault();e.stopPropagation();const d=DL(),q=b.dataset;
+function dlRefresh(){const c=$('#dlc');if(c&&c.isConnected){try{c.outerHTML=dlCard()}catch(e){}}}
+V.addEventListener('click',e=>{const b=e.target.closest('[data-dlp],[data-dlt],[data-dld],[data-dlsave],[data-dledit],[data-dlrestart],[data-dlstep]');if(!b)return;e.preventDefault();e.stopPropagation();const d=DL(),q=b.dataset;
  if(q.dlp!==undefined){const x=dlDay();x.p=x.p||[0,0,0,0,0];x.p[+q.dlp]=x.p[+q.dlp]?0:1;navigator.vibrate&&navigator.vibrate(10)}
+ else if(q.dlstep){const [k,st]=q.dlstep.split(':'),up=+st>0,mx=k==='matin'||k==='soir'?dlSel(k).length:dlMax[k],cur=dlTgt(k),ref=up?cur:cur-1,step=k==='tasbih'?(ref<33?1:ref<100?33:100):k==='coran'?(ref<10?1:5):1;d.tg[k]=Math.max(1,Math.min(mx,cur+(up?step:-step)));const y=V.scrollTop;save();dlRefresh();V.scrollTop=y;return}
  else if(q.dlt){d.on[q.dlt]=d.on[q.dlt]?0:1}
  else if(q.dld){d.eng.dur=+q.dld}
  else if(q.dledit){dlCard.edit=!dlCard.edit}
  else if(q.dlsave){dlCard.edit=false;toast('Objectifs validés',`Tu t’engages pendant ${d.eng.dur} jours. Une journée est tenue quand tous tes objectifs sont cochés.`)}
  else if(q.dlrestart){d.eng.start=today();dlCard.edit=false;toast('Objectifs recommencés','Tes objectifs recommencent aujourd’hui. Ta série et ton historique restent conservés.')}
  save();dlRefresh()},true);
-V.addEventListener('change',e=>{if(e.target.id==='mcalf'){const f=e.target.files[0];if(!f)return;if(f.size>2e6){toast('Fichier trop lourd','Exporte le calendrier en CSV (texte), moins de 2 Mo.');return}f.text().then(txt=>{MCALP=mcalParse(txt);MCALP.name=f.name;qSheet('mcal')});e.target.value='';return}const t=e.target;if(t.dataset&&t.dataset.dlg){DL().tg[t.dataset.dlg]=+t.value;save();dlRefresh()}});
+V.addEventListener('change',e=>{if(e.target.id==='mcalf'){const f=e.target.files[0];if(!f)return;if(f.size>2e6){toast('Fichier trop lourd','Exporte le calendrier en CSV (texte), moins de 2 Mo.');return}f.text().then(txt=>{MCALP=mcalParse(txt);MCALP.name=f.name;qSheet('mcal')});e.target.value='';return}const t=e.target;if(t.dataset&&t.dataset.dlg){const k=t.dataset.dlg,mx=k==='matin'||k==='soir'?dlSel(k).length:dlMax[k];DL().tg[k]=Math.max(1,Math.min(mx,Math.round(+t.value)||1));save();dlRefresh()}});
 /* ---------- Accueil ---------- */
 function home(){
   const x=D[S.cur-1],L=D[S.last-1],nd=cnt(S.done),nm=cnt(S.mem),na=cnt(S.seen);
@@ -1817,7 +1828,7 @@ function objView(cid){const c=CATS.find(x=>x.id===cid);if(!c)return invocations(
    ${op?`<button class="obtap${ok?' ok':''}${op?'':' sm'}" data-obc="${i}">${ok?'✓ Validée · annuler':n>1?`<b>${cnt} / ${n}</b> ${op?'Touche à chaque répétition':'Compter'}`:'Valider'}</button>`:''}</article>`}).join('');
  const ed=OBED?`<div class="obed"><h4>Choisis les invocations de ton objectif</h4>${c.items.map((d,i)=>`<button class="obsel${L.includes(i)?' on':''}" data-obsel="${i}"><i>${L.includes(i)?'✓':''}</i><span>${esc(d.t)}${d.n>1?` <small>· ${d.n} fois</small>`:''}</span></button>`).join('')}<button class="btn gold" data-obed="0" style="margin-top:12px">Enregistrer</button></div>`:'';
  return `<div class="obp"><div class="obtop"><button class="ib back" data-go="accueil" aria-label="Retour">${I.back}</button><div><small>MES OBJECTIFS DU JOUR</small><h1>${isM?'🌅':'🌙'} Adhkâr du ${isM?'matin':'soir'}</h1></div></div>
-  <div class="obsum${b&&a===b?' ok':''}"><b>${b&&a===b?'✓ Objectif atteint, qu’Allah l’accepte':`${a} / ${b} validée${a>1?'s':''}`}</b><div class="prog"><i style="width:${b?a/b*100:0}%"></i></div></div>
+  <div class="obsum${b&&a>=b?' ok':''}"><b>${b&&a>=b?'✓ Objectif atteint, qu’Allah l’accepte':`${a} / ${b} validée${a>1?'s':''}${b<L.length?` <small>(objectif : ${b} sur ${L.length})</small>`:''}`}</b><div class="prog"><i style="width:${b?a/b*100:0}%"></i></div></div>
   <div class="dtog obtog" role="tablist"><button role="tab" class="${S.dmode!=='ph'?'on':''}" data-dmode="ar">Arabe</button><button role="tab" class="${S.dmode==='ph'?'on':''}" data-dmode="ph">Phonétique</button></div>
   ${b?cards:'<p class="muted pad">Aucune invocation choisie : touche « Modifier mes invocations ».</p>'}
   <button class="btn ghost" data-obed="${OBED?0:1}" style="margin-top:16px">${OBED?'Fermer':'✏️ Modifier mes invocations'}</button>${ed}
