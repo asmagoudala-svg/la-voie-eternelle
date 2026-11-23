@@ -1304,6 +1304,19 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .obc .obar{font-size:22px;line-height:1.85;padding:0 14px;margin:0}.obc .obph{padding:0 14px}
 .obtr{margin:6px 14px 0;font-size:13px}.obtr summary{cursor:pointer;color:var(--gold2);font:700 12.5px Mulish;padding:4px 0}.obtr .obfr{font-size:14px}
 .obc .obtap{width:calc(100% - 28px);margin:10px 14px 14px;min-height:48px}.obc .obtap.sm{min-height:38px;margin-top:0;font-size:13.5px;border-radius:12px}.obtap.sm b{font-size:18px}
+
+/* v63 invocations compactes */
+.chh.sm .chero{height:180px!important}.chh.sm .dh{bottom:36px}.chh.sm .dh h1{font-size:24px!important;line-height:1.05}.chh.sm .dh span{font-size:12px}.chh.sm .back{top:10px;left:10px;width:40px;height:40px}
+.chh .chero{height:200px!important}.chh>h1{font-size:38px;bottom:40px}
+.dtx2{padding:8px 12px 10px}.dtog{margin-bottom:6px}.dtog button{min-height:32px}
+.dar2{font-size:23px;line-height:1.8;margin:0 0 4px}
+.dmore{border-top:1px solid var(--line);padding-top:6px}.dmore summary{cursor:pointer;font:700 12.5px Mulish;color:var(--gold2);padding:2px 0;list-style:revert}
+.dmore .dfr{border:0;padding-top:6px;font-size:14.5px}.dmore .fadl{margin-top:8px;padding:9px 12px;font-size:14px}.dmore .dsrc{margin:8px 0 2px}
+.tap{padding:10px;margin:4px 0 10px;border-radius:18px;flex-direction:row;justify-content:center;gap:12px}.tap b{font-size:32px}.tap small{font-size:18px}
+.acts .cbtn{min-height:40px;font-size:14px}.acts .fav{width:44px}
+.swh{margin-top:10px;font-size:12px}
+.ri{padding:10px 14px;min-height:54px;border-radius:16px;gap:12px}.ri .tt{font-size:19px}.ri .num{width:30px;height:30px;font-size:13px}.rows{gap:8px}
+.sheet{padding-top:18px}
 </style>
 </head>
 <body>
@@ -1709,19 +1722,18 @@ function catView(id){
   if(id==='recompenses')return `${hero({sc:{s:['#BFEBD2','#E9F8EE','#FFF6DC'],c:'sun',l:'hills',m:'chest',g:['#8ED19C','#5DB57A','#3E9A61']}},'RÉCOMPENSES<br>INESTIMABLES')}<div class="sheet"><div class="rcs">${c.items.map((d,i)=>{const bg=RC[i%RC.length],lt=['#E9E2CF','#C9A465','#DCE6D6'].includes(bg);return `<a class="rc" href="#dua-recompenses-${i}" style="background:${bg};color:${lt?'#1d3327':'#fff'};box-shadow:0 6px 16px rgba(41,71,53,.12)">${esc(d.h||d.t)}</a>`}).join('')}</div></div>`;
   const done=c.items.filter((d,i)=>d.n&&(S.cnt[today()+'|'+c.id+'-'+i]||0)>=d.n).length,withN=c.items.filter(d=>d.n).length;
   return `${hero(c,c.name.replace(/^(Le |La |Les |L')/,'').toUpperCase())}<div class="sheet"><p class="lead">${c.sub} · ${c.items.length} invocation${c.items.length>1?'s':''}${withN?` · ${done}/${withN} répétées aujourd'hui`:''}</p><div class="rows">${c.items.map((d,i)=>row(c.id,i,d,i+1)).join('')}</div></div>`}
+document.addEventListener('toggle',e=>{if(e.target.classList&&e.target.classList.contains('dmore')){S.dmore=e.target.open?1:0;save()}},true);
 function duaView(cid,i){const c=CATS.find(x=>x.id===cid),d=c&&c.items[i];if(!d)return invocations();
   const key=cid+'-'+i,cnt=S.cnt[today()+'|'+key]||0,n=d.n||0;
   return `<div class="chh sm">${cpic(c,'chero')}<button class="ib back" data-go="cat-${cid}" aria-label="Retour à ${c.name}">${I.back}</button><div class="dh"><span>${c.name} · ${i+1}/${c.items.length}</span><h1 class="bc" style="${(d.h||d.t).length>48?'font-size:27px':''}">${esc(d.h||d.t)}</h1></div></div>
   <div class="sheet">
    <div class="dtx2"><div class="dtog" role="tablist"><button role="tab" class="${S.dmode!=='ph'?'on':''}" aria-selected="${S.dmode!=='ph'}" data-dmode="ar">Arabe</button><button role="tab" class="${S.dmode==='ph'?'on':''}" aria-selected="${S.dmode==='ph'}" data-dmode="ph">Phonétique</button></div>
-   ${S.dmode==='ph'?`<p class="dph">${esc(translit(d.ar))}</p>`:`<div class="ar dar2" lang="ar">${d.ar}</div>`}
-   <p class="dfr">${esc(d.fr)}</p></div>
-   ${d.f?`<div class="fadl"><b>${STAR.replace(/22/g,'14')} Récompense</b>${esc(d.f)}</div>`:''}
-   <p class="dsrc">${gb(d.g)} <span>${esc(d.src)}</span></p>
+   ${S.dmode==='ph'?`<p class="dph">${esc(translit(d.ar))}</p>`:`<div class="ar dar2" lang="ar">${d.ar.replace(/\n\s*\n+/g,'§').replace(/\n/g,' ').replace(/§/g,'\n')}</div>`}
+   <details class="dmore"${S.dmore?' open':''}><summary>Traduction${d.f?', récompense':''} et source</summary><p class="dfr">${esc(d.fr)}</p>${d.f?`<div class="fadl"><b>${STAR.replace(/22/g,'14')} Récompense</b>${esc(d.f)}</div>`:''}<p class="dsrc">${gb(d.g)} <span>${esc(d.src)}</span></p></details></div>
    ${n?`<button class="tap ${cnt>=n?'full':''}" data-cnt="${key}" data-n="${n}"><b>${Math.min(cnt,n)}<small> / ${n}</small></b><span>${cnt>=n?'Accompli aujourd\'hui · touche pour recommencer':'Touche à chaque répétition'}</span></button>`:''}
    <div class="acts"><button class="cbtn" data-say="${key}">${SVGS.play} Écouter</button><button class="cbtn fav" data-fav="${key}" aria-label="Favorite">${SVGS.heart(S.fav[key])}</button><button class="cbtn" data-dcopy="${key}">${SVGS.copy} Copier</button></div>
    <div class="swh">${i>0?'‹ ':''}Glisse du doigt pour changer d'invocation${i<c.items.length-1?' ›':''}<div class="tdots">${c.items.map((_,k)=>`<i class="${k===i?'on':''}"></i>`).join('')}</div></div>
-   <p class="small muted" style="margin-top:14px">Audio : voix de synthèse (prototype) ; la version finale utilisera une récitation enregistrée.</p></div>`}
+   </div>`}
 /* ---------- Tasbih ---------- */
 const TS=[
 {ar:'سُبْحَانَ اللَّهِ',ph:'Subhâna Llâh',fr:'Gloire à Allah',t:33,f:"Cent tasbîh : mille bonnes actions inscrites ou mille péchés effacés.",src:'Muslim n° 2698',g:'m'},
