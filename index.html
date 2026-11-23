@@ -1426,6 +1426,36 @@ button,a{transition:opacity .12s}
 .tl:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,18,14,.45) 0%,rgba(10,18,14,0) 45%,rgba(10,18,14,.18) 100%)}
 .tl b,.tl em{z-index:2}
 .tl b{text-shadow:0 1px 8px rgba(0,0,0,.4)}
+
+/* v87 Accès rapide du Mushaf */
+#qquick{display:none;position:absolute;top:calc(10px + env(safe-area-inset-top));right:56px;z-index:42;width:34px;height:34px;border-radius:50%;border:1px solid rgba(217,185,119,.6);background:rgba(13,26,19,.85);color:#e2c88e;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.3);padding:0}
+#qquick svg{width:19px;height:19px}
+#phone.mush:not(.imm):not(.hubon) #qquick{display:flex}
+.qa-c{margin-top:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(217,185,119,.25)}
+.qa-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.qa-h label{font:800 11px Mulish,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#cdbf9c}
+.qa-val{display:flex;align-items:center;gap:8px;min-width:0}
+.qa-val output{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:800 14px Mulish,sans-serif;color:#f3ead2}
+.qa-mk{flex:none;width:36px;height:36px;display:grid;place-items:center;padding:0;border-radius:11px;border:1px solid rgba(217,185,119,.4);background:transparent;color:#cdbf9c;cursor:pointer}
+.qa-mk svg{width:17px;height:17px}
+.qa-mk.on{background:linear-gradient(135deg,#b8945a,#e2c88e);color:#1a2a1f;border:0}
+.qa-row{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:8px}
+.qa-row button{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;border:1px solid rgba(217,185,119,.35);background:rgba(217,185,119,.08);color:#e2c88e;font:800 21px/1 Mulish,sans-serif;cursor:pointer}
+.qa-row button:disabled{opacity:.3}
+.qa-row input[type=range]{width:100%;height:44px;margin:0;accent-color:#c9a465;touch-action:pan-x}
+.qa-pv{margin-top:12px;padding:12px 14px;border-radius:16px;background:#fbf6ea;border:1px solid #e3d7bd;min-height:150px}
+.qa-pvh{display:flex;justify-content:space-between;gap:10px;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid #eadfc6;font:800 10px Mulish,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a8a68}
+.qa-pvh span:last-child{letter-spacing:0;text-transform:none;color:#8a6a2c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qa-ar{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-family:'Amiri Quran','Amiri',serif;font-size:25px;line-height:1.95;direction:rtl;text-align:right;color:#1d2a20}
+.qa-fr{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;margin-top:8px;padding-top:8px;border-top:1px dashed #e3d7bd;font:400 14px/1.55 Mulish,sans-serif;color:#4d5a50}
+.qa-ld{min-height:110px;display:grid;place-items:center;color:#9a8a68;font:600 13px Mulish,sans-serif}
+.qa-go{margin-top:12px;min-height:52px;font-size:16px}
+#qsheet[data-kind=quick] .qsp{overflow-y:auto;overscroll-behavior:contain}
+#phone.light .qa-c{background:#fffdf7;border-color:#e3d7bd}
+#phone.light .qa-h label{color:#8a6a2c}
+#phone.light .qa-val output{color:#1f3a2b}
+#phone.light .qa-mk{color:#8a6a2c;border-color:#e3d7bd}
+#phone.light .qa-row button{color:#8a6a2c;border-color:#e3d7bd;background:#f4eee1}
 </style>
 </head>
 <body>
@@ -2260,7 +2290,7 @@ function qHub(sub){if(sub==='trad'||sub==='vocab')return `<div class="qhub qhub2
   <div class="qpl3">${QPILL.map(([k,l,dsc,ic,subs])=>`<button class="${pl&&pl[0]===k?'on':''}" data-qpill="${k}"><span class="qpli">${ic}</span><b>${l}</b><small>${dsc}</small></button>`).join('')}</div>
   ${pl?`<div class="qsubs">${pl[4].map(k=>`<button class="${k===sub?'on':''}" data-qsubgo="${k}"><span>${QSUBL[k][0]}</span><b>${QSUBL[k][1]}</b><small>${info[k]}</small></button>`).join('')}</div>`:''}</div>`}
 function qChrome(){['qrail','qfab'].forEach(i=>{const e=document.getElementById(i);e&&e.remove()});qFabUI()}
-function qFabUI(){mHeadEl();if(!qFabUI.sc){qFabUI.sc=1;V.addEventListener('scroll',()=>{cancelAnimationFrame(qFabUI.r);qFabUI.r=requestAnimationFrame(mHeadUpd)},{passive:true})}requestAnimationFrame(mHeadUpd);let bk=$('#qback');if(!bk){bk=document.createElement('button');bk.id='qback';bk.setAttribute('aria-label','Revenir à l’accueil');bk.innerHTML='‹';$('#phone').appendChild(bk);bk.onclick=()=>{qStop();location.hash='#accueil'}}let mo=$('#qmore');if(!mo){mo=document.createElement('button');mo.id='qmore';mo.setAttribute('aria-label','Outils de lecture');mo.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';mo.setAttribute('aria-label','Outils de lecture');$('#phone').appendChild(mo);mo.onclick=()=>qSheet('tools')}const on=QPLAY&&QPLAY.seq;$('#phone').classList.toggle('imm',!!(on&&QPLAY.imm));let x=$('#qimx');if(!x){x=document.createElement('button');x.id='qimx';x.setAttribute('aria-label','Arrêter la récitation');x.innerHTML='<span></span>';$('#phone').appendChild(x);x.onclick=()=>qStop()}qMini(on);const np=$('#nplay'),pl=on&&!QPLAY.paused;np&&(np.classList.toggle('on',!!on),np.setAttribute('aria-label',pl?'Mettre en pause':'Lancer la récitation'),np.querySelector('.npl')&&(np.querySelector('.npl').textContent=pl?'Pause':'Play'),np.querySelector('svg').innerHTML=pl?'<rect x="6.5" y="5.5" width="4" height="13" rx="1" fill="currentColor"/><rect x="13.5" y="5.5" width="4" height="13" rx="1" fill="currentColor"/>':'<path d="M8 5.5v13l11-6.5z" fill="currentColor"/>');document.querySelectorAll('[data-qplayall]').forEach(b=>{b.innerHTML=on?'■ Stop':'▶ Play';b.classList.toggle('on',!!on)})}
+function qFabUI(){mHeadEl();qaBtn();if(!qFabUI.sc){qFabUI.sc=1;V.addEventListener('scroll',()=>{cancelAnimationFrame(qFabUI.r);qFabUI.r=requestAnimationFrame(mHeadUpd)},{passive:true})}requestAnimationFrame(mHeadUpd);let bk=$('#qback');if(!bk){bk=document.createElement('button');bk.id='qback';bk.setAttribute('aria-label','Revenir à l’accueil');bk.innerHTML='‹';$('#phone').appendChild(bk);bk.onclick=()=>{qStop();location.hash='#accueil'}}let mo=$('#qmore');if(!mo){mo=document.createElement('button');mo.id='qmore';mo.setAttribute('aria-label','Outils de lecture');mo.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';mo.setAttribute('aria-label','Outils de lecture');$('#phone').appendChild(mo);mo.onclick=()=>qSheet('tools')}const on=QPLAY&&QPLAY.seq;$('#phone').classList.toggle('imm',!!(on&&QPLAY.imm));let x=$('#qimx');if(!x){x=document.createElement('button');x.id='qimx';x.setAttribute('aria-label','Arrêter la récitation');x.innerHTML='<span></span>';$('#phone').appendChild(x);x.onclick=()=>qStop()}qMini(on);const np=$('#nplay'),pl=on&&!QPLAY.paused;np&&(np.classList.toggle('on',!!on),np.setAttribute('aria-label',pl?'Mettre en pause':'Lancer la récitation'),np.querySelector('.npl')&&(np.querySelector('.npl').textContent=pl?'Pause':'Play'),np.querySelector('svg').innerHTML=pl?'<rect x="6.5" y="5.5" width="4" height="13" rx="1" fill="currentColor"/><rect x="13.5" y="5.5" width="4" height="13" rx="1" fill="currentColor"/>':'<path d="M8 5.5v13l11-6.5z" fill="currentColor"/>');document.querySelectorAll('[data-qplayall]').forEach(b=>{b.innerHTML=on?'■ Stop':'▶ Play';b.classList.toggle('on',!!on)})}
 
 /* v59 mini-lecteur compact du Mushaf (remplace la barre du bas pendant la récitation) */
 function qMini(on){let m=$('#qmini');if(!m){m=document.createElement('div');m.id='qmini';m.innerHTML=`<button class="qm-pp" data-qm="pp" aria-label="Pause"></button><button class="qm-i" data-qm="info" aria-label="Lecture en cours"><b id="qm-t"></b><small id="qm-s"></small></button><button class="qm-b" data-qm="sur" aria-label="Sourate et versets">📖</button><button class="qm-b" data-qm="rec" aria-label="Récitateur">🎙️</button><button class="qm-b qm-r" data-qm="rep" aria-label="Répétition"><span>↻</span><i id="qm-r"></i></button><button class="qm-b qm-x" data-qm="stop" aria-label="Arrêter la récitation"><span></span></button>`;$('#phone').appendChild(m);
@@ -2376,6 +2406,7 @@ function qSheet(kind,o){let sh=$('#qsheet');if(!sh){sh=document.createElement('d
  if(kind==='vemo'){sh.dataset.kind=kind;sh.innerHTML=vemoSheet();requestAnimationFrame(()=>sh.classList.add('on'));return}
  if(['pmeth','ploc','pnotif','mcal'].includes(kind)){sh.dataset.kind=kind;sh.innerHTML=prSheet(kind);requestAnimationFrame(()=>sh.classList.add('on'));return}
  sh.dataset.kind=kind;
+ if(kind==='quick'){sh.innerHTML=qaBody();requestAnimationFrame(()=>sh.classList.add('on'));return}
  if(kind==='sur'){const n=+V.dataset.qs||1,[ra,rb]=qRange(n);QSHS=n;
   sh.innerHTML=`<div class="qsp"><span class="qgrip"></span><div class="qsh2"><h3>Choisir la lecture</h3><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div>
   <p class="qsd">Sélectionne une sourate et une plage de versets à afficher et à écouter.</p>
@@ -2408,6 +2439,41 @@ function qSheet(kind,o){let sh=$('#qsheet');if(!sh){sh=document.createElement('d
     <div class="qlist">${RECS.map(([id,nm])=>`<button class="qrow ${qrec()===id?'on':''}" data-qrecid="${id}"><span class="qmic">${QI.mic}</span><span class="qn"><b>${nm}</b></span><span class="qck">${qrec()===id?'✓':''}</span></button>`).join('')}</div>
     <p class="small muted" style="margin:10px 4px 0">Récitations diffusées par EveryAyah.</p></div>`;
  requestAnimationFrame(()=>sh.classList.add('on'))}
+
+/* ---------- v87 Accès rapide du Mushaf ---------- */
+const QA_ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></svg>';
+const QA_MK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4.8A1.8 1.8 0 0 1 7.8 3h8.4A1.8 1.8 0 0 1 18 4.8V21l-6-3.8L6 21Z"/></svg>';
+let QA={s:1,v:1,tk:0};
+function qaPref(){if(!S.qa||typeof S.qa!=='object')S.qa={s:null,v:{}};if(!S.qa.v)S.qa.v={};return S.qa}
+function qaPrefV(n){const v=+qaPref().v[n];return Number.isInteger(v)&&v>=1?v:null}
+function qaCnt(n){return QIDX?QIDX[n-1][5]:286}
+function qaBtn(){let b=$('#qquick');if(!b){b=document.createElement('button');b.id='qquick';b.setAttribute('aria-label','Accès rapide');b.innerHTML=QA_ICO;$('#phone').appendChild(b);b.onclick=()=>qaOpen()}return b}
+async function qaOpen(){await qIndex();const P=qaPref(),cs=mHeadUpd.s||+V.dataset.qs||1,cv=mHeadUpd.v||1;
+ if(P.s){QA.s=P.s;QA.v=qaPrefV(P.s)||1}else{QA.s=cs;QA.v=cv}QA.v=Math.min(Math.max(1,QA.v),qaCnt(QA.s));
+ qSheet('quick');qaUpd(1)}
+function qaBody(){return `<div class="qsp"><span class="qgrip"></span><div class="qsh2"><div><small class="qkick">Navigation instantanée</small><h3>Accès rapide</h3></div><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div>
+ <p class="qsd">Choisis une sourate et un verset, puis ouvre-le directement.</p>
+ <div class="qa-c"><div class="qa-h"><label for="qa-s">Sourate</label><div class="qa-val"><output id="qa-sl"></output><button class="qa-mk" id="qa-ms" data-qa="ms" aria-pressed="false" title="Toujours commencer ici">${QA_MK}</button></div></div>
+  <div class="qa-row"><button data-qa="s-" aria-label="Sourate précédente">−</button><input id="qa-s" type="range" min="1" max="114" step="1" aria-label="Choisir la sourate"><button data-qa="s+" aria-label="Sourate suivante">+</button></div></div>
+ <div class="qa-c"><div class="qa-h"><label for="qa-v">Verset</label><div class="qa-val"><output id="qa-vl"></output><button class="qa-mk" id="qa-mv" data-qa="mv" aria-pressed="false" title="Toujours commencer à ce verset">${QA_MK}</button></div></div>
+  <div class="qa-row"><button data-qa="v-" aria-label="Verset précédent">−</button><input id="qa-v" type="range" min="1" step="1" aria-label="Choisir le verset"><button data-qa="v+" aria-label="Verset suivant">+</button></div></div>
+ <div class="qa-pv" aria-live="polite"><div class="qa-pvh"><span>Aperçu</span><span id="qa-ref"></span></div><div id="qa-pb"></div></div>
+ <button class="btn gold wide qa-go" data-qa="go">Ouvrir</button></div>`}
+function qaUpd(full){const sh=$('#qsheet');if(!sh||sh.dataset.kind!=='quick'||!QIDX)return;const {s:n,v}=QA,r=QIDX[n-1],c=r[5],P=qaPref();
+ const si=$('#qa-s'),vi=$('#qa-v');if(full||document.activeElement!==si)si.value=n;vi.max=c;if(full||document.activeElement!==vi)vi.value=v;
+ $('#qa-sl').textContent=`${n}. ${r[2]}`;$('#qa-vl').textContent=`Verset ${v} / ${c}`;$('#qa-ref').textContent=`${r[2]} · v. ${v}`;
+ sh.querySelector('[data-qa="s-"]').disabled=n<=1;sh.querySelector('[data-qa="s+"]').disabled=n>=114;sh.querySelector('[data-qa="v-"]').disabled=v<=1;sh.querySelector('[data-qa="v+"]').disabled=v>=c;
+ const ms=+P.s===n,mv=qaPrefV(n)===v;[['#qa-ms',ms,'cette sourate'],['#qa-mv',mv,'ce verset']].forEach(([id,on,l])=>{const b=$(id);b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.setAttribute('aria-label',(on?'Ne plus toujours commencer à ':'Toujours commencer à ')+l)});
+ const pb=$('#qa-pb'),d=QC[n];
+ if(d){pb.innerHTML=`<div class="qa-ar" lang="ar" dir="rtl">${esc(d.ar[v-1]||'')}</div><div class="qa-fr">${esc(d.fr[v-1]||'')}</div>`}
+ else{pb.innerHTML='<div class="qa-ld">Chargement de l’aperçu…</div>';const t=++QA.tk;qSura(n).then(()=>{if(t===QA.tk&&QA.s===n)qaUpd()}).catch(()=>{if(t===QA.tk)pb.innerHTML='<div class="qa-ld">Aperçu indisponible pour le moment.</div>'})}}
+function qaSetS(n){n=Math.min(114,Math.max(1,+n||1));if(n!==QA.s){QA.s=n;QA.v=Math.min(qaPrefV(n)||1,qaCnt(n))}qaUpd()}
+function qaSetV(v){QA.v=Math.min(qaCnt(QA.s),Math.max(1,+v||1));qaUpd()}
+function qaClick(k){const P=qaPref();
+ if(k==='s-')return qaSetS(QA.s-1);if(k==='s+')return qaSetS(QA.s+1);if(k==='v-')return qaSetV(QA.v-1);if(k==='v+')return qaSetV(QA.v+1);
+ if(k==='ms'){P.s=+P.s===QA.s?null:QA.s;save();qaUpd();toast(P.s?'Point de départ enregistré':'Point de départ retiré',P.s?`L’accès rapide s’ouvrira sur ${QIDX[QA.s-1][2]}.`:'L’accès rapide s’ouvrira sur ta lecture en cours.');return}
+ if(k==='mv'){if(qaPrefV(QA.s)===QA.v)delete P.v[QA.s];else P.v[QA.s]=QA.v;save();qaUpd();return}
+ if(k==='go'){const {s:n,v}=QA;qSheetClose();qStop();S.qrange=null;save();qGoTo(n,v)}}
 let QSHS=1,QNOTE=null;
 function qSheetClose(){const sh=$('#qsheet');sh&&sh.classList.remove('on')}
 function fillSurList(){const el=$('#qlist');if(!el||!QIDX)return;const q=norm(QQ);
@@ -2416,8 +2482,8 @@ function fillSurList(){const el=$('#qlist');if(!el||!QIDX)return;const q=norm(QQ
  const c=$('#qcs');c&&(c.textContent=`${QSHS} · ${QIDX[QSHS-1][2]}`)}
 function qFillRange(n,a,b){const c=QIDX[n-1][5],o=Array.from({length:c},(_,i)=>`<option value="${i+1}">Verset ${i+1}</option>`).join('');$('#qra').innerHTML=o;$('#qrb').innerHTML=o;$('#qra').value=a;$('#qrb').value=b}
 function qNoteWords(){const {s,v,sel}=QNOTE,t=QC[s].ar[v-1];let wi=0;$('#qnw').innerHTML=toks(t).filter(k=>k.w).map(k=>{wi++;return `<button class="qwc ${sel.has(wi)?'on':''}" data-qnw="${wi}">${k.x}</button>`}).join('');$('#qncount').textContent=`${sel.size} mot${sel.size>1?'s':''} surligné${sel.size>1?'s':''}`}
-function qSheetInput(e){if(e.target.id==='plq'){clearTimeout(PLT);const v=e.target.value;PLT=setTimeout(()=>plSearch(v),250);return}if(e.target.id&&e.target.id.startsWith('qn-'))return qNavSync(e.target.id,e.target.value);if(e.target.id==='cq'){QQ=e.target.value;fillSurList()}if(e.target.id==='mqq'){MQQ=e.target.value;clearTimeout(MQT);const w=MQQ.trim();if(w.length<2){MQC=null;MQR=null;MQERR='';mqRender();return}MQT=setTimeout(()=>mqDoCity(w),300)}}
-function qSheetClick(e){const sh=$('#qsheet');if(e.target===sh)return qSheetClose();const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+function qSheetInput(e){if(e.target.id==='qa-s')return qaSetS(e.target.value);if(e.target.id==='qa-v')return qaSetV(e.target.value);if(e.target.id==='plq'){clearTimeout(PLT);const v=e.target.value;PLT=setTimeout(()=>plSearch(v),250);return}if(e.target.id&&e.target.id.startsWith('qn-'))return qNavSync(e.target.id,e.target.value);if(e.target.id==='cq'){QQ=e.target.value;fillSurList()}if(e.target.id==='mqq'){MQQ=e.target.value;clearTimeout(MQT);const w=MQQ.trim();if(w.length<2){MQC=null;MQR=null;MQERR='';mqRender();return}MQT=setTimeout(()=>mqDoCity(w),300)}}
+function qSheetClick(e){const sh=$('#qsheet');if(e.target===sh)return qSheetClose();const b=e.target.closest('button');if(!b)return;const d=b.dataset;if(d.qa)return qaClick(d.qa);
  if(d.qclose)return qSheetClose();
  if(d.qfavcur){const [fs,fv]=d.qfavcur.split(':').map(Number);togFav(fs,fv);qSheet('tools');return}
  if(d.qcfset){QCF=d.qcfset}
