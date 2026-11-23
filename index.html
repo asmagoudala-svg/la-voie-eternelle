@@ -1361,6 +1361,7 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .hqc .hq{color:#f6efdc!important;position:relative}
 .hqf{margin-top:8px}.hqf>*{border-top-color:rgba(217,185,119,.35)!important}.hqf .src{margin:0;color:#cbbf9f}.hqf .src a{color:#e2c88e}
 #phone.light .hqc{color:#f3ead2}
+.hqf{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-top:10px;border-top:1px dashed rgba(217,185,119,.35)}.hqr{font-size:13px;color:#cbbf9f}
 </style>
 </head>
 <body>
@@ -1701,7 +1702,7 @@ function hadith(){
   <div class="hsheet">
    <article class="hqc"><span class="hqm" aria-hidden="true">❝</span><div class="hql">Le Prophète ﷺ a dit</div>
    ${S.lang==='fr'?`<p class="hq">${esc(x.fr)}</p>`:tri(x.fr,x.ar,'hq')}
-   <div class="hqf">${SRC(x.g,x.src)}</div></article>
+   <div class="hqf"><span class="gbadge ${GR[x.g][1]}">✓ ${GR[x.g][0].split(' · ')[0]}</span><span class="hqr">${esc(x.src)}</span></div></article>
    ${CHIPS(x.ar)}
    <div class="fadl"><b>${STAR.replace(/22/g,'14')} Pour aujourd'hui</b>${esc(x.m)}</div>
    <button class="btn ${rd?'done':''}" style="margin-top:14px" data-hread="${HD}">${rd?'✓ Hadith médité':"J'ai médité ce hadith"}</button>
