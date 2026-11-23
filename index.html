@@ -1363,6 +1363,14 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 #phone.light .hqc{color:#f3ead2}
 .hqf{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-top:10px;border-top:1px dashed rgba(217,185,119,.35)}.hqr{font-size:13px;color:#cbbf9f}
 .pic>img.hph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.hcard .pic:after,.himg .pic:after{z-index:0}.pic .cap{z-index:2}.himg .pic:after{content:'';position:absolute;inset:auto 0 0 0;height:65%;background:linear-gradient(transparent,rgba(8,16,12,.75))}
+
+/* v76 tactile instantané + zoom des invocations */
+a,button,summary,label,input,select,[data-go],[role=button]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:active,a:active,summary:active{opacity:.72;transition:opacity 0s}
+button,a{transition:opacity .12s}
+#phone.dz #view{touch-action:pan-y}
+#phone.dz .dar2{font-size:calc(23px*var(--dz,1))!important}#phone.dz .dph{font-size:calc(16px*var(--dz,1))!important}#phone.dz .dmore .dfr{font-size:calc(14.5px*var(--dz,1))!important}#phone.dz .dmore .fadl{font-size:calc(14px*var(--dz,1))!important}
+#phone.dz .obar{font-size:calc(22px*var(--dz,1))!important}#phone.dz .obph{font-size:calc(16px*var(--dz,1))!important}#phone.dz .obfr{font-size:calc(14px*var(--dz,1))!important}
 </style>
 </head>
 <body>
@@ -2385,7 +2393,7 @@ function qSheetClick(e){const sh=$('#qsheet');if(e.target===sh)return qSheetClos
  if(d.qpick){QSHS=+d.qpick;fillSurList();qFillRange(QSHS,1,QIDX[QSHS-1][5]);return}
  if(d.qrange){const n=QSHS,c=QIDX[n-1][5];let a=+$('#qra').value,bb=+$('#qrb').value;if(bb<a)[a,bb]=[bb,a];S.qrange=d.qrange==='all'||(a===1&&bb===c)?null:{s:n,a,b:bb};S.ql={s:n,v:a};QJUMP=1;save();qSheetClose();
    const sub=QSUB();if(sub==='mushaf'){if(location.hash==='#sourate-'+n)route();else location.hash='#sourate-'+n}else route();return}
- if(d.qrecid){QSET().rec=d.qrecid;save();qStop();qSheetClose();toast('Récitateur',recName());if(QSUB()==='reglages')route();return}
+ if(d.qrecid){QSET().rec=d.qrecid;save();qSheetClose();const P=QPLAY;if(P&&P.seq){if(P.a){P.a.onended=null;P.a.pause()}clearTimeout(qStep.t);P.paused=0;qStep();toast('Récitateur',recName()+' · reprise au verset en cours')}else toast('Récitateur',recName());if(QSUB()==='reglages')route();return}
  if(d.qnw){const w=+d.qnw;QNOTE.sel.has(w)?QNOTE.sel.delete(w):QNOTE.sel.add(w);qNoteWords();return}
  if(d.qnclear){QNOTE.sel.clear();qNoteWords();return}
  if(d.qnsave){const {s,v,id,sel}=QNOTE;if(!sel.size){toast('Choisis au moins un mot','Touche les mots à surveiller dans le verset.');return}
@@ -2652,7 +2660,7 @@ V.addEventListener('click',e=>{const t=e.target.closest('button,[role=button],.w
 
 /* ---------- Routeur ---------- */
 const STK=[];let SWD=0;
-function swipe(el,fn){let x0=null,y0=0;el.ontouchstart=e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY};el.ontouchend=e=>{if(x0===null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4)fn(dx<0?1:-1)};
+function swipe(el,fn){let x0=null,y0=0;el.ontouchstart=e=>{if(e.touches.length>1){x0=null;el._mt=1;return}el._mt=0;const t=e.touches[0];x0=t.clientX;y0=t.clientY};el.ontouchend=e=>{if(x0===null||el._mt)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4)fn(dx<0?1:-1)};
   let mx=null;el.onpointerdown=e=>{if(e.pointerType==='mouse')mx=e.clientX};el.onpointerup=e=>{if(mx===null||e.pointerType!=='mouse')return;const dx=e.clientX-mx;mx=null;if(Math.abs(dx)>80)fn(dx<0?1:-1)}}let JUMP=null;
 /* ---------- v58 « Partage un rappel 🤍 » ---------- */
 /* Contenus : uniquement des textes déjà vérifiés de l'application (Coran Tanzil + traduction Hamidullah, hadiths et invocations référencés, 99 noms).
@@ -2886,7 +2894,16 @@ setTimeout(async()=>{try{const n=S.shn||{};if(!n.d&&!n.e)return;const t=isoD(new
  if(n.e){const E=shEvents();const ev=E.find(x=>['ramadan','fitr','adha'].includes(x[0]))||E.find(x=>x[0]==='vendredi');if(ev)msgs.push([ev[0]==='vendredi'?'🕌 C’est vendredi !':ev[0]==='ramadan'?'🌙 Ramadan Mubarak !':'🤍 Aïd Mubarak !',ev[0]==='vendredi'?'Découvre un rappel à partager.':'Découvre nos cartes et partage tes vœux avec tes proches.'])}
  msgs.forEach(([a,b2],i)=>setTimeout(()=>{toast(a,b2);try{if('Notification' in window&&Notification.permission==='granted')new Notification(a,{body:b2})}catch(e){}},i*4200))}catch(e){}},2500);
 
+/* v76 : zoom au doigt sur les invocations (pages d'invocation et d'objectifs adhkâr) */
+(()=>{let d0=0,z0=1,on=0;const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY),ok=()=>/^#(dua-|obj-)/.test(location.hash);
+ const set=z=>{S.dz=Math.max(.8,Math.min(1.9,z));$('#phone').style.setProperty('--dz',S.dz)};
+ V.addEventListener('touchstart',e=>{if(e.touches.length===2&&ok()){d0=dist(e.touches);z0=S.dz||1;on=1}},{passive:true});
+ V.addEventListener('touchmove',e=>{if(!on||e.touches.length!==2)return;e.preventDefault();set(z0*dist(e.touches)/d0)},{passive:false});
+ V.addEventListener('touchend',e=>{if(on&&e.touches.length<2){on=0;save()}},{passive:true});
+ document.addEventListener('gesturestart',e=>{if(ok())e.preventDefault()});
+ setTimeout(()=>S.dz&&$('#phone').style.setProperty('--dz',S.dz),0)})();
 function route(){
+  $('#phone').classList.toggle('dz',/^#(dua-|obj-)/.test(location.hash));
   if(route.lh!==location.hash){sayStop();route.lh=location.hash}
   const h=(location.hash||'#accueil').slice(1);if(STK[STK.length-1]!==h)STK.push(h);let html,after=()=>{},tab=h.split('-')[0];
   let m;
