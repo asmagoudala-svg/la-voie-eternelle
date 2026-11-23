@@ -1496,6 +1496,17 @@ button,a{transition:opacity .12s}
 #phone.imm #mhead{display:block!important;pointer-events:auto}
 #qmini.paused #qm-s{color:#e2c88e}
 #phone.imm #qsheet .qsp.qnav{display:flex!important}
+
+/* v90 marque-page : bouton Ouvrir ; Mushaf : remonter aux sourates précédentes */
+.qa-bmt{flex:1;min-width:0;text-align:left;background:none;border:0;padding:0;cursor:pointer;color:inherit}
+.qa-bmt:disabled{cursor:default}
+.qa-bmt small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qa-bmo{flex:none;min-height:32px;padding:0 13px;border-radius:999px;border:0;background:linear-gradient(135deg,#b8945a,#e2c88e);color:#1a2a1f;font:800 12px Mulish,sans-serif;cursor:pointer}
+.qa-bmo[hidden]{display:none}
+.qa-bm.has .qa-bmb{background:transparent;border:1px solid rgba(217,185,119,.55);color:#e2c88e;padding:0 10px}
+#phone.light .qa-bm.has .qa-bmb{color:#8a6a2c}
+#view{overflow-anchor:none}
+#mprev .mload{margin:6px 0 10px}
 </style>
 </head>
 <body>
@@ -2363,7 +2374,7 @@ function qRoute(h){let m;qSheetClose();if(h!=='coran-hifz')hzStop();
 function mushaf(n){
  qIndex().then(()=>qSura(n)).then(d=>{if(V.dataset.qs==n&&$('#qverses'))fillMushaf(n,d)}).catch(()=>{const b=$('#qverses');b&&(b.innerHTML='<p class="muted pad">Impossible de charger cette sourate.</p>')});
  return `<div class="qrd qzone mushz" style="--qz:${qsz()/100}">
- <div id="qverses"><div class="mfr"><div class="mpage"><p class="muted pad">Chargement…</p></div></div></div>
+ <div id="mprev" class="mmore"></div><div id="qverses"><div class="mfr"><div class="mpage"><p class="muted pad">Chargement…</p></div></div></div>
  <div id="mmore" class="mmore"></div></div>`}
 const vEl=(s,v)=>document.getElementById('v-'+s+'-'+v)||(+V.dataset.qs===s?document.getElementById('v-'+v):null);
 function suraBlock(n,d,ra,rb){const [,a,t,f,ty,cnt]=QIDX[n-1],NS=noteSet(),bis=n!==1&&n!==9&&ra===1;
@@ -2376,9 +2387,9 @@ function suraBlock(n,d,ra,rb){const [,a,t,f,ty,cnt]=QIDX[n-1],NS=noteSet(),bis=n
  return `<div class="mfr" data-s="${n}"><div class="mpage"><span class="morn t">✦</span><div class="msh" role="button" tabindex="0" data-qsheet="sur" aria-label="Choisir la sourate et les versets"><span>❖</span><div><div class="mn" lang="ar">${a}</div><small>${n}. ${t.toUpperCase()} · VERSETS ${ra}–${rb}</small></div><span>❖</span></div>
   <div class="mlab">PAGE ${partOf(QMETA.page,AID(n,ra))} · JUZ ${partOf(QMETA.juz,AID(n,ra))}</div>${bis?`<div class="mbis" lang="ar">${tjHtml(QBIS,QBIST)}</div>`:''}
   <p class="mtxt" lang="ar">${html}</p><div class="mend"><span>۞</span>${rb-ra+1} versets<span>۞</span></div><span class="morn b">✦</span></div></div>`}
-let MIO=null,MNEXT=0,MLOAD=false;
+let MIO=null,MNEXT=0,MLOAD=false,MPREV=0,MPLOAD=false,MPTK=0;
 function fillMushaf(n,d){const [ra,rb]=qRange(n),cnt=QIDX[n-1][5],full=ra===1&&rb===cnt,box=$('#qverses');
- box.innerHTML=suraBlock(n,d,ra,rb);MNEXT=full&&n<114?n+1:0;
+ box.innerHTML=suraBlock(n,d,ra,rb);MNEXT=full&&n<114?n+1:0;MPREV=full&&n>1?n-1:0;MPTK++;MPLOAD=false;
  const go=S.ql&&S.ql.s===n&&QJUMP?S.ql.v:0;QJUMP=0;if(go>ra){const el=vEl(n,go);if(el){mScrollTo(el);let k=1;const st=()=>{k=0};V.addEventListener('touchstart',st,{once:true});V.addEventListener('wheel',st,{once:true});[250,700,1400].forEach(t=>setTimeout(()=>{k&&el.isConnected&&mScrollTo(el)},t));document.fonts&&document.fonts.ready.then(()=>{k&&el.isConnected&&mScrollTo(el)})}}
  if(!(S.ql&&S.ql.s===n&&S.ql.v>=ra&&S.ql.v<=rb))setCur(n,ra);
  MIO&&MIO.disconnect();MIO=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting&&!QPLAY){const s2=+e.target.dataset.s,v2=+e.target.dataset.v;if(+V.dataset.qs!==s2){V.dataset.qs=s2;try{history.replaceState(null,'','#sourate-'+s2)}catch(_){}STK[STK.length-1]='sourate-'+s2}setCur(s2,v2)}},{root:V,rootMargin:'-40% 0px -50% 0px'});
@@ -2386,6 +2397,7 @@ function fillMushaf(n,d){const [ra,rb]=qRange(n),cnt=QIDX[n-1][5],full=ra===1&&r
  const more=$('#mmore');more.innerHTML=MNEXT?'<p class="mload">Sourate suivante…</p>':(!full?`<a class="cbtn" href="#sourate-${n}" data-mall="${n}">Afficher toute la sourate</a>`:'<p class="mload">Fin du Coran · صدق الله العظيم</p>');
  const ma=more.querySelector('[data-mall]');ma&&(ma.onclick=e=>{e.preventDefault();S.qrange=null;save();route()});
  const so=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))mAppend(so)},{root:V,rootMargin:'0px 0px 900px 0px'});so.observe(more);
+ const pv=$('#mprev');if(pv){pv.innerHTML=MPREV?'<p class="mload">↑ Sourate précédente</p>':'';if(MPREV){let armed=0;setTimeout(()=>{armed=1;if(MPREV&&$('#mprev')&&V.scrollTop<500)mPrepend()},900);const po=new IntersectionObserver(es=>{if(armed&&es.some(e=>e.isIntersecting))mPrepend(po)},{root:V,rootMargin:'500px 0px 0px 0px'});po.observe(pv);V.addEventListener('scroll',function f(){if(!$('#mprev')){V.removeEventListener('scroll',f);return}if(armed&&MPREV&&V.scrollTop<500)mPrepend(po)},{passive:true})}}
  let T=null,sx=0,sy=0;
  box.onpointerdown=e=>{const w=e.target.closest('.w');if(!w)return;sx=e.clientX;sy=e.clientY;QLPF=0;clearTimeout(T);T=setTimeout(()=>{QLPF=1;const mv=w.closest('.mv');navigator.vibrate&&navigator.vibrate(15);qNote(+mv.dataset.s,+mv.dataset.v,[+w.dataset.w])},520)};
  box.onpointermove=e=>{if(Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>12)clearTimeout(T)};box.onpointerup=box.onpointercancel=()=>clearTimeout(T);box.oncontextmenu=e=>{if(e.target.closest('.w'))e.preventDefault()};
@@ -2394,6 +2406,10 @@ async function mAppend(so){if(!MNEXT||MLOAD||!$('#qverses'))return;MLOAD=true;co
  box.insertAdjacentHTML('beforeend',suraBlock(n,d,1,QIDX[n-1][5]));box.querySelectorAll(`.mfr[data-s="${n}"] .mv`).forEach(el=>MIO.observe(el));MNEXT=n<114?n+1:0;
  if(!MNEXT)$('#mmore').innerHTML='<p class="mload">Fin du Coran · صدق الله العظيم</p>'}finally{MLOAD=false}
  const m=$('#mmore');if(m&&MNEXT){const r=m.getBoundingClientRect();if(r.top<V.getBoundingClientRect().bottom+900)mAppend(so)}}
+async function mPrepend(po){if(!MPREV||MPLOAD||!$('#qverses'))return;MPLOAD=true;const n=MPREV,tk=MPTK;try{const d=await qSura(n);const box=$('#qverses');if(!box||tk!==MPTK||MPREV!==n)return;
+ const ref=box.firstElementChild,b0=ref?ref.getBoundingClientRect().top:0;box.insertAdjacentHTML('afterbegin',suraBlock(n,d,1,QIDX[n-1][5]));box.querySelectorAll(`.mfr[data-s="${n}"] .mtxt`).forEach(t=>t.style.contentVisibility='visible');if(n<=1){const pv0=$('#mprev');pv0&&(pv0.innerHTML='')}
+ const b1=ref?ref.getBoundingClientRect().top:0;if(b1!==b0)V.scrollTop+=b1-b0;
+ box.querySelectorAll(`.mfr[data-s="${n}"] .mv`).forEach(el=>MIO&&MIO.observe(el));MPREV=n>1?n-1:0;const pv=$('#mprev');if(pv&&!MPREV)pv.innerHTML='';setTimeout(mHeadUpd,60)}finally{if(tk===MPTK)MPLOAD=false}}
 function setCur(n,v){QCUR=v;try{dlRead(AID(n,v))}catch(_){}if(!S.ql||S.ql.s!==n||S.ql.v!==v){S.ql={s:n,v};clearTimeout(setCur.t);setCur.t=setTimeout(save,600)}}
 /* ---------- lecture audio (gamme, répétitions, intervalle) ---------- */
 function qUnits(n,v0,endId){const out=[];let id=AID(n,v0);while(id<=endId){const u=[id];let [s,v]=SV(id);while(linked(s,v)&&id<endId&&v<QIDX[s-1][5]){id++;v++;u.push(id)}out.push(u);id++}return out}
@@ -2420,7 +2436,7 @@ let QNT='go',QNG=null;
 function mHeadEl(){let h=$('#mhead');if(!h){h=document.createElement('div');h.id='mhead';h.innerHTML='<button id="mh-mid" aria-label="Aller à une sourate, un juz ou une page"><span class="mh-t"><b id="mh-n">Mushaf</b><span id="mh-a" class="ar" lang="ar"></span><i class="mh-c">▾</i></span><span class="mh-s" id="mh-s"></span></button>';$('#phone').appendChild(h);$('#mh-mid').onclick=()=>qSheet('nav')}return h}
 function mHeadUpd(){const h=$('#mhead');const ph=$('#phone');if(!h||!(ph.classList.contains('mush')||ph.classList.contains('qtr'))||!QIDX||!QMETA)return;
  const vr=V.getBoundingClientRect(),y=h.getBoundingClientRect().bottom+26;let s=0,v=0;
- for(const fx of [.5,.3,.7,.15,.85,.4,.6]){const el=document.elementFromPoint(vr.left+vr.width*fx,y);if(!el||!el.closest)continue;const mv=el.closest('.mv'),mk=el.closest('.mk'),fr=el.closest('.mfr[data-s]');
+ for(const fx of [.5,.3,.7,.15,.85,.4,.6]){const el=document.elementFromPoint(vr.left+vr.width*fx,y);if(!el||!el.closest||el.closest('.mend,.morn,#mprev'))continue;{const f0=el.closest('.mfr[data-s]');if(f0&&f0.getBoundingClientRect().bottom<y+50)continue}const mv=el.closest('.mv'),mk=el.closest('.mk'),fr=el.closest('.mfr[data-s]');
   if(mv){s=+mv.dataset.s;v=+mv.dataset.v;break}const tv=el.closest('.tv');if(tv){s=+V.dataset.qs;v=+tv.dataset.v;break}const tx=el.closest('.mtxt');if(tx){const f=[...tx.querySelectorAll('.mv')].find(m=>{const rs=m.getClientRects();return rs.length&&rs[rs.length-1].bottom>=y});if(f){s=+f.dataset.s;v=+f.dataset.v;break}}if(mk){s=+mk.dataset.s;v=+mk.dataset.qlink;break}if(fr&&!s){s=+fr.dataset.s;v=qRange(s)[0]}}
  if(!s&&QPLAY&&QPLAY.cur){[s,v]=SV(QPLAY.cur)}
  if(!s){if(mHeadUpd.s&&(!$('#phone').classList.contains('qtr')||mHeadUpd.s===+V.dataset.qs)){s=mHeadUpd.s;v=mHeadUpd.v}else{s=+V.dataset.qs||1;v=S.ql&&S.ql.s===s?S.ql.v:1}}
@@ -2498,7 +2514,7 @@ function qaBody(){return `<div class="qsp"><span class="qgrip"></span><div class
   <div class="qa-row"><button data-qa="s-" aria-label="Sourate précédente">−</button><input id="qa-s" type="range" min="1" max="114" step="1" aria-label="Choisir la sourate"><button data-qa="s+" aria-label="Sourate suivante">+</button></div>
  <div class="qa-h qa-h2"><label for="qa-v">Verset</label><div class="qa-val"><output id="qa-vl"></output></div></div>
   <div class="qa-row"><button data-qa="v-" aria-label="Verset précédent">−</button><input id="qa-v" type="range" min="1" step="1" aria-label="Choisir le verset"><button data-qa="v+" aria-label="Verset suivant">+</button></div></div>
- <div class="qa-bm" id="qa-bm"><span class="qa-bmi">${QA_MK}</span><div class="qa-bmt"><b>Marque-page</b><small id="qa-bms"></small></div><button class="qa-bmb" id="qa-bmb" data-qa="bm"></button></div>
+ <div class="qa-bm" id="qa-bm"><span class="qa-bmi">${QA_MK}</span><button class="qa-bmt" data-qa="bmo" id="qa-bmt"><b>Marque-page</b><small id="qa-bms"></small></button><button class="qa-bmo" id="qa-bmo" data-qa="bmo">Ouvrir</button><button class="qa-bmb" id="qa-bmb" data-qa="bm"></button></div>
  <div class="qa-pv" aria-live="polite"><div class="qa-pvh"><span>Aperçu</span><span id="qa-ref"></span></div><div id="qa-pb"></div></div>
  <button class="btn gold wide qa-go" data-qa="go">Ouvrir</button></div>`}
 function qaUpd(full){const sh=$('#qsheet');if(!sh||sh.dataset.kind!=='quick'||!QIDX)return;const {s:n,v}=QA,r=QIDX[n-1],c=r[5],P=qaPref();
@@ -2507,7 +2523,7 @@ function qaUpd(full){const sh=$('#qsheet');if(!sh||sh.dataset.kind!=='quick'||!Q
  sh.querySelector('[data-qa="s-"]').disabled=n<=1;sh.querySelector('[data-qa="s+"]').disabled=n>=114;sh.querySelector('[data-qa="v-"]').disabled=v<=1;sh.querySelector('[data-qa="v+"]').disabled=v>=c;
  const hb=!!P.s,here=hb&&+P.s===n&&qaPrefV(n)===v,bm=$('#qa-bm'),bb=$('#qa-bmb');bm.classList.toggle('on',here);
  $('#qa-bms').textContent=hb?`${QIDX[P.s-1][2]} · verset ${qaPrefV(P.s)||1}${here?' · ici':''}`:'Aucun · l’accès rapide s’ouvre là où tu lis';
- bb.textContent=here?'Retirer':(hb?'Déplacer ici':'Poser ici');bb.setAttribute('aria-label',here?'Retirer le marque-page':`Poser le marque-page sur ${r[2]}, verset ${v}`);
+ bb.textContent=here?'Retirer':(hb?'Déplacer ici':'Poser ici');bm.classList.toggle('has',hb);$('#qa-bmo').hidden=!hb;$('#qa-bmt').disabled=!hb;if(hb)$('#qa-bmo').setAttribute('aria-label',`Ouvrir le marque-page : ${QIDX[P.s-1][2]}, verset ${qaPrefV(P.s)||1}`);bb.setAttribute('aria-label',here?'Retirer le marque-page':`Poser le marque-page sur ${r[2]}, verset ${v}`);
  const pb=$('#qa-pb'),d=QC[n];
  if(d){pb.innerHTML=`<div class="qa-ar" lang="ar" dir="rtl">${esc(d.ar[v-1]||'')}</div><div class="qa-fr">${esc(d.fr[v-1]||'')}</div>`}
  else{pb.innerHTML='<div class="qa-ld">Chargement de l’aperçu…</div>';const t=++QA.tk;qSura(n).then(()=>{if(t===QA.tk&&QA.s===n)qaUpd()}).catch(()=>{if(t===QA.tk)pb.innerHTML='<div class="qa-ld">Aperçu indisponible pour le moment.</div>'})}}
@@ -2517,6 +2533,7 @@ function qaClick(k){const P=qaPref();
  if(k==='s-')return qaSetS(QA.s-1);if(k==='s+')return qaSetS(QA.s+1);if(k==='v-')return qaSetV(QA.v-1);if(k==='v+')return qaSetV(QA.v+1);
  if(k==='bm'){const here=P.s&&+P.s===QA.s&&qaPrefV(QA.s)===QA.v;if(here){P.s=null;P.v={}}else{P.s=QA.s;P.v={[QA.s]:QA.v}}save();qaUpd();qaDot();
   toast(here?'Marque-page retiré':'🔖 Marque-page posé',here?'L’accès rapide s’ouvrira là où tu lis.':`${QIDX[QA.s-1][2]}, verset ${QA.v}. L’accès rapide s’ouvrira ici.`);return}
+ if(k==='bmo'){if(!P.s)return;const n=+P.s,v=Math.min(qaPrefV(n)||1,qaCnt(n));qSheetClose();S.qrange=null;save();qJump(n,v);return}
  if(k==='go'){const {s:n,v}=QA;qSheetClose();S.qrange=null;save();qJump(n,v)}}
 
 /* v89 navigation pendant la récitation : on continue à lire depuis le nouvel endroit */
