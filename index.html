@@ -1350,6 +1350,17 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 /* v68 hadith : lecture confortable, même police que le reste de l'appli */
 .hq,.hsheet .hq{font-family:Mulish,system-ui,sans-serif!important;font-size:17px!important;line-height:1.6!important;font-weight:500;letter-spacing:0;word-spacing:0}
 .hsheet .ph.hq{font-style:italic;font-size:16px!important}
+
+/* v71 hadith : carte visuelle */
+.hqc{position:relative;overflow:hidden;margin:4px 0 14px;padding:18px 18px 14px;border-radius:22px;border:1px solid rgba(217,185,119,.55);background:radial-gradient(120% 80% at 100% 0%,rgba(217,185,119,.18),transparent 55%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23E2C88E' stroke-opacity='.08'%3E%3Cpath d='M40 8l9 23 23 9-23 9-9 23-9-23-23-9 23-9z'/%3E%3Crect x='24' y='24' width='32' height='32' transform='rotate(45 40 40)'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(160deg,#1f4a35,#14281d);color:#f3ead2;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.hqc:before{content:"";position:absolute;inset:6px;border:1px solid rgba(217,185,119,.2);border-radius:17px;pointer-events:none}
+.hqm{position:absolute;top:-14px;right:10px;font:700 110px/1 Georgia,serif;color:rgba(226,200,142,.16);pointer-events:none}
+.hql{font:700 11.5px Mulish;letter-spacing:.1em;text-transform:uppercase;color:#e2c88e;margin-bottom:10px}
+.hqa{font-size:23px;line-height:1.85;color:#e8cf8f;text-align:center;margin:0}
+.hqo{display:flex;align-items:center;gap:10px;justify-content:center;color:#c9a465;font-size:15px;margin:6px 0 8px}.hqo i{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(217,185,119,.6),transparent)}
+.hqc .hq{color:#f6efdc!important;position:relative}
+.hqf{margin-top:8px}.hqf>*{border-top-color:rgba(217,185,119,.35)!important}.hqf .src{margin:0;color:#cbbf9f}.hqf .src a{color:#e2c88e}
+#phone.light .hqc{color:#f3ead2}
 </style>
 </head>
 <body>
@@ -1688,12 +1699,13 @@ function hadith(){
   <div class="pills"><button class="pa" data-wk="-7" aria-label="Semaine précédente">‹</button>${days.map(d=>{const o=dOf(d);return `<button class="pl ${d===HD?'on':''} ${S.hd[d]?'rd':''}" data-hd="${d}" aria-label="${o.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric'})}"><small>${d===td?"Aujourd'hui":o.toLocaleDateString('fr-FR',{weekday:'short'})}</small><b>${o.getDate()}</b></button>`}).join('')}<button class="pa" data-wk="7" aria-label="Semaine suivante">›</button></div>
   <div class="himg">${hart(x,'hhero',`<div class="cap"><b>${x.t}</b><span style="text-transform:capitalize">Hadith du jour · ${lbl}</span></div>`)}</div>
   <div class="hsheet">
-   <div class="lab">Le Prophète ﷺ a dit</div>
-   ${S.lang==='fr'?`<p class="hq">${esc(x.fr)}</p>`:tri(x.fr,x.ar,'hq')}
+   <article class="hqc"><span class="hqm" aria-hidden="true">❝</span><div class="hql">Le Prophète ﷺ a dit</div>
+   ${S.lang==='fr'?`${x.ar?`<div class="ar hqa" lang="ar">${x.ar}</div><div class="hqo" aria-hidden="true"><i></i>۞<i></i></div>`:''}<p class="hq">${esc(x.fr)}</p>`:tri(x.fr,x.ar,'hq')}
+   <div class="hqf">${SRC(x.g,x.src)}</div></article>
    ${CHIPS(x.ar)}
    <div class="fadl"><b>${STAR.replace(/22/g,'14')} Pour aujourd'hui</b>${esc(x.m)}</div>
    <button class="btn ${rd?'done':''}" style="margin-top:14px" data-hread="${HD}">${rd?'✓ Hadith médité':"J'ai médité ce hadith"}</button>
-   ${SRC(x.g,x.src)}</div>`}
+   </div>`}
 /* ---------- Invocations ---------- */
 const hour=()=>new Date().getHours();
 const CC={maison:['house',['#1f4a35','#3f7a57']],priere:['rugobj',['#18463f','#2f7468']],purification:['fountain',['#174a5a','#2f7f8f']],mosquee:['mosque',['#223d2e','#3d6a4d'],'translate(110 30) scale(.85)'],nourriture:['dates',['#7a4a1c','#b8803c']],maladie:['honey',['#22513f','#4a8a69']],protection:['shield',['#16301f','#2f5a40']],humeur:['sunburst',['#8a6420','#c9a245']],peur:['lantern',['#132a33','#2a5560'],'translate(130 30) scale(.9)'],mariage:['rings',['#6a2c3e','#a9566c']],jeune:['crescentobj',['#1a2c3a','#38586a']],salutation:['dove',['#245a4a','#4f8f78'],'translate(70 20) scale(.9)'],assemblee:['tea',['#5a3418','#94602f']],hajj:['kaaba',['#6a5020','#a88a44']],omra:['kaaba',['#1d4a48','#3f7f78']],deces:['tree',['#36423b','#66786c'],'translate(60 20) scale(.9)'],evenements:['hourglass',['#4a3a1c','#8a6c38']],nature:['cloudrain',['#2a5a34','#4f8a52']],biens:['wheat',['#7a5a14','#b8923a']],rabbana:['book',['#1d3327','#3d6a4d'],'translate(150 40) scale(.8)'],coran:['hands',['#1a3a44','#3a6a70'],'translate(140 20) scale(.9)']};
