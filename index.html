@@ -24,7 +24,7 @@ body{margin:0;background:#E9E5DA url("data:image/svg+xml,%3Csvg xmlns='http://ww
 h1,h2,h3,.disp{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.1;margin:0;text-wrap:balance}
 #phone{color:var(--ink);position:relative;max-width:440px;margin:0 auto;height:100dvh;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 @media(min-width:600px){#phone{height:min(900px,calc(100dvh - 40px));margin-top:20px;border-radius:34px;box-shadow:0 30px 70px rgba(41,71,53,.25),0 0 0 1px rgba(30,127,87,.25)}}
-#view{flex:1;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;padding-bottom:24px}
+#view{flex:1;overflow-y:auto;overflow-x:hidden;scroll-behavior:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:24px}
 .pat{background-color:var(--hero);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23F6D27A' stroke-opacity='.32'%3E%3Cpath d='M40 8l9 23 23 9-23 9-9 23-9-23-23-9 23-9z'/%3E%3Crect x='24' y='24' width='32' height='32' transform='rotate(45 40 40)'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(160deg,#1a2e22,#294735 60%,#36573f);color:#F8F5EE}
 .top{display:flex;align-items:center;gap:10px;padding:14px 16px 12px}
 .top .t{flex:1;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
@@ -1371,6 +1371,10 @@ button,a{transition:opacity .12s}
 #phone.dz #view{touch-action:pan-y}
 #phone.dz .dar2{font-size:calc(23px*var(--dz,1))!important}#phone.dz .dph{font-size:calc(16px*var(--dz,1))!important}#phone.dz .dmore .dfr{font-size:calc(14.5px*var(--dz,1))!important}#phone.dz .dmore .fadl{font-size:calc(14px*var(--dz,1))!important}
 #phone.dz .obar{font-size:calc(22px*var(--dz,1))!important}#phone.dz .obph{font-size:calc(16px*var(--dz,1))!important}#phone.dz .obfr{font-size:calc(14px*var(--dz,1))!important}
+
+/* v77 fluidité : rendu différé des pages du Mushaf hors écran, pas d'animation d'entrée lente */
+#qverses .mtxt{content-visibility:auto;contain-intrinsic-size:auto 1000px}
+.ri,.shc,.hcu,.obc,.cat,.tl{contain:layout paint}
 </style>
 </head>
 <body>
@@ -1728,9 +1732,10 @@ function hArt(id){let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;const
  <rect width="${W}" height="${H}" fill="url(#${u}b)" opacity=".0"/></svg>`}
 /* v75 : photos libres de droits (Unsplash) choisies pour illustrer chaque hadith ; l'illustration dorée reste en secours si la photo ne charge pas */
 const HPH={intention:'1599659593072-10de2e109486',frere:'1521791136064-7986c2920216',langue:'1507126882445-434b04530d1a',taire:'1557316655-8715fdecd2d1',sourire:'1598920710727-e6c74781538c',purete:'1538300342682-cf57afb97285',regularite:'1527066236128-2ff79f7b9705',faciliter:'1734517648088-2990d38c258d',colere:'1524679166686-04237b4667b4',coeurs:'1564045288780-5c11658fefa3',science:'1595123550441-d377e017de6a',coran:'1542816417-0983c9c9ad53',preserve:'1546484953-6d9a8d66cc56',croyant:'1515694346937-94d85e41e6f0',taqwa:'1771758266506-c7002e6487af',parole:'1476293889456-abfb7492a29f',merci:'1629738601425-494c3d6ba3e2',nuit:'1590092794015-bce5431c83f4',paroles:'1720873160840-d5934323bb23',voyageur:'1767201808465-76c84406bec7',richesse:'1491720731493-223f97d92c21',fort:'1518495973542-4542c06a5843',douceur:'1480511361210-b1b966c8d614',soulager:'1586726370832-3440a511e479',vendredi:'1605976528013-638e49b6599f',jeune:'1587617425953-9075d28b8c46',arafa:'1553755088-ef1973c7b4a1',epreuve:'1593242940939-efbeaed59c3b'};
-const hart=(x,cls='',cap='')=>`<div class="pic ${cls}">${hArt(x.id)}${HPH[x.id]?`<img class="hph" src="https://images.unsplash.com/photo-${HPH[x.id]}?w=900&h=600&fit=crop&q=70&auto=format" alt="" loading="lazy" onerror="this.remove()">`:''}${cap}</div>`;
-const ppic=(p,cls='',cap='')=>`<div class="pic ${cls}">${paint(Object.assign({},p))}${cap}</div>`;
-const pic=(sc,cls='',cap='')=>`<div class="pic ${cls}">${scene(sc)}${cap}</div>`;
+const MEMO=new Map(),memo=(k,f)=>{let v=MEMO.get(k);if(v===undefined){v=f();if(MEMO.size>400)MEMO.clear();MEMO.set(k,v)}return v};
+const hart=(x,cls='',cap='')=>`<div class="pic ${cls}">${memo('ha'+x.id,()=>hArt(x.id))}${HPH[x.id]?`<img class="hph" src="https://images.unsplash.com/photo-${HPH[x.id]}?w=900&h=600&fit=crop&q=70&auto=format" alt="" loading="lazy" onerror="this.remove()">`:''}${cap}</div>`;
+const ppic=(p,cls='',cap='')=>`<div class="pic ${cls}">${memo('pp'+JSON.stringify(p),()=>paint(Object.assign({},p)))}${cap}</div>`;
+const pic=(sc,cls='',cap='')=>`<div class="pic ${cls}">${memo('sc'+JSON.stringify(sc),()=>scene(sc))}${cap}</div>`;
 const iso=d=>{const z=new Date(d);z.setMinutes(z.getMinutes()-z.getTimezoneOffset());return z.toISOString().slice(0,10)};
 const dOf=s=>new Date(s+'T12:00:00');
 function hadithFor(ds){const d=dOf(ds);if(d.getDay()===5)return H.find(x=>x.id==='vendredi');const L=H.filter(x=>x.id!=='vendredi');return L[Math.floor(d/864e5)%L.length]}
@@ -2603,10 +2608,10 @@ V.addEventListener('change',e=>{const f=e.target.dataset&&e.target.dataset.vimgf
 (()=>{let P=null;const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
  V.addEventListener('touchstart',e=>{if(e.touches.length!==2||!$('#phone').classList.contains('mush'))return;const z=$('.mushz');if(!z)return;
   const mx=(e.touches[0].clientX+e.touches[1].clientX)/2,my=(e.touches[0].clientY+e.touches[1].clientY)/2,el=document.elementFromPoint(mx,my),mv=el&&el.closest('.mv');
-  P={d:dist(e.touches),s:QSET().size,z,mv,off:mv?mv.getBoundingClientRect().top:0};e.preventDefault()},{passive:false});
- V.addEventListener('touchmove',e=>{if(!P||e.touches.length!==2)return;e.preventDefault();const sz=Math.max(70,Math.min(220,Math.round(P.s*dist(e.touches)/P.d)));if(sz===P.cur)return;P.cur=sz;
-  document.querySelectorAll('.qrd').forEach(x=>x.style.setProperty('--qz',sz/100));if(P.mv){const t=P.mv.getBoundingClientRect().top;V.scrollTop+=t-P.off}},{passive:false});
- const end=e=>{if(!P)return;if(e.touches.length<2){if(P.cur){QSET().size=P.cur;save()}P=null}};V.addEventListener('touchend',end);V.addEventListener('touchcancel',end)})();
+  P={d:dist(e.touches),s:QSET().size,z,mv,off:mv?mv.getBoundingClientRect().top:0};V.addEventListener('touchmove',MV,{passive:false})},{passive:true});
+ const MV=e=>{if(!P||e.touches.length!==2)return;e.preventDefault();const sz=Math.max(70,Math.min(220,Math.round(P.s*dist(e.touches)/P.d)));if(sz===P.cur)return;P.cur=sz;
+  document.querySelectorAll('.qrd').forEach(x=>x.style.setProperty('--qz',sz/100));if(P.mv){const t=P.mv.getBoundingClientRect().top;V.scrollTop+=t-P.off}};
+ const end=e=>{if(!P)return;if(e.touches.length<2){V.removeEventListener('touchmove',MV);if(P.cur){QSET().size=P.cur;save()}P=null}};V.addEventListener('touchend',end,{passive:true});V.addEventListener('touchcancel',end,{passive:true})})();
 /* ---------- Réglages ---------- */
 function qReglages(){const s=QSET(),sw=(k,t,dsc)=>`<button class="qsw" data-qset="${k}" role="switch" aria-checked="${!!s[k]}"><span><b>${t}</b><small>${dsc}</small></span><i class="${s[k]?'on':''}"></i></button>`,
  stp=(k,lab,dsc,val)=>`<div class="qstp"><span><b>${lab}</b><small>${dsc}</small></span><div class="qzoom"><button data-qstep="${k}" data-d="-1" aria-label="Réduire">−</button><span>${val}</span><button data-qstep="${k}" data-d="1" aria-label="Augmenter">+</button></div></div>`;
@@ -2897,9 +2902,9 @@ setTimeout(async()=>{try{const n=S.shn||{};if(!n.d&&!n.e)return;const t=isoD(new
 /* v76 : zoom au doigt sur les invocations (pages d'invocation et d'objectifs adhkâr) */
 (()=>{let d0=0,z0=1,on=0;const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY),ok=()=>/^#(dua-|obj-)/.test(location.hash);
  const set=z=>{S.dz=Math.max(.8,Math.min(1.9,z));$('#phone').style.setProperty('--dz',S.dz)};
- V.addEventListener('touchstart',e=>{if(e.touches.length===2&&ok()){d0=dist(e.touches);z0=S.dz||1;on=1}},{passive:true});
- V.addEventListener('touchmove',e=>{if(!on||e.touches.length!==2)return;e.preventDefault();set(z0*dist(e.touches)/d0)},{passive:false});
- V.addEventListener('touchend',e=>{if(on&&e.touches.length<2){on=0;save()}},{passive:true});
+ const MV=e=>{if(!on||e.touches.length!==2)return;e.preventDefault();set(z0*dist(e.touches)/d0)};
+ V.addEventListener('touchstart',e=>{if(e.touches.length===2&&ok()){d0=dist(e.touches);z0=S.dz||1;on=1;V.addEventListener('touchmove',MV,{passive:false})}},{passive:true});
+ const end=e=>{if(on&&e.touches.length<2){on=0;V.removeEventListener('touchmove',MV);save()}};V.addEventListener('touchend',end,{passive:true});V.addEventListener('touchcancel',end,{passive:true});
  document.addEventListener('gesturestart',e=>{if(ok())e.preventDefault()});
  setTimeout(()=>S.dz&&$('#phone').style.setProperty('--dz',S.dz),0)})();
 function route(){
