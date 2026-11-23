@@ -1297,6 +1297,13 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .obsel{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 4px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:600 14.5px Mulish;cursor:pointer}.obsel i{width:24px;height:24px;flex:none;border-radius:7px;border:1.5px solid var(--gold);display:grid;place-items:center;font-style:normal;font-size:14px}.obsel.on i{background:var(--gold);color:#2a1e08}.obsel small{color:var(--mute)}
 .oball{display:block;text-align:center;margin-top:16px;font:700 14px Mulish;color:var(--gold2);text-decoration:none}
 #phone.night .obtop h1,#phone.night .obar{color:#f1ead9}
+
+/* v62 objectifs compacts (accordéon) */
+.obc{padding:0;overflow:hidden;margin-bottom:10px}.obc .obh{width:100%;border:0;background:transparent;color:inherit;text-align:left;padding:12px 14px;margin:0;cursor:pointer;font:inherit}.obc.op{box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 60%,transparent)}
+.obh b{font-size:18px;line-height:1.1}.obc:not(.op) .obh{padding:10px 14px}.obc:not(.op) .obn{width:26px;height:26px;font-size:12.5px}.obchev{font-style:normal;color:var(--gold2);font-size:13px}
+.obc .obar{font-size:22px;line-height:1.85;padding:0 14px;margin:0}.obc .obph{padding:0 14px}
+.obtr{margin:6px 14px 0;font-size:13px}.obtr summary{cursor:pointer;color:var(--gold2);font:700 12.5px Mulish;padding:4px 0}.obtr .obfr{font-size:14px}
+.obc .obtap{width:calc(100% - 28px);margin:10px 14px 14px;min-height:48px}.obc .obtap.sm{min-height:38px;margin-top:0;font-size:13.5px;border-radius:12px}.obtap.sm b{font-size:18px}
 </style>
 </head>
 <body>
@@ -1657,13 +1664,14 @@ function treasure(){return `<a class="tl w tr" href="#cat-recompenses">${cardArt
 let IQ='';
 
 /* ---------- v61 Mes objectifs : adhkâr du matin / du soir à valider à la suite ---------- */
-let OBED=0;
+let OBED=0,OBOPEN=null;
 function objView(cid){const c=CATS.find(x=>x.id===cid);if(!c)return invocations();const L=dlSel(cid),[a,b]=dlCatDone(cid),isM=cid==='matin';
- const cards=L.map((i,k)=>{const d=c.items[i],key=cid+'-'+i,cnt=S.cnt[today()+'|'+key]||0,n=nN(d),ok=cnt>=n;
-  return `<article class="obc${ok?' ok':''}" id="ob-${i}"><div class="obh"><span class="obn">${ok?'✓':k+1}</span><b>${esc(d.t)}</b>${n>1?`<em>${n} fois</em>`:''}</div>
-   ${S.dmode==='ph'?`<p class="obph">${esc(translit(d.ar))}</p>`:`<div class="ar obar" lang="ar">${d.ar}</div>`}<p class="obfr">${esc(d.fr)}</p>
-   <p class="obsrc">${gb(d.g)} <span>${esc(d.src)}</span></p>
-   <button class="obtap${ok?' ok':''}" data-obc="${i}">${ok?'✓ Validée · touche pour annuler':n>1?`<b>${cnt} / ${n}</b> Touche à chaque répétition`:'Valider cette invocation'}</button></article>`}).join('');
+ const cur=L.find(i=>(S.cnt[today()+'|'+cid+'-'+i]||0)<nN(c.items[i])),open=OBOPEN===null?cur:OBOPEN;
+ const cards=L.map((i,k)=>{const d=c.items[i],key=cid+'-'+i,cnt=S.cnt[today()+'|'+key]||0,n=nN(d),ok=cnt>=n,op=i===open;
+  return `<article class="obc${ok?' ok':''}${op?' op':''}" id="ob-${i}"><button class="obh" data-obopen="${i}" aria-expanded="${op}"><span class="obn">${ok?'✓':k+1}</span><b>${esc(d.t)}</b>${n>1?`<em>${ok?n:cnt}/${n}</em>`:ok?'<em>Faite</em>':''}<i class="obchev">${op?'▴':'▾'}</i></button>
+   ${op?`${S.dmode==='ph'?`<p class="obph">${esc(translit(d.ar))}</p>`:`<div class="ar obar" lang="ar">${d.ar.replace(/\n\s*\n+/g,'§').replace(/\n/g,' ').replace(/§/g,'\n')}</div>`}
+   <details class="obtr"><summary>Traduction et source</summary><p class="obfr">${esc(d.fr)}</p><p class="obsrc">${gb(d.g)} <span>${esc(d.src)}</span></p></details>`:''}
+   ${op?`<button class="obtap${ok?' ok':''}${op?'':' sm'}" data-obc="${i}">${ok?'✓ Validée · annuler':n>1?`<b>${cnt} / ${n}</b> ${op?'Touche à chaque répétition':'Compter'}`:'Valider'}</button>`:''}</article>`}).join('');
  const ed=OBED?`<div class="obed"><h4>Choisis les invocations de ton objectif</h4>${c.items.map((d,i)=>`<button class="obsel${L.includes(i)?' on':''}" data-obsel="${i}"><i>${L.includes(i)?'✓':''}</i><span>${esc(d.t)}${d.n>1?` <small>· ${d.n} fois</small>`:''}</span></button>`).join('')}<button class="btn gold" data-obed="0" style="margin-top:12px">Enregistrer</button></div>`:'';
  return `<div class="obp"><div class="obtop"><button class="ib back" data-go="accueil" aria-label="Retour">${I.back}</button><div><small>MES OBJECTIFS DU JOUR</small><h1>${isM?'🌅':'🌙'} Adhkâr du ${isM?'matin':'soir'}</h1></div></div>
   <div class="obsum${b&&a===b?' ok':''}"><b>${b&&a===b?'✓ Objectif atteint, qu’Allah l’accepte':`${a} / ${b} validée${a>1?'s':''}`}</b><div class="prog"><i style="width:${b?a/b*100:0}%"></i></div></div>
@@ -1671,11 +1679,12 @@ function objView(cid){const c=CATS.find(x=>x.id===cid);if(!c)return invocations(
   ${b?cards:'<p class="muted pad">Aucune invocation choisie : touche « Modifier mes invocations ».</p>'}
   <button class="btn ghost" data-obed="${OBED?0:1}" style="margin-top:16px">${OBED?'Fermer':'✏️ Modifier mes invocations'}</button>${ed}
   <a class="oball" href="#cat-${cid}">Voir toutes les invocations du ${isM?'matin':'soir'} ›</a></div>`}
-V.addEventListener('click',e=>{const b=e.target.closest('[data-obc],[data-obsel],[data-obed]');if(!b||!$('.obp'))return;e.preventDefault();e.stopPropagation();const q=b.dataset,cid=(location.hash.match(/^#obj-(\w+)/)||[])[1],c=CATS.find(x=>x.id===cid);if(!c)return;const y=V.scrollTop;
+V.addEventListener('click',e=>{const b=e.target.closest('[data-obc],[data-obsel],[data-obed],[data-obopen]');if(!b||!$('.obp'))return;e.preventDefault();e.stopPropagation();const q=b.dataset,cid=(location.hash.match(/^#obj-(\w+)/)||[])[1],c=CATS.find(x=>x.id===cid);if(!c)return;const y=V.scrollTop;
+ if(q.obopen!==undefined){const i=+q.obopen,L=dlSel(cid),cur=L.find(j=>(S.cnt[today()+'|'+cid+'-'+j]||0)<nN(c.items[j])),open=OBOPEN===null?cur:OBOPEN;OBOPEN=open===i?-1:i;route();V.scrollTop=y;const el=$('#ob-'+i);el&&V.scrollTo({top:V.scrollTop+el.getBoundingClientRect().top-V.getBoundingClientRect().top-80,behavior:'smooth'});return}
  if(q.obed!==undefined){OBED=+q.obed;route();V.scrollTop=y;return}
  if(q.obsel!==undefined){const L=dlSel(cid),i=+q.obsel,j=L.indexOf(i);if(j>=0)L.splice(j,1);else{L.push(i);L.sort((a,b)=>a-b)}save();route();V.scrollTop=y;return}
- const i=+q.obc,d=c.items[i],k=today()+'|'+cid+'-'+i,n=nN(d),cur=S.cnt[k]||0;S.cnt[k]=cur>=n?0:cur+1;save();try{navigator.vibrate&&navigator.vibrate(S.cnt[k]>=n?60:15)}catch(_){}
- route();V.scrollTop=y;if(S.cnt[k]>=n&&cur<n){const L=dlSel(cid),nx=L.find(j=>(S.cnt[today()+'|'+cid+'-'+j]||0)<nN(c.items[j]));const [a,bb]=dlCatDone(cid);if(a===bb){toast('Objectif atteint 🤍',`Adhkâr du ${cid} terminés. Qu’Allah les accepte de toi.`);V.scrollTo({top:0,behavior:'smooth'})}else if(nx!==undefined){const el=$('#ob-'+nx);el&&setTimeout(()=>V.scrollTo({top:V.scrollTop+el.getBoundingClientRect().top-V.getBoundingClientRect().top-12,behavior:'smooth'}),60)}}},true);
+ const i=+q.obc,d=c.items[i],k=today()+'|'+cid+'-'+i,n=nN(d),cur=S.cnt[k]||0;S.cnt[k]=cur>=n?0:cur+1;save();if(S.cnt[k]>=n||S.cnt[k]===0)OBOPEN=S.cnt[k]===0?i:null;try{navigator.vibrate&&navigator.vibrate(S.cnt[k]>=n?60:15)}catch(_){}
+ route();V.scrollTop=y;if(S.cnt[k]>=n&&cur<n){const L=dlSel(cid),nx=L.find(j=>(S.cnt[today()+'|'+cid+'-'+j]||0)<nN(c.items[j]));const [a,bb]=dlCatDone(cid);if(a===bb){toast('Objectif atteint 🤍',`Adhkâr du ${cid} terminés. Qu’Allah les accepte de toi.`);V.scrollTo({top:0,behavior:'smooth'})}else if(nx!==undefined){const el=$('#ob-'+nx);el&&setTimeout(()=>V.scrollTo({top:V.scrollTop+el.getBoundingClientRect().top-V.getBoundingClientRect().top-80,behavior:'smooth'}),60)}}},true);
 function invocations(){const fv=Object.keys(S.fav).filter(k=>S.fav[k]&&duaByKey(k));
   return `<div class="ih"><h1 class="bc">Invocations</h1><a class="ib" href="#cat-favoris" aria-label="Mes favorites" style="color:#D9546E;text-decoration:none;background:var(--card)">${SVGS.heart(fv.length)}</a></div>
   <div class="hs">${suggestCats().map(sqCard).join('')}</div>
@@ -2767,7 +2776,7 @@ function route(){
     $('#jcopy').onclick=async()=>{const e=S.jr[n]||{};const tx=`${D[n-1].translit} — ${D[n-1].fr}\n\n`+JQ.map(([k,q])=>`${q}\n${e[k]||''}`).join('\n\n');try{await navigator.clipboard.writeText(tx);toast('Copié','Ta note est dans le presse-papiers.')}catch(_){toast('Copie impossible','Sélectionne le texte pour le copier.')}}}}
   else if((m=h.match(/^rev-(\d+)$/))){start('etape',+m[1]);html=session();tab='noms';try{history.replaceState(null,'','#reviser')}catch(_){}}
   else if(h==='calendrier'){html=calendrier();tab='partage';after=()=>{HCM=0;fillCal()}}
-  else if((m=h.match(/^obj-(matin|soir)$/))){html=objView(m[1]);tab='accueil'}
+  else if((m=h.match(/^obj-(matin|soir)$/))){if(route.obl!==h){OBOPEN=null;route.obl=h}html=objView(m[1]);tab='accueil'}
   else if(h==='partage'){html=partage();tab='partage';after=fillPartage}
   else if((m=h.match(/^partage-(.+)$/))){const id=m[1];html=shView(id);tab='partage';after=()=>fillShView(id)}
   else if(h==='hadith'){html=hadith();tab='hadith'}
