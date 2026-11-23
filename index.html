@@ -1682,7 +1682,43 @@ const H=window.HADITHS,CATS=window.CATS;
 const GR={bm:['Sahîh · Al-Bukhârî et Muslim',''],b:['Sahîh · Al-Bukhârî',''],m:['Sahîh · Muslim',''],as:['Sahîh · authentifié par al-Albânî',''],ah:['Hasan · jugé bon par al-Albânî','h'],q:['Parole d\'Allah · Coran','q']};
 const gb=g=>`<span class="gbadge ${GR[g][1]}">✓ ${GR[g][0]}</span>`;
 const HA={intention:['hands',['#1d3327','#4a7a5c']],frere:['tea',['#5a3418','#a8703a']],langue:['dove',['#245a4a','#5fa58a'],'translate(70 20) scale(.9)'],taire:['crescentobj',['#14243a','#3a5a7a']],sourire:['sunburst',['#8a6420','#e0b552']],purete:['fountain',['#174a5a','#3f95a8']],regularite:['hourglass',['#4a3a1c','#9a7a40']],faciliter:['house',['#1f4a35','#4f8a62']],colere:['shield',['#16301f','#3f6b4f']],coeurs:['lantern',['#132a33','#2f5f6a'],'translate(130 30) scale(.9)'],science:['book',['#3a2a14','#8a6a34'],'translate(150 40) scale(.8)'],coran:['rugobj',['#18463f','#3f8070']],preserve:['tree',['#1d3a2c','#4f7a5c'],'translate(60 20) scale(.9)'],croyant:['cloudrain',['#2a5a6a','#6fa8b0']],taqwa:['tasbih',['#1d3327','#3d6a4d'],'translate(110 30) scale(.85)'],parole:['rose',['#6a2c3e','#c26a80']],merci:['dates',['#6a4416','#b8843c']],nuit:['mosque',['#0f1f3a','#2f4a7a'],'translate(110 30) scale(.85)'],paroles:['chest',['#1d3327','#4a7a5c'],'translate(120 40) scale(.85)'],voyageur:['caravan',['#7a4a1c','#d08a4a'],'translate(40 30) scale(1)'],richesse:['palm',['#1f5a46','#5fa585']],fort:['tree',['#2a4a2a','#6a9a5a'],'translate(60 20) scale(.9)'],douceur:['rose',['#8a4a6a','#e0a0b8']],soulager:['house',['#5a3a1a','#b07a3c']],vendredi:['mosque',['#1d3327','#4f8a62'],'translate(110 30) scale(.85)'],jeune:['crescentobj',['#1a2c3a','#4a6a8a']],arafa:['kaaba',['#6a5020','#c09a4c']],epreuve:['rose',['#3a2a30','#8a5060']]};
-const hart=(x,cls='',cap='')=>{const [m,c,t]=HA[x.id]||['book',['#1d3327','#3d6a4d']];return `<div class="pic ${cls}">${cardArt(m,c,{t})}${cap}</div>`};
+/* v74 : illustrations des hadiths — motif géométrique islamique, arche de mihrab et lumière, au lieu des dessins */
+const HPAL=[['#0f3326','#1f5a40','#e2c88e'],['#101c38','#25406e','#e8d29c'],['#3a1420','#6e2a3a','#ecc88e'],['#0e3236','#1f6066','#e6cf96'],['#3a2a12','#6e5226','#f0d9a0'],['#24163a','#4a3270','#e9d09a']];
+const HICO={
+crescent:'<path d="M60 18a34 34 0 1 0 20 56a27 27 0 1 1-20-56z"/><path d="M74 30l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>',
+heart:'<path d="M50 82S16 60 16 38a17 17 0 0 1 34-6a17 17 0 0 1 34 6c0 22-34 44-34 44z"/>',
+hearts:'<path d="M40 76S12 58 12 40a14 14 0 0 1 28-5a14 14 0 0 1 28 5c0 18-28 36-28 36z"/><path d="M62 84S38 68 38 52a12 12 0 0 1 24-4a12 12 0 0 1 24 4c0 16-24 32-24 32z"/>',
+hands:'<path d="M24 80c-2-18 2-34 10-42 5-4 10 0 8 8l-4 16M76 80c2-18-2-34-10-42-5-4-10 0-8 8l4 16M36 70c6 8 22 8 28 0"/><path d="M50 20v10M42 24l4 6M58 24l-4 6"/>',
+book:'<path d="M50 30v52M50 30C38 22 24 22 14 26v52c10-4 24-4 36 4c12-8 26-8 36-4V26c-10-4-24-4-36 4"/><path d="M22 38h18M22 48h18M60 38h18M60 48h18"/>',
+drop:'<path d="M50 12C38 34 28 46 28 60a22 22 0 0 0 44 0c0-14-10-26-22-48z"/><path d="M40 62a10 10 0 0 0 10 10"/>',
+hourglass:'<path d="M28 14h44M28 86h44M32 14c0 22 36 22 36 36s-36 14-36 36M68 14c0 22-36 22-36 36s36 14 36 36"/><path d="M42 78h16"/>',
+sun:'<circle cx="50" cy="50" r="15"/><path d="M50 18v10M50 72v10M18 50h10M72 50h10M27 27l7 7M66 66l7 7M27 73l7-7M66 34l7-7"/>',
+shield:'<path d="M50 12l30 10v24c0 22-14 34-30 40-16-6-30-18-30-40V22z"/><path d="M50 34l4 8 8 4-8 4-4 8-4-8-8-4 8-4z"/>',
+lantern:'<path d="M50 8v8M40 16h20l7 12v34l-7 12H40l-7-12V28zM33 28h34M33 62h34M50 74v10"/><path d="M50 34c6 6 6 16 0 22c-6-6-6-16 0-22z"/>',
+rain:'<path d="M30 58h40a13 13 0 0 0 0-26a19 19 0 0 0-37-4a13 13 0 0 0-3 30z"/><path d="M36 68l-4 10M50 68l-4 10M64 68l-4 10"/>',
+tasbih:'<circle cx="50" cy="40" r="24" stroke-dasharray="1 7" stroke-linecap="round" stroke-width="7"/><path d="M50 64v10M44 74h12l-3 12h-6z"/>',
+flower:'<circle cx="50" cy="46" r="7"/><path d="M50 39c-8-14 8-14 0 0M57 44c14-6 10 10 0 6M54 53c8 12-8 14-4 0M44 53c-8 12 8 14 4 0M43 44c-14-6-10 10 0 6"/><path d="M50 56v30M50 72c-8-2-14-8-14-14c8 0 14 6 14 14zM50 78c8-2 14-8 14-14c-8 0-14 6-14 14z"/>',
+palm:'<path d="M52 86c-2-20 0-40-4-54"/><path d="M48 32c-10-8-24-8-32 0c12-2 22 0 32 6M48 32c10-10 24-10 34-2c-12-2-24 2-34 8M48 32c-4-12-14-18-24-18c10 4 18 10 22 20M48 32c6-12 16-16 26-14c-10 4-18 10-24 18"/><path d="M34 86h36"/>',
+tree:'<path d="M50 86V50M50 62l-12-10M50 56l12-10"/><circle cx="50" cy="34" r="20"/><circle cx="32" cy="46" r="12"/><circle cx="68" cy="46" r="12"/><path d="M34 86h32"/>',
+mosque:'<path d="M28 84V58h44v26M28 58c0-18 10-28 22-32c12 4 22 14 22 32M50 26v-8M22 84V38l3-6 3 6v46M72 84V38l3-6 3 6v46M16 84h68M44 84V72a6 6 0 0 1 12 0v12"/><path d="M54 12a5 5 0 1 0 0 8a4 4 0 1 1 0-8z"/>',
+kaaba:'<path d="M22 34l28-10 28 10v42l-28 10-28-10zM22 34l28 10 28-10M50 44v42"/><path d="M22 44l28 10 28-10" stroke-width="5" stroke-opacity=".8"/>',
+dove:'<path d="M18 56c16-2 26-12 32-26c4 10 2 22-4 28c14 0 26 4 36 12c-18 4-36 2-48-6c-6 0-12-2-16-8z"/><circle cx="62" cy="40" r="1.5"/><path d="M50 70c-4 6-4 12 0 16"/>',
+road:'<path d="M40 86L47 40M60 86L53 40M50 80v-6M50 66v-6M50 52v-4"/><path d="M50 14l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/><path d="M24 86h52"/>',
+door:'<path d="M30 86V44c0-16 10-26 20-30c10 4 20 14 20 30v42M40 86V50c0-8 4-14 10-16c6 2 10 8 10 16v36M22 86h56"/><circle cx="56" cy="64" r="1.6"/>'};
+const HMOT={intention:'heart',frere:'hearts',langue:'dove',taire:'crescent',sourire:'sun',purete:'drop',regularite:'hourglass',faciliter:'door',colere:'shield',coeurs:'heart',science:'book',coran:'book',preserve:'lantern',croyant:'rain',taqwa:'tasbih',parole:'flower',merci:'hands',nuit:'crescent',paroles:'tasbih',voyageur:'road',richesse:'palm',fort:'tree',douceur:'flower',soulager:'hands',vendredi:'mosque',jeune:'crescent',arafa:'kaaba',epreuve:'flower'};
+function hArt(id){let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;const [c0,c1,g]=HPAL[h%HPAL.length],u='h'+id,W=400,H=260,cx=270+(h%3)*20;
+ const star=(x,y,r)=>{let d='';for(let i=0;i<16;i++){const rr=i%2?r*.42:r,a=Math.PI/8*i-Math.PI/2;d+=(i?'L':'M')+(x+rr*Math.cos(a)).toFixed(1)+' '+(y+rr*Math.sin(a)).toFixed(1)}return d+'Z'};
+ let pat='';for(let x=0;x<=W+40;x+=40)for(let y=0;y<=H+40;y+=40)pat+=star(x,y,15)+`M${x-20} ${y}L${x} ${y-20}L${x+20} ${y}L${x} ${y+20}Z`;
+ const ar=(w,hh,yb)=>`M${cx-w} ${yb}V${yb-hh}Q${cx-w} ${yb-hh-w*1.05} ${cx} ${yb-hh-w*1.55}Q${cx+w} ${yb-hh-w*1.05} ${cx+w} ${yb-hh}V${yb}`;
+ return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${u}b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c0}"/></linearGradient><radialGradient id="${u}l" cx="${cx/W}" cy=".42" r=".55"><stop offset="0" stop-color="${g}" stop-opacity=".55"/><stop offset=".45" stop-color="${g}" stop-opacity=".12"/><stop offset="1" stop-color="${g}" stop-opacity="0"/></radialGradient><radialGradient id="${u}m" cx="${cx/W}" cy=".45" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity=".08"/></radialGradient><mask id="${u}k"><rect width="${W}" height="${H}" fill="url(#${u}m)"/></mask></defs>
+ <rect width="${W}" height="${H}" fill="url(#${u}b)"/><path d="${pat}" fill="none" stroke="${g}" stroke-opacity=".22" stroke-width=".8" mask="url(#${u}k)"/>
+ <rect width="${W}" height="${H}" fill="url(#${u}l)"/>
+ <path d="${ar(78,120,H+10)}" fill="${c0}" fill-opacity=".35" stroke="${g}" stroke-opacity=".8" stroke-width="1.6"/><path d="${ar(66,112,H+10)}" fill="none" stroke="${g}" stroke-opacity=".45" stroke-width="1"/>
+ <g transform="translate(${cx-48} ${H-172}) scale(.96)" fill="none" stroke="${g}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px ${g}66)">${HICO[HMOT[id]]||HICO.book}</g>
+ <path d="M${cx-58} ${H-52}H${cx+58}" stroke="${g}" stroke-opacity=".5"/>${[...Array(5)].map((_,i)=>`<circle cx="${30+i*37+(h%7)*9}" cy="${22+((h>>i)%5)*9}" r="${1+(i%2)}" fill="${g}" fill-opacity=".7"/>`).join('')}
+ <rect width="${W}" height="${H}" fill="url(#${u}b)" opacity=".0"/></svg>`}
+window.__ha=hArt;
+const hart=(x,cls='',cap='')=>`<div class="pic ${cls}">${hArt(x.id)}${cap}</div>`;
 const ppic=(p,cls='',cap='')=>`<div class="pic ${cls}">${paint(Object.assign({},p))}${cap}</div>`;
 const pic=(sc,cls='',cap='')=>`<div class="pic ${cls}">${scene(sc)}${cap}</div>`;
 const iso=d=>{const z=new Date(d);z.setMinutes(z.getMinutes()-z.getTimezoneOffset());return z.toISOString().slice(0,10)};
