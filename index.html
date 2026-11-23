@@ -1700,7 +1700,7 @@ function hadith(){
   <div class="himg">${hart(x,'hhero',`<div class="cap"><b>${x.t}</b><span style="text-transform:capitalize">Hadith du jour · ${lbl}</span></div>`)}</div>
   <div class="hsheet">
    <article class="hqc"><span class="hqm" aria-hidden="true">❝</span><div class="hql">Le Prophète ﷺ a dit</div>
-   ${S.lang==='fr'?`${x.ar?`<div class="ar hqa" lang="ar">${x.ar}</div><div class="hqo" aria-hidden="true"><i></i>۞<i></i></div>`:''}<p class="hq">${esc(x.fr)}</p>`:tri(x.fr,x.ar,'hq')}
+   ${S.lang==='fr'?`<p class="hq">${esc(x.fr)}</p>`:tri(x.fr,x.ar,'hq')}
    <div class="hqf">${SRC(x.g,x.src)}</div></article>
    ${CHIPS(x.ar)}
    <div class="fadl"><b>${STAR.replace(/22/g,'14')} Pour aujourd'hui</b>${esc(x.m)}</div>
