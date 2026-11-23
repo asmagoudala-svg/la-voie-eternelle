@@ -1425,9 +1425,7 @@ button,a{transition:opacity .12s}
 .tl>svg>g[stroke]{stroke-opacity:.1}
 .tl:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,18,14,.45) 0%,rgba(10,18,14,0) 45%,rgba(10,18,14,.18) 100%)}
 .tl b,.tl em{z-index:2}
-.tl b{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1.02;letter-spacing:.005em;text-shadow:0 1px 8px rgba(0,0,0,.4)}
-.tl.w b{font-size:34px}
-.tl em{font-family:'Mulish',sans-serif;font-size:14px;line-height:1.4;opacity:.88;top:60px}
+.tl b{text-shadow:0 1px 8px rgba(0,0,0,.4)}
 </style>
 </head>
 <body>
@@ -1832,7 +1830,7 @@ const c3ico=(id,w=520)=>CPH[id]?`<img class="ph3" src="https://images.unsplash.c
 const cpic=(c,cls='',cap='')=>PC[c.id]?ppic(PC[c.id],cls,cap):pic(c.sc,cls,cap);
 function sqCard(c){return `<a class="sq" href="#cat-${c.id}">${cpic(c)}<span>${LBL[c.id]||c.name}</span></a>`}
 function tile(c){const [m,col,t]=CC[c.id]||['none',['#294735','#3f6b52']];const w=WIDE[c.id];
-  return `<a class="tl ${w?'w':''}" href="#cat-${c.id}">${cardArt(m,col,{t:t||(w?'translate(150 30) scale(.8)':undefined)})}<b${!w&&Math.max(...c.name.split(' ').map(x=>x.length))>11?' style="font-size:24px"':''}>${c.name.replace(/^(Le |La |Les |L')/,'').replace(/^./,x=>x.toUpperCase())}</b>${w?`<em>${c.sub}</em>`:''}</a>`}
+  return `<a class="tl ${w?'w':''}" href="#cat-${c.id}">${cardArt(m,col,{t:t||(w?'translate(150 30) scale(.8)':undefined)})}<b${!w&&Math.max(...c.name.split(' ').map(x=>x.length))>11?' style="font-size:22px"':''}>${c.name.replace(/^(Le |La |Les |L')/,'').replace(/^./,x=>x.toUpperCase())}</b>${w?`<em>${c.sub}</em>`:''}</a>`}
 function treasure(){return `<a class="tl w tr" href="#cat-recompenses">${cardArt('chest',['#1d3327','#4a7a5c'],{t:'translate(120 40) scale(.85)'})}<b>Les trésors</b><em>Découvre les récompenses inestimables de l'invocation au quotidien</em></a>`}
 let IQ='';
 
