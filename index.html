@@ -2096,7 +2096,7 @@ function qSheet(kind,o){let sh=$('#qsheet');if(!sh){sh=document.createElement('d
   <button class="btn gold wide" data-qplayall="1" style="margin-top:12px;min-height:54px;font-size:17px">▶ Lancer la récitation</button>
   <div class="qtgrid"><button data-qsheet="sur"><span>📖</span><b>Sourate & versets</b><small>${esc(nm)}</small></button><button data-qsheet="rec"><span>🎙️</span><b>Récitateur</b><small>${esc(recName())}</small></button>
    <button data-qrep="1"><span>↻</span><b>Répétition</b><small id="qrepv">${st.vrep?VREPS[st.vrep]:qrep()}× par verset</small></button><button data-qsubgo="reglages"><span>⚙️</span><b>Réglages</b><small>Récitateur, tajwid…</small></button></div>
-  <div class="qstp" style="border:0"><span><b>Taille du texte</b></span><div class="qzoom"><button data-qsz="-10">−</button><span id="qszv">${qsz()}%</span><button data-qsz="10">+</button><button data-qsz="0">⌂</button></div></div></div>`}
+</div>`}
  else if(kind==='tj')sh.innerHTML=`<div class="qsp"><span class="qgrip"></span><div class="qsh2"><h3>Les couleurs du tajwid</h3><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div>
     <div class="qlist" style="margin-top:10px">${TJL.map(([k,l,dsc])=>`<div class="qrow"><span class="tjsw tj-bg-${k}"></span><span class="qn"><b>${l}</b><small>${dsc}</small></span></div>`).join('')}</div>
     <p class="small muted" style="margin:10px 4px 0">Mushaf en lecture Ḥafṣ ʿan ʿĀṣim. Annotations : projet quran-tajweed (C. Fairhall, CC BY 4.0), calculées automatiquement sur le texte Tanzil. Elles aident à la lecture mais ne remplacent pas l'apprentissage auprès d'un enseignant.</p></div>`;
