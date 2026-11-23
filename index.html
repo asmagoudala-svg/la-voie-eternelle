@@ -1362,6 +1362,7 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .hqf{margin-top:8px}.hqf>*{border-top-color:rgba(217,185,119,.35)!important}.hqf .src{margin:0;color:#cbbf9f}.hqf .src a{color:#e2c88e}
 #phone.light .hqc{color:#f3ead2}
 .hqf{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-top:10px;border-top:1px dashed rgba(217,185,119,.35)}.hqr{font-size:13px;color:#cbbf9f}
+.pic>img.hph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.hcard .pic:after,.himg .pic:after{z-index:0}.pic .cap{z-index:2}.himg .pic:after{content:'';position:absolute;inset:auto 0 0 0;height:65%;background:linear-gradient(transparent,rgba(8,16,12,.75))}
 </style>
 </head>
 <body>
@@ -1717,8 +1718,9 @@ function hArt(id){let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;const
  <g transform="translate(${cx-48} ${H-172}) scale(.96)" fill="none" stroke="${g}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px ${g}66)">${HICO[HMOT[id]]||HICO.book}</g>
  <path d="M${cx-58} ${H-52}H${cx+58}" stroke="${g}" stroke-opacity=".5"/>${[...Array(5)].map((_,i)=>`<circle cx="${30+i*37+(h%7)*9}" cy="${22+((h>>i)%5)*9}" r="${1+(i%2)}" fill="${g}" fill-opacity=".7"/>`).join('')}
  <rect width="${W}" height="${H}" fill="url(#${u}b)" opacity=".0"/></svg>`}
-window.__ha=hArt;
-const hart=(x,cls='',cap='')=>`<div class="pic ${cls}">${hArt(x.id)}${cap}</div>`;
+/* v75 : photos libres de droits (Unsplash) choisies pour illustrer chaque hadith ; l'illustration dorée reste en secours si la photo ne charge pas */
+const HPH={intention:'1599659593072-10de2e109486',frere:'1521791136064-7986c2920216',langue:'1507126882445-434b04530d1a',taire:'1557316655-8715fdecd2d1',sourire:'1598920710727-e6c74781538c',purete:'1538300342682-cf57afb97285',regularite:'1527066236128-2ff79f7b9705',faciliter:'1734517648088-2990d38c258d',colere:'1524679166686-04237b4667b4',coeurs:'1564045288780-5c11658fefa3',science:'1595123550441-d377e017de6a',coran:'1542816417-0983c9c9ad53',preserve:'1546484953-6d9a8d66cc56',croyant:'1515694346937-94d85e41e6f0',taqwa:'1771758266506-c7002e6487af',parole:'1476293889456-abfb7492a29f',merci:'1629738601425-494c3d6ba3e2',nuit:'1590092794015-bce5431c83f4',paroles:'1720873160840-d5934323bb23',voyageur:'1767201808465-76c84406bec7',richesse:'1491720731493-223f97d92c21',fort:'1518495973542-4542c06a5843',douceur:'1480511361210-b1b966c8d614',soulager:'1586726370832-3440a511e479',vendredi:'1605976528013-638e49b6599f',jeune:'1587617425953-9075d28b8c46',arafa:'1553755088-ef1973c7b4a1',epreuve:'1593242940939-efbeaed59c3b'};
+const hart=(x,cls='',cap='')=>`<div class="pic ${cls}">${hArt(x.id)}${HPH[x.id]?`<img class="hph" src="https://images.unsplash.com/photo-${HPH[x.id]}?w=900&h=600&fit=crop&q=70&auto=format" alt="" loading="lazy" onerror="this.remove()">`:''}${cap}</div>`;
 const ppic=(p,cls='',cap='')=>`<div class="pic ${cls}">${paint(Object.assign({},p))}${cap}</div>`;
 const pic=(sc,cls='',cap='')=>`<div class="pic ${cls}">${scene(sc)}${cap}</div>`;
 const iso=d=>{const z=new Date(d);z.setMinutes(z.getMinutes()-z.getTimezoneOffset());return z.toISOString().slice(0,10)};
