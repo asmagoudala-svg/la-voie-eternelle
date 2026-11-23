@@ -1211,6 +1211,15 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 #phone.qtr #mhead{display:block;padding-left:14px!important;padding-right:14px!important}
 #phone.qtr .qzone.qrd{padding-top:64px}
 #phone.qtr .tv{scroll-margin-top:96px}
+/* v55 favoris */
+.tvb{display:flex;gap:8px;align-items:center}
+.tfav{width:40px;height:40px;border-radius:50%;border:1px solid rgba(217,185,119,.55);background:none;color:#e2c88e;font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.tfav.on{background:#c2453b;border-color:#c2453b;color:#fff}
+#phone.light .tfav{color:#9a7334}#phone.light .tfav.on{color:#fff}
+.qfv{margin:10px 0;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(217,185,119,.3)}
+.qfvh{display:flex;justify-content:space-between;align-items:center;gap:8px}.qfvr{background:none;border:0;color:#e2c88e;font:800 14px Mulish,sans-serif;cursor:pointer;padding:6px 0;text-align:left}
+.qfva{font-family:'Amiri Quran',Amiri,serif;font-size:24px;line-height:2;direction:rtl;text-align:right;color:#f3ead2;margin:6px 0}.qfvf{font-size:14.5px;line-height:1.5;color:#d9cfb3;margin:0}
+#phone.light .qfv{background:#fff;border-color:rgba(184,148,90,.35)}#phone.light .qfvr{color:#8a6a2f}#phone.light .qfva{color:#1f3a2b}#phone.light .qfvf{color:#4a4231}
 </style>
 </head>
 <body>
@@ -2086,7 +2095,7 @@ function qSheet(kind,o){let sh=$('#qsheet');if(!sh){sh=document.createElement('d
   sh.innerHTML=`<div class="qsp"><span class="qgrip"></span><div class="qsh2"><div><small class="qkick">Mushaf</small><h3>${esc(nm)} · v. ${ra}–${rb}</h3></div><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div>
   <button class="btn gold wide" data-qplayall="1" style="margin-top:12px;min-height:54px;font-size:17px">▶ Lancer la récitation</button>
   <div class="qtgrid"><button data-qsheet="sur"><span>📖</span><b>Sourate & versets</b><small>${esc(nm)}</small></button><button data-qsheet="rec"><span>🎙️</span><b>Récitateur</b><small>${esc(recName())}</small></button>
-   <button data-qrep="1"><span>↻</span><b>Répétition</b><small id="qrepv">${st.vrep?VREPS[st.vrep]:qrep()}× par verset</small></button><button data-qsubgo="reglages"><span>⚙️</span><b>Réglages</b><small>Récitateur, tajwid…</small></button></div>
+   <button data-qrep="1"><span>↻</span><b>Répétition</b><small id="qrepv">${st.vrep?VREPS[st.vrep]:qrep()}× par verset</small></button><button data-qsubgo="reglages"><span>⚙️</span><b>Réglages</b><small>Récitateur, tajwid…</small></button>${(()=>{try{mHeadUpd()}catch(e){}const hs=mHeadUpd.s===n,fs=n,fv=hs?mHeadUpd.v:(S.ql&&S.ql.s===n?S.ql.v:ra),on=isFav(fs,fv);return `<button data-qfavcur="${fs}:${fv}"><span>${on?'♥':'♡'}</span><b>${on?'Retirer des favoris':'Favori'}</b><small>${esc(QIDX?QIDX[fs-1][2]:'')} · v. ${fv}</small></button><button data-qsubgo="carnet" data-qcfset="fav"><span>📒</span><b>Mes favoris</b><small>${(S.qfav||[]).length} verset(s)</small></button>`})()}</div>
   <div class="qstp" style="border:0"><span><b>Taille du texte</b></span><div class="qzoom"><button data-qsz="-10">−</button><span id="qszv">${qsz()}%</span><button data-qsz="10">+</button><button data-qsz="0">⌂</button></div></div></div>`}
  else if(kind==='tj')sh.innerHTML=`<div class="qsp"><span class="qgrip"></span><div class="qsh2"><h3>Les couleurs du tajwid</h3><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div>
     <div class="qlist" style="margin-top:10px">${TJL.map(([k,l,dsc])=>`<div class="qrow"><span class="tjsw tj-bg-${k}"></span><span class="qn"><b>${l}</b><small>${dsc}</small></span></div>`).join('')}</div>
@@ -2117,6 +2126,8 @@ function qNoteWords(){const {s,v,sel}=QNOTE,t=QC[s].ar[v-1];let wi=0;$('#qnw').i
 function qSheetInput(e){if(e.target.id==='plq'){clearTimeout(PLT);const v=e.target.value;PLT=setTimeout(()=>plSearch(v),250);return}if(e.target.id&&e.target.id.startsWith('qn-'))return qNavSync(e.target.id,e.target.value);if(e.target.id==='cq'){QQ=e.target.value;fillSurList()}if(e.target.id==='mqq'){MQQ=e.target.value;clearTimeout(MQT);const w=MQQ.trim();if(w.length<2){MQC=null;MQR=null;MQERR='';mqRender();return}MQT=setTimeout(()=>mqDoCity(w),300)}}
 function qSheetClick(e){const sh=$('#qsheet');if(e.target===sh)return qSheetClose();const b=e.target.closest('button');if(!b)return;const d=b.dataset;
  if(d.qclose)return qSheetClose();
+ if(d.qfavcur){const [fs,fv]=d.qfavcur.split(':').map(Number);togFav(fs,fv);qSheet('tools');return}
+ if(d.qcfset){QCF=d.qcfset}
  if(d.vemcat){VEMCAT=+d.vemcat;sh.innerHTML=vemoSheet();sh.classList.add('on');return}
  if(d.vemopick&&VEF){S.vemo=S.vemo||{};S.vemo[VEF]=d.vemopick;if(S.vimg)delete S.vimg[VEF];save();qSheetClose();fillVocab(+V.dataset.qs||1);return}
  {const c=PS(),K=sh.dataset.kind,upd=()=>{S.pr=c;save();const sc=(sh.querySelector('.ptsc')||{}).scrollTop||0;if(location.hash==='#priere'){const y=V.scrollTop;route();V.scrollTop=y}sh.innerHTML=prSheet(K);sh.classList.add('on');const p2=sh.querySelector('.ptsc');p2&&(p2.scrollTop=sc)};
@@ -2165,13 +2176,22 @@ function qSheetClick(e){const sh=$('#qsheet');if(e.target===sh)return qSheetClos
    if(QSUB()==='mushaf'&&QC[s]&&+V.dataset.qs===s){const y=V.scrollTop;fillMushaf(s,QC[s]);V.scrollTop=y}else if(QSUB()==='carnet')fillCarnet();else if(QSUB()==='bequille'&&location.hash==='#coran-seance'){}return}}
 function qNote(s,v,words){qSheet('note',{s,v,words})}
 /* ---------- Carnet ---------- */
+/* v55 versets favoris */
+const isFav=(s,v)=>(S.qfav||[]).some(x=>x.s===s&&x.v===v);
+function togFav(s,v){S.qfav=S.qfav||[];const i=S.qfav.findIndex(x=>x.s===s&&x.v===v);if(i>=0){S.qfav.splice(i,1);toast('Retiré des favoris',`${QIDX?QIDX[s-1][2]:'Sourate '+s} · verset ${v}`)}else{S.qfav.unshift({s,v,at:Date.now()});toast('Ajouté aux favoris ♥',`${QIDX?QIDX[s-1][2]:'Sourate '+s} · verset ${v} · retrouve-le dans Carnet › Favoris`)}save();return i<0}
+async function fillFavs(el){const F=S.qfav||[];if(!F.length){el.innerHTML=`<div class="qempty"><h2>♡ Aucun favori</h2><p>Dans la Traduction, touche le cœur ♡ d’un verset. Dans le Mushaf, ouvre ⚙️ Outils puis « Favori » pour ajouter le verset en cours.</p></div>`;return}
+ await qIndex();await Promise.all([...new Set(F.map(x=>x.s))].map(s=>qSura(s).catch(()=>null)));if(!$('#qclist'))return;
+ el.innerHTML=F.map(x=>{const d=QC[x.s];return `<article class="qfv"><div class="qfvh"><button class="qfvr" data-qfgo="${x.s}:${x.v}">${esc(QIDX[x.s-1][2])} · verset ${x.v} ›</button><button class="tfav on" data-qfav="${x.s}:${x.v}" aria-label="Retirer des favoris">♥</button></div>${d?`<p class="qfva" lang="ar">${d.ar[x.v-1]}</p><p class="qfvf">${esc(d.fr[x.v-1])}</p>`:''}</article>`}).join('')}
+V.addEventListener('click',e=>{const b=e.target.closest('[data-qfav],[data-qfgo]');if(!b)return;e.preventDefault();e.stopPropagation();
+ if(b.dataset.qfgo){const [s,v]=b.dataset.qfgo.split(':').map(Number);S.qsub='mushaf';qGoTo(s,v);return}
+ const [s,v]=b.dataset.qfav.split(':').map(Number),on=togFav(s,v);if(location.hash==='#coran-carnet'){fillCarnet();return}b.classList.toggle('on',on);b.textContent=on?'♥':'♡';b.setAttribute('aria-label',on?'Retirer des favoris':'Ajouter aux favoris')},true);
 function carnet(){const N=S.qnotes||[],rev=N.filter(x=>!x.acq),acq=N.filter(x=>x.acq),L=S.ql;
  return `<div class="qzone">${qHub('carnet')}<div class="qhero"><small>MON CARNET</small><div class="qht"><h1>À retravailler</h1><span class="qbadge">${rev.length}</span></div><p>Les points où tu te trompes, prêts à être repris.</p>
   ${L?`<a class="qresume" href="#sourate-${L.s}" data-qjump="1">${QI.book}<span><b>Reprendre ma lecture</b><small id="qresn">Sourate ${L.s} · verset ${L.v}</small></span>›</a>`:''}
   <div class="qstats2"><div><b>${rev.length}</b>à revoir</div><div><b>${acq.length}</b>acquis</div></div></div>
-  <div class="qfil">${[['rev','À revoir'],['tajwid','Tajwid'],['pron','Prononciation'],['memo','Mémorisation'],['acq','Acquis']].map(([k,l])=>`<button class="chip ${QCF===k?'on':''}" data-qcf="${k}">${l}</button>`).join('')}</div>
+  <div class="qfil">${[['fav','♥ Favoris'],['rev','À revoir'],['tajwid','Tajwid'],['pron','Prononciation'],['memo','Mémorisation'],['acq','Acquis']].map(([k,l])=>`<button class="chip ${QCF===k?'on':''}" data-qcf="${k}">${l}</button>`).join('')}</div>
   <div id="qclist"></div></div>`}
-function fillCarnet(){const el=$('#qclist');if(!el)return;const N=S.qnotes||[];const L=N.filter(x=>QCF==='acq'?x.acq:!x.acq&&(QCF==='rev'||x.type===QCF));
+function fillCarnet(){const el=$('#qclist');if(!el)return;if(QCF==='fav'){fillFavs(el);return}const N=S.qnotes||[];const L=N.filter(x=>QCF==='acq'?x.acq:!x.acq&&(QCF==='rev'||x.type===QCF));
  const r=$('#qresn');r&&S.ql&&QIDX&&(r.textContent=`${QIDX[S.ql.s-1][2]} · verset ${S.ql.v}`);
  if(!N.length){el.innerHTML=`<div class="qempty">${QI.note}<h2>Ton carnet est prêt</h2><p>Dans le Mushaf, appuie longuement sur un mot ou utilise « ✎ Noter ». Chaque difficulté sera soulignée et prête à être reprise.</p><button class="btn gold" data-qsubgo="mushaf">Ouvrir le Mushaf</button></div>`;return}
  if(!L.length){el.innerHTML=`<p class="qcount">Aucun passage dans cette catégorie.</p>`;return}
@@ -2233,7 +2253,7 @@ function tradView(n){const v=QSET();return `<div class="qzone qrd" style="--qz:$
   <div class="qsz3"><small>TAILLE DU TEXTE</small><div class="qzoom"><button data-qsz="-10">A−</button><span id="qszv">${qsz()}%</span><button data-qsz="10">A+</button></div></div></div>
   <div id="qverses"><p class="muted pad">Chargement…</p></div></div>`}
 function fillTrad(n,d){const [,a,t,f,ty,cnt]=QIDX[n-1],[ra,rb]=qRange(n),v=QSET(),bis=n!==1&&n!==9&&ra===1;$('#qtt').textContent=t;$('#qtsub').textContent=`${rb-ra+1} versets · ${ty==='M'?'MECQUOISE':'MÉDINOISE'}`;
- let h='';for(let i=ra-1;i<rb;i++)h+=`<article class="tv" id="v-${i+1}" data-v="${i+1}"><div class="tvt"><span class="vpill">Verset <b>${i+1}</b></span><button class="tplay" data-qp="${n}:${i+1}" aria-label="Écouter le verset ${i+1}">▶ Play</button></div>
+ let h='';for(let i=ra-1;i<rb;i++)h+=`<article class="tv" id="v-${i+1}" data-v="${i+1}"><div class="tvt"><span class="vpill">Verset <b>${i+1}</b></span><span class="tvb"><button class="tfav ${isFav(n,i+1)?'on':''}" data-qfav="${n}:${i+1}" aria-label="${isFav(n,i+1)?'Retirer des favoris':'Ajouter aux favoris'}">${isFav(n,i+1)?'♥':'♡'}</button><button class="tplay" data-qp="${n}:${i+1}" aria-label="Écouter le verset ${i+1}">▶ Play</button></span></div>
   ${i===0&&bis?`<div class="tbis"><div lang="ar">${tjHtml(QBIS,QBIST)}</div><small>BASMALA · OUVERTURE DE LA SOURATE</small></div>`:''}
   ${v.arv?`<p class="tar ${qtj()?'tjon':''}" lang="ar">${tjHtml(d.ar[i],d.tj&&d.tj[i])}</p>`:''}${v.tl?`<div class="tlab">Phonétique</div><p class="tph">${esc(d.ph[i])}</p>`:''}${v.frv?`<div class="tlab">Sens français</div><p class="tfr">${esc(d.fr[i])}</p>`:''}</article>`;
  $('#qverses').innerHTML=h;const go=S.ql&&S.ql.s===n?S.ql.v:0;if(go>ra){const el=$('#v-'+go);el&&mScrollTo(el)}setTimeout(mHeadUpd,80);
