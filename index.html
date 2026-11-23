@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>La Voie Éternelle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Barlow+Condensed:wght@500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Barlow+Condensed:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Scheherazade+New:wght@400;700&family=Reem+Kufi:wght@400;600&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* VOICE: calme, recueilli, élégant — un compagnon spirituel, jamais bruyant
    IDEA: le livret relié d'une mosquée : arches, enluminure dorée, papier crème
@@ -624,7 +624,7 @@ nav{grid-template-columns:1fr 1.25fr 1fr!important;overflow:visible;position:rel
 .alli small{font:800 10px Mulish,sans-serif;text-align:center;line-height:1.15}.allic{width:38px;height:38px;display:grid;place-items:center}.allic .hmi{width:38px;height:38px}
 .hmt>span:nth-child(2){display:flex;flex-direction:column;min-width:0}
 /* v28 barre du bas par espace */
-nav.sp-coran,nav.sp-day{grid-template-columns:1.1fr repeat(5,1fr)!important}nav.sp-coran a,nav.sp-day a{font-size:9px!important;padding-left:0!important;padding-right:0!important}nav.sp-coran svg.nvi,nav.sp-day svg.nvi{width:32px!important;height:32px!important}nav.sp-coran .nve{width:32px;height:32px;font-size:20px}
+nav.sp-coran{grid-template-columns:1.1fr repeat(5,1fr)!important}nav.sp-day{grid-template-columns:1fr repeat(6,1fr)!important}nav.sp-coran a,nav.sp-day a{font-size:9px!important;padding-left:0!important;padding-right:0!important}nav.sp-coran svg.nvi,nav.sp-day svg.nvi{width:32px!important;height:32px!important}nav.sp-coran .nve{width:32px;height:32px;font-size:20px}
 nav.sp-home{grid-template-columns:repeat(3,1fr)!important}
 nav a span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 nav.sp-coran a,nav.sp-day a{font-size:9.5px}
@@ -934,7 +934,7 @@ nav.sp-home{grid-template-columns:1fr 1.25fr 1fr!important}nav.sp-home #navc .na
 #phone.light .adh{background:linear-gradient(160deg,#fffdf7,#f3ecdc)!important;border-color:#e3d7bd}#phone.light .adh *{color:#1d2a20}
 #phone.light .dt.big{background:linear-gradient(160deg,#fffdf7,#f3ecdc)!important;border:1px solid #e3d7bd}#phone.light .dt.big b{color:#1d2a20}#phone.light .dt.big span{color:#6d6656}
 /* v34 barre Coran avec Réglages, Accueil réduit, bouton Outils visible */
-nav.sp-coran{grid-template-columns:.85fr repeat(6,1fr)!important}nav.sp-day{grid-template-columns:.85fr repeat(5,1fr)!important}
+nav.sp-coran{grid-template-columns:.85fr repeat(6,1fr)!important}nav.sp-day{grid-template-columns:.8fr repeat(6,1fr)!important}nav.sp-day a{font-size:8.5px!important;letter-spacing:-.01em}nav.sp-day svg.nvi{width:28px!important;height:28px!important}
 nav.sp-coran #navc .navc-b,nav.sp-day #navc .navc-b{width:36px;height:36px;border-width:2px}nav.sp-coran #navc .navc-i,nav.sp-day #navc .navc-i{width:20px;height:20px}
 nav.sp-coran #navc small,nav.sp-day #navc small{font-size:9px}nav.sp-coran #navc .navc-b::before,nav.sp-day #navc .navc-b::before{left:-8px;font-size:15px}
 nav.sp-coran a,nav.sp-day a{font-size:9px!important}nav.sp-coran svg.nvi,nav.sp-day svg.nvi{width:30px!important;height:30px!important}nav.sp-coran .nve{width:30px!important;height:30px!important;font-size:19px!important}
@@ -1221,6 +1221,33 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .qfva{font-family:'Amiri Quran',Amiri,serif;font-size:24px;line-height:2;direction:rtl;text-align:right;color:#f3ead2;margin:6px 0}.qfvf{font-size:14.5px;line-height:1.5;color:#d9cfb3;margin:0}
 #phone.light .qfv{background:#fff;border-color:rgba(184,148,90,.35)}#phone.light .qfvr{color:#8a6a2f}#phone.light .qfva{color:#1f3a2b}#phone.light .qfvf{color:#4a4231}
 #phone.mush .mushz{touch-action:pan-y}
+
+/* v58 Partage un rappel */
+.shp{padding:16px 16px 40px}.shh h1{font-family:'Cormorant Garamond',serif;font-size:32px;margin:6px 0 4px;color:var(--gold2,#e2c88e)}.shh p{margin:0 0 14px;opacity:.85;font-size:14px}
+.shban{display:grid;gap:8px;margin-bottom:12px}.shban button{text-align:left;border:1px solid rgba(201,164,101,.55);background:linear-gradient(135deg,rgba(201,164,101,.22),rgba(31,90,64,.25));color:inherit;border-radius:14px;padding:11px 13px;font:600 13.5px Mulish}
+#shq{width:100%;box-sizing:border-box;border-radius:14px;border:1px solid rgba(201,164,101,.4);background:rgba(255,255,255,.06);color:inherit;padding:11px 14px;font:14px Mulish;margin-bottom:10px}
+.shcats,.shrow{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}.shcats::-webkit-scrollbar,.shrow::-webkit-scrollbar{display:none}
+.shcats button{flex:none;border:1px solid rgba(201,164,101,.45);background:transparent;color:inherit;border-radius:999px;padding:7px 12px;font:600 12.5px Mulish;white-space:nowrap}.shcats button.on{background:#c9a465;color:#14251c;border-color:#c9a465}
+.sht{font-family:'Cormorant Garamond',serif;font-size:21px;margin:18px 0 9px;color:var(--gold2,#e2c88e)}
+.shgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.shc{position:relative;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;text-align:center;border:1px solid var(--ac);border-radius:16px;padding:14px 10px 12px;min-height:190px;background:linear-gradient(160deg,var(--b1),var(--b2));color:var(--tx);overflow:hidden;font-family:Mulish;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.shrow .shc{flex:none;width:150px}
+.shc small{font:700 8.5px Mulish;letter-spacing:.08em;color:var(--ac);line-height:1.3}.shc .sha{font:19px/1.65 'Amiri Quran','Amiri',serif;direction:rtl}.shc b{font:700 15px 'Cormorant Garamond',serif;color:var(--ac)}.shc .shf{font:italic 13px/1.35 'Cormorant Garamond',serif}.shc i{font:600 8.5px Mulish;color:var(--ac);font-style:normal;opacity:.9}.shc em{position:absolute;top:8px;right:10px;font-style:normal;color:#e06b7a}
+.shc.big{min-height:260px;padding:24px 18px}.shc.big .sha{font-size:27px}.shc.big .shf{font-size:16px}.shc.big i{font-size:10px}
+.shev{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;width:86px;border:1px solid rgba(201,164,101,.45);background:rgba(201,164,101,.1);color:inherit;border-radius:14px;padding:10px 4px;font:600 11px Mulish}.shev span{font-size:24px}
+.shset{margin-top:22px}.shoff{display:flex;align-items:center;gap:8px}.shoff button{width:32px;height:32px;border-radius:50%;border:1px solid #c9a465;background:transparent;color:inherit;font-size:18px}
+.shfoot{margin-top:26px;text-align:center;border-top:1px solid rgba(201,164,101,.35);padding-top:18px}.shfoot span{font:24px/1.7 'Amiri',serif;color:var(--gold2,#e2c88e);display:block}.shfoot p{font:italic 16px 'Cormorant Garamond',serif;margin:6px 0}.shfoot small{opacity:.75}
+.shvt{display:flex;align-items:center;gap:10px;margin-bottom:12px}.shvt b{font-family:'Cormorant Garamond',serif;font-size:20px}
+.shcv{border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}.shcv canvas{display:block;width:100%;height:auto}.shcv.fx{animation:shfx .9s ease}@keyframes shfx{0%{transform:scale(1)}30%{transform:scale(.97)}60%{transform:scale(1.02);box-shadow:0 0 0 6px rgba(201,164,101,.5)}100%{transform:scale(1)}}
+.shsend{margin-top:14px;font-size:16px!important;padding:14px!important}
+.shacts{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}.shacts button{border:1px solid rgba(201,164,101,.5);background:rgba(201,164,101,.08);color:inherit;border-radius:12px;padding:10px 2px;font:600 11.5px Mulish}.shacts button.on{background:#c9a465;color:#14251c}
+.shref{font-size:12px;opacity:.85;text-align:center;margin:12px 0}
+.shed{border:1px solid rgba(201,164,101,.4);border-radius:16px;padding:12px 14px;margin-top:8px}.shed summary{font:700 14px Mulish;cursor:pointer;color:var(--gold2,#e2c88e)}
+.shl{font:700 11px Mulish;letter-spacing:.05em;text-transform:uppercase;opacity:.75;margin:14px 0 6px}
+.shseg{display:flex;flex-wrap:wrap;gap:6px}.shseg button{border:1px solid rgba(201,164,101,.45);background:transparent;color:inherit;border-radius:10px;padding:7px 10px;font:600 12px Mulish;display:flex;flex-direction:column;align-items:center}.shseg button small{font-size:9px;opacity:.7}.shseg button.on{background:#c9a465;color:#14251c;border-color:#c9a465}
+.shsty{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.shsty button{aspect-ratio:1;border-radius:12px;border:2px solid transparent;font:700 8.5px Mulish;display:flex;align-items:flex-end;justify-content:center;padding:4px;line-height:1.1}.shsty button.on{border-color:#c9a465;box-shadow:0 0 0 2px rgba(201,164,101,.4)}
+#shmsg{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid rgba(201,164,101,.45);background:rgba(255,255,255,.06);color:inherit;padding:10px 12px;font:14px Mulish}
+#phone.light .shh h1,#phone.light .sht,#phone.light .shed summary,#phone.light .shfoot span{color:#1f5a40}#phone.light #shq,#phone.light #shmsg{background:#fff}
 </style>
 </head>
 <body>
@@ -1290,6 +1317,7 @@ const CHIPS=(ar,ref)=>ar?`<div class="chips2">${ref?`<button class="chp" data-re
 const SRC=(g,src)=>`<div class="srcs">${gb(g)}<span>${esc(src)}</span></div>`;
 const SAY=(ar,label='Écouter')=>ar?`<button class="cbtn" data-sayar="${esc(ar)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg> ${label}</button>`:'';
 const NTILE="<path d=\"M24 31l19 8-19 8-19-8z\" fill=\"url(#nvm)\"/><path d=\"M5 39v2.5l19 8v-2.5z\" fill=\"#cfc8bb\"/><path d=\"M43 39v2.5l-19 8v-2.5z\" fill=\"#b9b2a4\"/><path d=\"M24 33l14.5 6L24 45 9.5 39z\" fill=\"none\" stroke=\"#C9A465\" stroke-width=\".8\" opacity=\".9\"/>";const NI={"accueil": "<rect x=\"14\" y=\"24\" width=\"20\" height=\"12\" fill=\"url(#nvg)\"/><path d=\"M17 24q0-11 7-14q7 3 7 14z\" fill=\"url(#nvg)\"/><path d=\"M24 10v-4\" stroke=\"#8a6420\" stroke-width=\"1\"/><circle cx=\"24\" cy=\"5.5\" r=\"1.2\" fill=\"#d8b25a\"/><rect x=\"9\" y=\"12\" width=\"3.4\" height=\"24\" fill=\"url(#nvg)\"/><rect x=\"35.6\" y=\"12\" width=\"3.4\" height=\"24\" fill=\"url(#nvg)\"/><path d=\"M8.6 12l2.1-5 2.1 5zM35.2 12l2.1-5 2.1 5z\" fill=\"#d8b25a\"/><path d=\"M21.5 36v-6a2.5 2.5 0 015 0v6z\" fill=\"#5a3a10\"/>", "noms": "<path d=\"M24 5l4 9.5 9.5 4-9.5 4L24 32l-4-9.5-9.5-4 9.5-4z\" fill=\"url(#nvg)\"/><rect x=\"14.5\" y=\"9\" width=\"19\" height=\"19\" transform=\"rotate(45 24 18.5)\" fill=\"none\" stroke=\"#a8843f\" stroke-width=\"1.2\"/><circle cx=\"24\" cy=\"18.5\" r=\"5.5\" fill=\"url(#nvbk)\"/><text x=\"24\" y=\"21\" text-anchor=\"middle\" font-size=\"6.5\" font-family=\"Barlow Condensed,sans-serif\" font-weight=\"700\" fill=\"#f3dca0\">99</text>", "hadith": "<path d=\"M24 34q-9-5-17-3V14q8-2 17 3z\" fill=\"#fbf6ea\" stroke=\"#c9a465\" stroke-width=\".8\"/><path d=\"M24 34q9-5 17-3V14q-8-2-17 3z\" fill=\"#f1e8d4\" stroke=\"#c9a465\" stroke-width=\".8\"/><path d=\"M24 17v17\" stroke=\"#a8843f\"/><path d=\"M10 18q6-1 11 1.5M10 21.5q6-1 11 1.5M10 25q6-1 11 1.5M27 19.5q5-2.5 11-1.5M27 23q5-2.5 11-1.5M27 26.5q5-2.5 11-1.5\" stroke=\"#8a7a5a\" stroke-width=\".7\" opacity=\".7\"/><path d=\"M7 14v17l-2 1V15zM41 14v17l2 1V15z\" fill=\"url(#nvbk)\"/><path d=\"M32 8l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z\" fill=\"#d8b25a\"/>", "invocations": "<path d=\"M22 33c-5-1-10-6-12-12-1-3 1-4 3-2l3 4V11c0-2 3-2 3 0v8-10c0-2 3-2 3 0v10-8c0-2 3-2 3 0v19z\" fill=\"url(#nvs)\" stroke=\"#b07a52\" stroke-width=\".6\"/><path d=\"M26 33c5-1 10-6 12-12 1-3-1-4-3-2l-3 4V11c0-2-3-2-3 0v8-10c0-2-3-2-3 0v10-8c0-2-3-2-3 0v19z\" fill=\"url(#nvs)\" stroke=\"#b07a52\" stroke-width=\".6\"/><rect x=\"19\" y=\"32\" width=\"10\" height=\"4\" rx=\"1.5\" fill=\"#fff\" stroke=\"#ddd\"/>", "tasbih": "<g fill=\"url(#nvgr)\" stroke=\"#164a30\" stroke-width=\".4\"><circle cx=\"35.0\" cy=\"19.0\" r=\"2.3\"/><circle cx=\"34.2\" cy=\"22.1\" r=\"2.3\"/><circle cx=\"31.8\" cy=\"24.7\" r=\"2.3\"/><circle cx=\"28.2\" cy=\"26.4\" r=\"2.3\"/><circle cx=\"24.0\" cy=\"27.0\" r=\"2.3\"/><circle cx=\"19.8\" cy=\"26.4\" r=\"2.3\"/><circle cx=\"16.2\" cy=\"24.7\" r=\"2.3\"/><circle cx=\"13.8\" cy=\"22.1\" r=\"2.3\"/><circle cx=\"13.0\" cy=\"19.0\" r=\"2.3\"/><circle cx=\"13.8\" cy=\"15.9\" r=\"2.3\"/><circle cx=\"16.2\" cy=\"13.3\" r=\"2.3\"/><circle cx=\"19.8\" cy=\"11.6\" r=\"2.3\"/><circle cx=\"24.0\" cy=\"11.0\" r=\"2.3\"/><circle cx=\"28.2\" cy=\"11.6\" r=\"2.3\"/><circle cx=\"31.8\" cy=\"13.3\" r=\"2.3\"/><circle cx=\"34.2\" cy=\"15.9\" r=\"2.3\"/></g><circle cx=\"24\" cy=\"27\" r=\"2.6\" fill=\"url(#nvg)\"/><path d=\"M22.5 29h3l1.5 7h-6z\" fill=\"url(#nvg)\"/>", "qibla": "<path d=\"M14 34V16l10-4 10 4v18l-10 4z\" fill=\"#151515\"/><path d=\"M14 16l10 4 10-4\" fill=\"none\" stroke=\"#333\"/><path d=\"M24 20v18\" stroke=\"#2a2a2a\"/><path d=\"M14 21l10 4 10-4\" stroke=\"#d8b25a\" stroke-width=\"2\" fill=\"none\"/><path d=\"M26.5 27h3v6h-3z\" fill=\"#d8b25a\"/><path d=\"M3 40l7-7v3.5h6v7h-6V47z\" fill=\"#2f8a52\" stroke=\"#1d5a34\" stroke-width=\".6\"/>", "reviser": "<rect x=\"12\" y=\"10\" width=\"17\" height=\"23\" rx=\"2.5\" transform=\"rotate(-10 20 21)\" fill=\"#2f5a43\" stroke=\"#c9a465\" stroke-width=\".8\"/><rect x=\"19\" y=\"9\" width=\"17\" height=\"23\" rx=\"2.5\" transform=\"rotate(8 27 20)\" fill=\"url(#nvg)\"/><text x=\"27.5\" y=\"25\" text-anchor=\"middle\" font-family=\"Amiri,serif\" font-size=\"11\" fill=\"#1d3327\" transform=\"rotate(8 27 20)\">ر</text>"};
+NI.partage='<path d="M24 36s-11-6.5-11-14a6 6 0 0 1 11-3.3A6 6 0 0 1 35 22c0 7.5-11 14-11 14z" fill="url(#nvg)" stroke="#8a6420" stroke-width=".8"/><path d="M19 20.5a3 3 0 0 1 3-2" stroke="#fff7df" stroke-width="1.4" fill="none" stroke-linecap="round"/>';
 const nicon=(k,c='nvi')=>`<svg class="${c}" viewBox="0 0 48 50">${NTILE}${NI[k]}</svg>`;
 NI.priere='<rect x="13" y="22" width="16" height="12" fill="url(#nvg)"/><path d="M15 22q0-9 6-11q6 2 6 11z" fill="url(#nvg)"/><path d="M21 11V7" stroke="#8a6420"/><circle cx="21" cy="6.5" r="1" fill="#d8b25a"/><rect x="9" y="13" width="3" height="21" fill="url(#nvg)"/><path d="M8.6 13l1.9-4.5 1.9 4.5z" fill="#d8b25a"/><circle cx="33" cy="27" r="8.5" fill="#fbf6ea" stroke="#c9a465" stroke-width="1.4"/><path d="M33 22.5V27l3 2" stroke="#1d3327" stroke-width="1.6" stroke-linecap="round" fill="none"/>';
 NI.coran='<path d="M11 31l3-19 19-3-3 19z" fill="#1f4a35" stroke="#c9a465" stroke-width=".8"/><path d="M14 12l19-3v1.5L15.5 13.3z" fill="#e9dcbd"/><path d="M33 9l-3 19 2 .3 3-19z" fill="#e9dcbd"/><path d="M18 19l4-1 1 4-4 1zM22 18l4-1 1 4-4 1z" fill="none"/><path d="M22 15.5l1.6 2.6 3 .4-2.3 2 .6 3-2.8-1.4-2.7 1.5.5-3-2.2-2.1 3-.4z" fill="url(#nvg)"/><rect x="15" y="14" width="14" height="14" transform="rotate(-9 22 21)" fill="none" stroke="#c9a465" stroke-width=".6"/><path d="M12 31l-2 4M30 28l1 4" stroke="#7a4a24" stroke-width="2"/>';
@@ -1297,8 +1325,8 @@ const NAVS=[['accueil','#accueil','Accueil'],['coran','#coran','Coran'],['noms',
 /* barre du bas : trois espaces (Accueil, Coran, Quotidien), comme deux applications */
 const NAVC_SVG=`<svg viewBox="0 0 40 40" class="navc-i"><path d="M8 34V20c0-6 12-12 12-12s12 6 12 12v14z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 8.6V6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M22.4 0.3a3.6 3.6 0 1 0 0 5.8a2.9 2.9 0 1 1 0-5.8z" fill="currentColor"/><path d="M16 34v-7a4 4 0 018 0v7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 34h32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>`;
 const SP_COR=[['play','',null],['mushaf','Mushaf',()=>nicon('coran')],['trad','Traduction',()=>'<span class="nve">🌐</span>'],['bequille','Béquille',()=>'<span class="nve">🪜</span>'],['carnet','Carnet',()=>'<span class="nve">📒</span>']];
-const SP_DAY=[['hadith','#hadith','Hadith'],['invocations','#invocations','Invocations'],['noms','#parcours','99 Noms'],['tasbih','#tasbih','Tasbih'],['priere','#priere','Prière']];
-const DAYTABS=['hadith','invocations','cat','dua','tasbih','priere','noms','qibla'];
+const SP_DAY=[['hadith','#hadith','Hadith'],['invocations','#invocations','Invocations'],['noms','#parcours','99 Noms'],['tasbih','#tasbih','Tasbih'],['priere','#priere','Prière'],['partage','#partage','Partage']];
+const DAYTABS=['partage','hadith','invocations','cat','dua','tasbih','priere','noms','qibla'];
 const navHome=`<button id="navc" aria-label="Retour à l’accueil"><span class="navc-b">${NAVC_SVG}</span><small>Accueil</small></button>`;
 let NAVSP='';
 function renderNav(tab){const sp=tab==='coran'?'coran':DAYTABS.includes(tab)?'day':'home',nav=$('#nav');
@@ -1373,7 +1401,7 @@ function home(){
   ${(()=>{const acq=D.filter(x=>known(x.n)).length,todo=D.filter(x=>(S.seen[x.n]||S.done[x.n])&&!known(x.n)).length,stp=Object.keys(S.perfect).filter(k=>S.perfect[k]).length,cs=Math.min(stp+1,10),td=iso(new Date()),hx=hadithFor(td),mon=new Date();mon.setDate(mon.getDate()-((mon.getDay()+6)%7));let wk=0;for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);if(S.hd[iso(d)])wk++}
    const h=hour(),moment=h>=3&&h<12?'matin':h>=21||h<3?'sommeil':'soir',mc=CATS.find(c=>c.id===moment),mdone=mc.items.filter((d,i)=>d.n&&(S.cnt[today()+'|'+mc.id+'-'+i]||0)>=d.n).length,mN=mc.items.filter(d=>d.n).length,P=qpos(),qb=qbear(P.lat,P.lon);
    const ALL=[['#sourate-'+(S.ql?S.ql.s:1),'coran','Mushaf'],['#coran-trad','','Traduction','🌐'],['#coran-bequille','','Béquille','🌅'],['#coran-carnet','','Carnet','📒'],['#hadith','hadith','Hadith'],['#invocations','invocations','Invocations'],['#parcours','noms','99 Noms'],['#tasbih','tasbih','Tasbih'],['#priere','priere','Prière']];
-   const nq=(S.qnotes||[]).length,COR=[['#sourate-'+(S.ql?S.ql.s:1),nicon('coran','spi'),'Mushaf',S.ql?`Reprendre : sourate ${S.ql.s}, verset ${S.ql.v}`:'Lire le Coran, page par page',1],['#coran-trad','<span class="spe">🌐</span>','Traduction','Le sens en français, la phonétique et les mots'],['#coran-bequille','<span class="spe">🪜</span>','Béquille','Apprendre par cœur en masquant les mots, du plus facile au plus difficile'],['#coran-carnet','<span class="spe">📒</span>','Carnet',nq?`${nq} note${nq>1?'s':''} à revoir`:'Tes notes et mots à revoir']],DAY=[['#hadith',nicon('hadith','spi'),'Hadith','Un hadith à méditer chaque jour'],['#invocations',nicon('invocations','spi'),'Invocations','Adhkâr du matin, du soir et du quotidien'],['#parcours',nicon('noms','spi'),'99 Noms','Apprendre les noms d’Allah, étape par étape'],['#tasbih',nicon('tasbih','spi'),'Tasbih','Compter ton dhikr'],['#priere',nicon('priere','spi'),'Prière','Horaires de ta mosquée et Qibla']];
+   const nq=(S.qnotes||[]).length,COR=[['#sourate-'+(S.ql?S.ql.s:1),nicon('coran','spi'),'Mushaf',S.ql?`Reprendre : sourate ${S.ql.s}, verset ${S.ql.v}`:'Lire le Coran, page par page',1],['#coran-trad','<span class="spe">🌐</span>','Traduction','Le sens en français, la phonétique et les mots'],['#coran-bequille','<span class="spe">🪜</span>','Béquille','Apprendre par cœur en masquant les mots, du plus facile au plus difficile'],['#coran-carnet','<span class="spe">📒</span>','Carnet',nq?`${nq} note${nq>1?'s':''} à revoir`:'Tes notes et mots à revoir']],DAY=[['#hadith',nicon('hadith','spi'),'Hadith','Un hadith à méditer chaque jour'],['#invocations',nicon('invocations','spi'),'Invocations','Adhkâr du matin, du soir et du quotidien'],['#parcours',nicon('noms','spi'),'99 Noms','Apprendre les noms d’Allah, étape par étape'],['#tasbih',nicon('tasbih','spi'),'Tasbih','Compter ton dhikr'],['#priere',nicon('priere','spi'),'Prière','Horaires de ta mosquée et Qibla'],['#partage','<span class="spe">🤍</span>','Partage un rappel','Des cartes prêtes à envoyer à tes proches']];
    const col=(cls,ic,t,sub,txt,it,go,gl)=>`<section class="spc ${cls}"><header class="sph"><span class="sphi">${ic}</span><h3>${t}</h3><p class="sps">${sub}</p><p class="spt">${txt}</p></header><div class="spl">${it.map(([h,ico,l,d,q])=>`<a href="${h}" class="spit" ${q&&S.ql?'data-qjump="1"':''}><span class="spic">${ico}</span><span class="spx"><b>${l}</b><small>${d}</small></span></a>`).join('')}</div><a class="spgo" href="${go}" ${cls==='cor'&&S.ql?'data-qjump="1"':''}>${gl} →</a></section>`;
    return `<div class="allr spaces"><div class="spint"><h2>Deux espaces, un même chemin</h2><p>À gauche, tout pour le Coran. À droite, ton rappel de chaque jour. Tu les retrouves aussi dans la barre du bas.</p></div><div class="spg">${col('cor',nicon('coran','sph-i'),'Le Coran','Lire · Comprendre · Mémoriser','Le Mushaf, sa traduction et ta mémorisation.',COR,'#sourate-'+(S.ql?S.ql.s:1),'Ouvrir le Coran')}${col('day',nicon('invocations','sph-i'),'Au quotidien','Prier · Invoquer · Se souvenir','Les rappels qui rythment ta journée.',DAY,'#hadith','Ouvrir le quotidien')}</div></div>${dlCard()}`})()}
   <div class="card verse" style="margin-top:18px">
@@ -2436,6 +2464,183 @@ V.addEventListener('click',e=>{const t=e.target.closest('button,[role=button],.w
 const STK=[];let SWD=0;
 function swipe(el,fn){let x0=null,y0=0;el.ontouchstart=e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY};el.ontouchend=e=>{if(x0===null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4)fn(dx<0?1:-1)};
   let mx=null;el.onpointerdown=e=>{if(e.pointerType==='mouse')mx=e.clientX};el.onpointerup=e=>{if(mx===null||e.pointerType!=='mouse')return;const dx=e.clientX-mx;mx=null;if(Math.abs(dx)>80)fn(dx<0?1:-1)}}let JUMP=null;
+/* ---------- v58 « Partage un rappel 🤍 » ---------- */
+/* Contenus : uniquement des textes déjà vérifiés de l'application (Coran Tanzil + traduction Hamidullah, hadiths et invocations référencés, 99 noms).
+   Les messages de vœux sont écrits librement et toujours affichés comme « Message de vœux », jamais comme verset ou hadith.
+   Un élément avec draft:true n'est jamais affiché (contenu à vérifier). */
+const SHV=[[2,153,'patience'],[2,155,'patience'],[94,5,'patience'],[94,6,'patience'],[39,10,'patience'],[12,87,'patience'],[9,51,'patience'],[65,3,'patience'],
+ [39,53,'pardon'],[15,49,'pardon'],[2,186,'priere'],[40,60,'priere'],[2,45,'priere'],[29,45,'priere'],[20,14,'priere'],[13,28,'priere'],[33,41,'priere'],[2,152,'gratitude'],
+ [14,7,'gratitude'],[16,18,'gratitude'],[17,24,'famille'],[25,74,'famille'],[14,41,'famille'],[30,21,'famille'],[3,8,'dua'],[2,201,'dua'],[21,87,'dua'],[28,24,'dua'],
+ [2,183,'ramadan'],[97,3,'ramadan'],[62,9,'vendredi'],[22,27,'hajj'],[22,37,'adha'],[37,107,'adha']];
+const SHHT={croyant:'patience',epreuve:'patience',preserve:'patience',merci:'gratitude',richesse:'gratitude',nuit:'priere',paroles:'priere',regularite:'priere',purete:'priere',taqwa:'pardon',frere:'famille',douceur:'famille',vendredi:'vendredi',jeune:'ramadan',arafa:'arafat'};
+const SHE=[
+ ['ramadan','رَمَضَانُ مُبَارَك','Ramadan Mubarak 🌙','Qu’Allah fasse de ce mois une source de lumière pour toi et ta famille.'],
+ ['ramadan','رَمَضَانُ كَرِيم','Ramadan Kareem','Que ce mois béni t’apporte paix, patience et proximité avec Allah.'],
+ ['ramadan','','Bienvenue Ramadan 🤍','Qu’Allah nous permette de vivre ce mois pleinement et de le terminer meilleurs qu’au début.'],
+ ['ramadan','','Qu’Allah accepte notre jeûne et nos adorations.','Je pense à toi dans mes invocations pendant ce mois béni.'],
+ ['ramadan','لَيْلَةُ القَدْر','Les dix dernières nuits','Qu’Allah nous fasse atteindre Laylat al-Qadr et accepte nos invocations.'],
+ ['fitr','عِيدٌ مُبَارَك','Aïd Mubarak 🤍','Bonne fête de l’Aïd à toi et à toute ta famille.'],
+ ['fitr','تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُم','Taqabbal Allâhu minnâ wa minkum','Qu’Allah accepte de nous et de vous. Formule de vœux traditionnelle.'],
+ ['fitr','','Qu’Allah accepte nos bonnes actions.','Aïd Mubarak ! Que cette journée soit remplie de joie et de baraka.'],
+ ['fitr','عِيدٌ مُبَارَك','Aïd Mubarak, chers parents','Merci pour tout ce que vous m’avez donné. Qu’Allah vous préserve.'],
+ ['fitr','عِيدٌ مُبَارَك','Aïd Mubarak, mon amour','Qu’Allah bénisse notre foyer et nous réunisse toujours dans le bien.'],
+ ['fitr','عِيدٌ مُبَارَك','Aïd Mubarak à mes proches','Je vous souhaite une fête pleine de douceur, de rires et de baraka.'],
+ ['adha','عِيدُ أَضْحَى مُبَارَك','Aïd al-Adha Mubarak 🐑','Qu’Allah accepte vos sacrifices, vos prières et vos invocations.'],
+ ['adha','','Bonne fête de l’Aïd al-Adha','Qu’Allah bénisse ta famille et remplisse ta maison de paix.'],
+ ['adha','عِيدٌ مُبَارَك','Aïd Mubarak à toute la famille','Que cette fête nous rapproche les uns des autres et d’Allah.'],
+ ['dhulhijja','','Les dix premiers jours de Dhul-Hijja','Des jours précieux arrivent : profitons-en pour multiplier le bien.'],
+ ['arafat','','Journée de ʿArafat 🤍','Aujourd’hui, pense à ceux que tu aimes dans tes invocations.'],
+ ['achoura','','Jour de ʿĀchūrāʾ','Un rappel pour toi et tes proches en ce jour de Muharram.'],
+ ['hijri','','Nouvelle année hégirienne','Qu’Allah remplisse cette nouvelle année de bien. (Ce n’est pas une fête religieuse instituée.)'],
+ ['blancs','','Les jours blancs','Les 13, 14 et 15 du mois lunaire : un rappel pour toi et tes proches.'],
+ ['vendredi','','Bon vendredi 🤍','Qu’Allah t’accorde un cœur apaisé et une belle journée.']];
+const SHEV={ramadan:['🌙','Ramadan'],fitr:['🕌','Aïd al-Fitr'],adha:['🐑','Aïd al-Adha'],dhulhijja:['🌄','Dhul-Hijja'],arafat:['⛰️','ʿArafat'],hajj:['🕋','Hajj'],achoura:['📿','ʿĀchūrāʾ'],hijri:['🗓️','Année hégirienne'],blancs:['🌕','Jours blancs'],vendredi:['🕌','Vendredi']};
+const SHCATS=[['tout','Tout'],['coran','📖 Versets'],['hadith','🌙 Hadiths'],['dua','🤲 Invocations'],['noms','✨ 99 Noms'],['patience','🤍 Patience et épreuves'],['gratitude','🌿 Gratitude'],['priere','🕌 Prière et adoration'],['famille','💕 Famille et mariage'],['events','🌙 Événements']];
+const SHST={beige:['Beige et doré',['#fbf3e2','#efe1c2'],'#3a2a12','#b08a43'],emeraude:['Vert émeraude',['#1f5a40','#0f2f22'],'#f6efd9','#e2c88e'],blanc:['Blanc minimaliste',['#ffffff','#f3f3f1'],'#1d2a22','#9a8b6a'],nuit:['Bleu nuit et étoiles',['#1b2a4a','#0b1224'],'#f3ead2','#e2c88e'],rose:['Rose poudré',['#f8e3e3','#efcfd2'],'#4a2b30','#b9737c'],geo:['Motifs géométriques',['#16392b','#0c2219'],'#f6efd9','#d9b977'],mosquee:['Architecture de mosquée',['#2a3d5c','#e0b77a'],'#fffaf0','#f1d79c'],fleurs:['Fleurs et nature',['#eef4e6','#d9e8cf'],'#243b2a','#6f9a5b'],lanternes:['Lanternes du Ramadan',['#2b1d47','#120c22'],'#fbefd5','#f0c36b'],noiror:['Noir et or',['#151515','#050505'],'#f5e6c4','#d4af37']};
+const SHFMT={carre:['Carré',1080,1080],portrait:['Portrait',1080,1350],story:['Story',1080,1920]};
+const SHFONT={amiriq:['Amiri Quran','"Amiri Quran","Amiri",serif'],amiri:['Amiri','"Amiri",serif'],sch:['Scheherazade','"Scheherazade New","Amiri",serif'],kufi:['Reem Kufi','"Reem Kufi","Amiri",sans-serif']};
+let SHL=null,SHQ='',SHCAT='tout';
+async function shLib(){if(SHL)return SHL;await qIndex();await Promise.all([...new Set(SHV.map(x=>x[0]))].map(s=>qSura(s)));const L=[];
+ SHV.forEach(([s,v,t])=>{const d=QC[s];L.push({id:`v${s}-${v}`,kind:'coran',cats:['coran',t],ar:d.ar[v-1],fr:d.fr[v-1],ref:`${QIDX[s-1][2]} (${s}:${v})`,grade:'Parole d’Allah · Coran',lab:'VERSET DU CORAN'})});
+ (window.HADITHS||[]).forEach(h=>{if(!h.ar||h.draft)return;L.push({id:'h'+h.id,kind:'hadith',cats:['hadith',SHHT[h.id]].filter(Boolean),ar:h.ar,fr:h.fr,ref:h.src,grade:GR[h.g]?GR[h.g][0]:'',lab:'HADITH · '+h.t.toUpperCase()})});
+ (window.CATS||[]).forEach(c=>{if(c.id==='recompenses')return;c.items.forEach((d,i)=>{if(!d.ar||d.draft||d.ar.length>320)return;const fam=['mariage'].includes(c.id),pat=['humeur','peur','maladie'].includes(c.id),pr=['priere','mosquee','purification','coran'].includes(c.id);
+  L.push({id:`d${c.id}-${i}`,kind:'dua',cats:['dua',fam?'famille':'',pat?'patience':'',pr?'priere':'',c.id==='jeune'?'ramadan':'',c.id==='hajj'?'hajj':''].filter(Boolean),ar:d.ar,fr:d.fr,ref:d.src,grade:GR[d.g]?GR[d.g][0]:'',lab:'INVOCATION · '+(d.t||c.name).toUpperCase(),tl:translit(d.ar)})})});
+ D.forEach(x=>L.push({id:'n'+x.n,kind:'nom',cats:['noms'],ar:x.ar,fr:x.fr,tl:x.translit,sens:x.sens,ref:`Les 99 noms d’Allah · n° ${x.n}`,grade:'',lab:'LES PLUS BEAUX NOMS D’ALLAH'}));
+ SHE.forEach(([ev,ar,t,m],i)=>L.push({id:'e'+i,kind:'voeux',cats:['events',ev],ev,ar,title:t,fr:m,ref:'Message de vœux · ce n’est ni un verset ni un hadith',grade:'',lab:(SHEV[ev]?SHEV[ev][1]:'').toUpperCase(),isNew:1}));
+ SHL=L.filter(x=>!x.draft);return SHL}
+const shGet=id=>(SHL||[]).find(x=>x.id===id);
+/* calendrier hégirien (Umm al-Qurâ) avec correction manuelle */
+function hijri(off=0){try{const d=new Date();d.setDate(d.getDate()+(S.hoff||0)+off);const p={};new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric',month:'numeric'}).formatToParts(d).forEach(x=>p[x.type]=+x.value||x.value);return {m:+p.month,d:+p.day,w:d.getDay()}}catch(e){return null}}
+function shEvents(){const h=hijri();if(!h)return [];const E=[];const add=(k,msg)=>E.push([k,msg]);
+ if(h.m===8&&h.d>=15)add('ramadan','🌙 Le Ramadan approche ! Prépare tes cartes pour tes proches.');
+ if(h.m===9){add('ramadan','🌙 Ramadan Mubarak ! Partage tes vœux avec tes proches.');if(h.d>=27)add('fitr','🤍 L’Aïd approche : prépare tes plus beaux vœux.')}
+ if(h.m===10&&h.d<=3)add('fitr','🤍 Partage tes plus beaux vœux de l’Aïd.');
+ if(h.m===11&&h.d>=25)add('dhulhijja','🌄 Les dix premiers jours de Dhul-Hijja arrivent.');
+ if(h.m===12){if(h.d<=10)add('dhulhijja','🌄 Les dix premiers jours de Dhul-Hijja.');if(h.d===9)add('arafat','⛰️ C’est le jour de ʿArafat.');if(h.d>=8&&h.d<=13)add('adha','🐑 Aïd al-Adha : partage tes vœux.');if(h.d<=13)add('hajj','🕋 Période du Hajj.')}
+ if(h.m===1){if(h.d<=3)add('hijri','🗓️ Nouvelle année hégirienne.');if(h.d>=7&&h.d<=10)add('achoura','📿 ʿĀchūrāʾ approche.')}
+ if(h.d>=12&&h.d<=15)add('blancs','🌕 Les jours blancs.');if(h.w===5)add('vendredi','🕌 C’est vendredi ! Découvre un rappel à partager.');return E}
+function shDaily(L){const pool=L.filter(x=>x.kind==='coran'||x.kind==='hadith'||x.kind==='nom');const n=Math.floor((Date.now()-new Date().getTimezoneOffset()*6e4)/864e5);return pool[n%pool.length]}
+/* rendu HTML des aperçus */
+const shThumb=(c,big)=>{const st=SHST[c.kind==='voeux'&&/ramadan/.test(c.ev)?'lanternes':c.kind==='voeux'?'beige':c.kind==='nom'?'emeraude':c.kind==='hadith'?'nuit':c.kind==='dua'?'rose':'geo'];
+ return `<button class="shc${big?' big':''}" data-shopen="${c.id}" style="--b1:${st[1][0]};--b2:${st[1][1]};--tx:${st[2]};--ac:${st[3]}"><small>${esc(c.lab||'')}</small>${c.ar?`<span class="sha" lang="ar">${c.ar.length>140&&!big?c.ar.slice(0,140).replace(/\s\S*$/,'')+' …':c.ar}</span>`:''}${c.title?`<b>${esc(c.title)}</b>`:''}${c.tl&&c.kind==='nom'?`<b>${esc(c.tl)}</b>`:''}<span class="shf">${esc((c.fr||'').length>120&&!big?c.fr.slice(0,120).replace(/\s\S*$/,'')+' …':c.fr||'')}</span><i>${esc(c.ref)}</i>${(S.shf||[]).includes(c.id)?'<em>♥</em>':''}</button>`};
+function partage(){return `<div class="shp"><div class="shh"><h1>Partage un rappel 🤍</h1><p>Un rappel peut toucher un cœur. Partage-le avec ceux que tu aimes.</p></div><div id="shbody"><p class="muted pad">Chargement des cartes…</p></div></div>`}
+async function fillPartage(){const el=$('#shbody');if(!el)return;const L=await shLib();if(!$('#shbody'))return;const EV=shEvents(),day=shDaily(L),fav=(S.shf||[]).map(shGet).filter(Boolean),hist=(S.shh||[]).map(shGet).filter(Boolean).slice(0,10);
+ const q=norm(SHQ),list=L.filter(c=>(SHCAT==='tout'||c.cats.includes(SHCAT))&&(!q||norm([c.ar,c.fr,c.ref,c.title,c.tl,c.lab].join(' ')).includes(q)));
+ const evKeys=[...new Set(EV.map(e=>e[0]))];
+ el.innerHTML=`${EV.length?`<div class="shban">${EV.map(([k,m])=>`<button data-shcat="${k}">${m}</button>`).join('')}</div>`:''}
+  <input type="search" id="shq" value="${esc(SHQ)}" placeholder="Rechercher : patience, Aïd, parents, Ar-Rahmân…" aria-label="Rechercher une carte">
+  <div class="shcats">${SHCATS.map(([k,l])=>`<button class="${SHCAT===k?'on':''}" data-shcat="${k}">${l}</button>`).join('')}${(SHCAT==='events'||SHEV[SHCAT]?Object.keys(SHEV):evKeys).filter(k=>!SHCATS.some(c=>c[0]===k)).map(k=>`<button class="${SHCAT===k?'on':''}" data-shcat="${k}">${SHEV[k][0]} ${SHEV[k][1]}</button>`).join('')}</div>
+  ${SHCAT==='tout'&&!q?`<h3 class="sht">Ton rappel du jour 🌙</h3>${shThumb(day,1)}
+   <h3 class="sht">Événements religieux 🌙</h3><div class="shrow">${Object.keys(SHEV).map(k=>`<button class="shev" data-shcat="${k}"><span>${SHEV[k][0]}</span>${SHEV[k][1]}</button>`).join('')}</div>
+   ${fav.length?`<h3 class="sht">Mes favoris 🤍</h3><div class="shrow">${fav.map(c=>shThumb(c)).join('')}</div>`:''}
+   ${hist.length?`<h3 class="sht">Consultés récemment</h3><div class="shrow">${hist.map(c=>shThumb(c)).join('')}</div>`:''}
+   <h3 class="sht">Nouveautés</h3><div class="shrow">${L.filter(c=>c.isNew).slice(0,8).map(c=>shThumb(c)).join('')}</div>
+   <h3 class="sht">Toutes les cartes · ${L.length}</h3>`:`<h3 class="sht">${list.length} carte${list.length>1?'s':''}</h3>`}
+  <div class="shgrid">${list.slice(0,SHMORE).map(c=>shThumb(c)).join('')}</div>${list.length>SHMORE?`<button class="btn ghost wide" data-shmore="1">Afficher plus de cartes</button>`:''}
+  <div class="shset"><h3 class="sht">Rappels et calendrier</h3>
+   <div class="ptrow"><span><b>Rappel du jour</b><br><small>Une notification quand tu ouvres l’application</small></span><button class="ptsw ${S.shn&&S.shn.d?'on':''}" data-shnot="d" aria-label="Rappel du jour"><i></i></button></div>
+   <div class="ptrow"><span><b>Événements religieux</b><br><small>Ramadan, Aïd, vendredi…</small></span><button class="ptsw ${S.shn&&S.shn.e?'on':''}" data-shnot="e" aria-label="Événements"><i></i></button></div>
+   <div class="ptrow"><span><b>Correction du calendrier hégirien</b><br><small>Selon l’observation de la lune dans ton pays</small></span><span class="shoff"><button data-shoff="-1">−</button><b>${(S.hoff||0)>0?'+':''}${S.hoff||0} j</b><button data-shoff="1">+</button></span></div></div>
+  <div class="shfoot"><span lang="ar">مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ</span><p>« Celui qui indique un bien aura une récompense semblable à celle de celui qui l’accomplit. »</p><small>Sahih Muslim, n° 1893</small></div>`;
+ const qi=$('#shq');qi&&(qi.oninput=()=>{SHQ=qi.value;clearTimeout(qi.t);qi.t=setTimeout(()=>{const p=qi.selectionStart;fillPartage().then(()=>{const n=$('#shq');n&&(n.focus(),n.setSelectionRange(p,p))})},250)})}
+let SHMORE=60;
+/* ---------- visionneuse + éditeur ---------- */
+const SHDEF={st:'',col:'auto',sz:1,font:'amiriq',sh:1,ov:0,frame:1,al:'center',msg:'',logo:'r',fmt:'portrait'};
+function shOpts(c){const o=Object.assign({},SHDEF,(S.shc||{})[c.id]||{});if(!o.st)o.st=c.kind==='voeux'&&/ramadan/.test(c.ev)?'lanternes':c.kind==='voeux'?'beige':c.kind==='nom'?'emeraude':c.kind==='hadith'?'nuit':c.kind==='dua'?'rose':'geo';return o}
+function shView(id){return `<div class="shp shv"><div class="shvt"><button class="ib back" data-go="partage" aria-label="Retour">${I.back}</button><b>Partage un rappel 🤍</b></div><div id="shvbody"><p class="muted pad">Préparation de la carte…</p></div></div>`}
+async function fillShView(id){await shLib();const c=shGet(id),el=$('#shvbody');if(!el)return;if(!c){el.innerHTML='<p class="muted pad">Carte introuvable.</p>';return}
+ S.shh=[id].concat((S.shh||[]).filter(x=>x!==id)).slice(0,20);save();const o=shOpts(c),fav=(S.shf||[]).includes(id);
+ const seg=(k,arr)=>`<div class="shseg">${arr.map(([v,l])=>`<button class="${String(o[k])===String(v)?'on':''}" data-sho="${k}:${v}">${l}</button>`).join('')}</div>`;
+ el.innerHTML=`<div class="shcv"><canvas id="shcv"></canvas></div>
+  <button class="btn gold wide shsend" data-shsend="1">Envoyer à un proche 🤍</button>
+  <div class="shacts"><button data-shwa="1">WhatsApp</button><button data-shdl="1">Télécharger</button><button data-shcopy="1">Copier le texte</button><button data-shfav="1" class="${fav?'on':''}">${fav?'♥ Favori':'♡ Favori'}</button></div>
+  <p class="shref"><b>${esc(c.ref)}</b>${c.grade?` · ${esc(c.grade)}`:''}</p>
+  <details class="shed" ${S.shedo?'open':''}><summary>Personnaliser la carte</summary>
+   <div class="shl">Format</div>${seg('fmt',Object.entries(SHFMT).map(([k,v])=>[k,`${v[0]}<small>${v[1]}×${v[2]}</small>`]))}
+   <div class="shl">Univers</div><div class="shsty">${Object.entries(SHST).map(([k,v])=>`<button class="${o.st===k?'on':''}" data-sho="st:${k}" style="background:linear-gradient(160deg,${v[1][0]},${v[1][1]});color:${v[2]}" aria-label="${v[0]}"><span>${v[0]}</span></button>`).join('')}</div>
+   <div class="shl">Couleur du texte</div>${seg('col',[['auto','Auto'],['#ffffff','Blanc'],['#f1d79c','Doré'],['#1f3a2b','Vert'],['#1b1b1b','Noir']])}
+   <div class="shl">Police arabe</div>${seg('font',Object.entries(SHFONT).map(([k,v])=>[k,v[0]]))}
+   <div class="shl">Taille du texte</div>${seg('sz',[[.85,'Petite'],[1,'Normale'],[1.15,'Grande'],[1.3,'Très grande']])}
+   <div class="shl">Ombre</div>${seg('sh',[[0,'Aucune'],[1,'Légère'],[2,'Forte']])}
+   <div class="shl">Voile sur le fond</div>${seg('ov',[[0,'0 %'],[.25,'25 %'],[.45,'45 %'],[.65,'65 %']])}
+   <div class="shl">Cadre décoratif</div>${seg('frame',[[1,'Avec'],[0,'Sans']])}
+   <div class="shl">Alignement du français</div>${seg('al',[['left','Gauche'],['center','Centre'],['right','Droite']])}
+   <div class="shl">Logo La Voie Éternelle</div>${seg('logo',[['l','En bas à gauche'],['r','En bas à droite']])}
+   <div class="shl">Message personnel (séparé du texte religieux)</div><input type="text" id="shmsg" maxlength="90" value="${esc(o.msg)}" placeholder="Ex. : Je pense à toi, maman 🤍">
+   <button class="btn ghost wide" data-shreset="1" style="margin-top:12px">Réinitialiser</button>
+   <p class="qsd">Le texte d’un verset, d’un hadith ou d’une invocation ne peut jamais être modifié : seule sa mise en forme change.</p></details>`;
+ const m=$('#shmsg');m&&(m.oninput=()=>{shSet(c,{msg:m.value},1)});$('.shed').ontoggle=e=>{S.shedo=e.target.open?1:0;save()};
+ shDraw($('#shcv'),c,o)}
+function shSet(c,p,quiet){S.shc=S.shc||{};S.shc[c.id]=Object.assign({},S.shc[c.id]||{},p);save();const o=shOpts(c);if(quiet){shDraw($('#shcv'),c,o);return}const y=V.scrollTop;fillShView(c.id).then(()=>V.scrollTop=y)}
+function shWrap(ctx,t,w){const out=[];String(t||'').split('\n').forEach(par=>{let line='';par.split(/\s+/).filter(Boolean).forEach(word=>{const tt=line?line+' '+word:word;if(ctx.measureText(tt).width>w&&line){out.push(line);line=word}else line=tt});out.push(line)});return out}
+async function shDraw(cv,c,o){if(!cv)return;const [,W,H]=SHFMT[o.fmt],st=SHST[o.st];cv.width=W;cv.height=H;const x=cv.getContext('2d');
+ try{await Promise.all([`60px ${SHFONT[o.font][1]}`,'italic 40px "Cormorant Garamond"','700 40px Mulish','40px Mulish'].map(f=>document.fonts.load(f)))}catch(e){}
+ const g=x.createLinearGradient(0,0,W*.3,H);g.addColorStop(0,st[1][0]);g.addColorStop(1,st[1][1]);x.fillStyle=g;x.fillRect(0,0,W,H);shDeco(x,W,H,o.st,st[3]);
+ if(o.ov){const dark=['emeraude','nuit','geo','lanternes','noiror','mosquee'].includes(o.st);x.fillStyle=dark?`rgba(0,0,0,${o.ov})`:`rgba(255,255,255,${o.ov})`;x.fillRect(0,0,W,H)}
+ if(+o.frame){x.strokeStyle=st[3];x.lineWidth=4;x.strokeRect(46,46,W-92,H-92);x.lineWidth=1.5;x.strokeRect(62,62,W-124,H-124);[[46,46],[W-46,46],[46,H-46],[W-46,H-46]].forEach(([a,b])=>{x.fillStyle=st[3];x.save();x.translate(a,b);x.rotate(Math.PI/4);x.fillRect(-11,-11,22,22);x.restore()})}
+ const col=o.col==='auto'?st[2]:o.col,acc=st[3],pad=120,tw=W-pad*2,sc=+o.sz||1;
+ x.shadowColor=['beige','blanc','rose','fleurs'].includes(o.st)&&o.col==='auto'?'rgba(80,60,20,.18)':'rgba(0,0,0,.45)';x.shadowBlur=+o.sh===2?18:+o.sh===1?8:0;x.shadowOffsetY=+o.sh?3:0;
+ const blocks=k=>{const B=[];const arS=(c.kind==='nom'?150:!c.ar?66:c.ar.length>160?52:c.ar.length<45?88:c.ar.length<90?74:64)*sc*k,frS=(c.kind==='nom'?44:38)*sc*k;
+  B.push({t:'lab',s:26,f:'700 26px Mulish',txt:c.lab||'',c:acc,al:'center'});
+  if(c.ar){x.font=`${arS}px ${SHFONT[o.font][1]}`;x.direction='rtl';B.push({t:'ar',s:arS,lines:shWrap(x,c.ar.replace(/\n+/g,'\n'),tw),f:`${arS}px ${SHFONT[o.font][1]}`,c:col,lh:arS*1.75});x.direction='ltr'}
+  if(c.kind==='nom'){B.push({t:'tl',lines:[c.tl],f:`700 ${62*sc*k}px "Cormorant Garamond"`,c:acc,lh:76*sc*k})}
+  if(c.title){x.font=`700 ${52*sc*k}px "Cormorant Garamond"`;B.push({t:'ti',lines:shWrap(x,c.title,tw),f:x.font,c:acc,lh:62*sc*k})}
+  if(c.fr){x.font=`italic ${frS}px "Cormorant Garamond"`;B.push({t:'fr',lines:shWrap(x,c.kind==='nom'?c.fr+(c.sens?'\n'+c.sens:''):c.fr,tw),f:x.font,c:col,lh:frS*1.32,al:o.al})}
+  x.font=`600 ${24*k}px Mulish`;B.push({t:'ref',lines:shWrap(x,c.ref+(c.grade?' · '+c.grade:''),tw),f:x.font,c:acc,lh:32*k});
+  if(o.msg){x.font=`italic ${34*k}px "Cormorant Garamond"`;B.push({t:'msg',lines:shWrap(x,o.msg,tw-60),f:x.font,c:col,lh:44*k,box:1})}
+  return B};
+ const hOf=B=>B.reduce((h,b)=>h+(b.t==='lab'?60:b.lines.length*b.lh+(b.box?50:0))+28,0);
+ let k=1,B=blocks(k);const avail=H-260;while(hOf(B)>avail&&k>.35){k*=.92;B=blocks(k)}
+ let y=(H-hOf(B))/2-20;x.textBaseline='middle';
+ B.forEach(b=>{x.fillStyle=b.c;if(b.t==='lab'){x.font=b.f;x.textAlign='center';x.save();x.shadowBlur=0;x.fillText(b.txt,W/2,y+20);x.restore();x.fillRect(W/2-40,y+46,80,2);y+=60+28;return}
+  if(b.box){x.save();x.shadowBlur=0;x.fillStyle='rgba(255,255,255,.12)';x.strokeStyle=acc;x.lineWidth=1.5;const bh=b.lines.length*b.lh+40;shRR(x,pad-10,y,tw+20,bh,22);x.fill();x.stroke();x.restore();y+=20}
+  x.font=b.f;x.fillStyle=b.c;
+  b.lines.forEach(l=>{if(b.t==='ar'){x.direction='rtl';x.textAlign='center';x.fillText(l,W/2,y+b.lh/2);x.direction='ltr'}else{const al=b.al||'center';x.textAlign=al;x.fillText(l,al==='left'?pad:al==='right'?W-pad:W/2,y+b.lh/2)}y+=b.lh});
+  if(b.box)y+=20;if(b.t==='ar'){x.save();x.shadowBlur=0;x.fillStyle=acc;x.font='28px serif';x.textAlign='center';x.fillText('۞',W/2,y+10);x.restore();y+=24}y+=28});
+ x.shadowBlur=0;x.shadowOffsetY=0;shLogo(x,W,H,o.logo,acc,col)}
+function shRR(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+function shLogo(x,W,H,side,acc,col){const s=1.15,yb=H-92,label='La Voie Éternelle';x.font='700 26px "Cormorant Garamond"';const tw=x.measureText(label).width,iw=34,gap=12,tot=iw+gap+tw;let x0=side==='l'?96:W-96-tot;
+ x.save();x.globalAlpha=.9;x.translate(x0,yb-24);x.scale(s,s);x.strokeStyle=acc;x.lineWidth=2.2;x.lineJoin='round';x.beginPath();x.moveTo(4,34);x.lineTo(4,20);x.bezierCurveTo(4,13,15,8,15,8);x.bezierCurveTo(15,8,26,13,26,20);x.lineTo(26,34);x.stroke();x.beginPath();x.moveTo(1,34);x.lineTo(29,34);x.stroke();x.beginPath();x.moveTo(11,34);x.lineTo(11,27);x.arc(15,27,4,Math.PI,0);x.lineTo(19,34);x.stroke();x.beginPath();x.moveTo(15,8);x.lineTo(15,5);x.stroke();x.fillStyle=acc;x.beginPath();x.arc(16.5,2.5,2.6,0,Math.PI*2);x.fill();x.restore();
+ x.save();x.globalAlpha=.9;x.fillStyle=acc;x.textAlign='left';x.textBaseline='middle';x.fillText(label,x0+iw+gap,yb-4);x.restore()}
+function shDeco(x,W,H,k,acc){x.save();
+ const star=(cx,cy,r,a)=>{x.beginPath();for(let i=0;i<16;i++){const rr=i%2?r*.42:r,an=Math.PI/8*i;x.lineTo(cx+rr*Math.cos(an),cy+rr*Math.sin(an))}x.closePath();x.globalAlpha=a;x.fill()};
+ if(k==='nuit'||k==='lanternes'){x.fillStyle='#fff';for(let i=0;i<70;i++){const a=(i*97%W),b=(i*53%H)*.6;x.globalAlpha=.25+(i%5)*.1;x.beginPath();x.arc(a,b,(i%3)+1,0,7);x.fill()}x.globalAlpha=.9;x.fillStyle='#f3e2b3';x.beginPath();x.arc(W*.8,H*.13,48,0,7);x.fill();x.fillStyle=k==='nuit'?'#1b2a4a':'#2b1d47';x.beginPath();x.arc(W*.8+22,H*.13-14,44,0,7);x.fill()}
+ if(k==='lanternes'){[[W*.16,0,H*.2],[W*.3,0,H*.12],[W*.72,0,H*.16]].forEach(([a,,l])=>{x.globalAlpha=.85;x.strokeStyle=acc;x.lineWidth=2;x.beginPath();x.moveTo(a,0);x.lineTo(a,l);x.stroke();x.fillStyle=acc;shRR(x,a-24,l,48,70,12);x.fill();x.fillStyle='#fff3c4';x.globalAlpha=.7;shRR(x,a-14,l+12,28,46,8);x.fill()})}
+ if(k==='geo'||k==='beige'||k==='noiror'){x.fillStyle=acc;for(let i=0;i<W;i+=120)for(let j=0;j<H;j+=120)star(i+60,j+60,26,k==='beige'?.08:.1)}
+ if(k==='mosquee'){const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(20,30,50,.0)');g.addColorStop(1,'rgba(20,30,50,.35)');x.fillStyle=g;x.fillRect(0,0,W,H);x.globalAlpha=.35;x.fillStyle='#1a2436';const b=H-40;x.fillRect(W*.2,b-160,W*.6,160);x.beginPath();x.arc(W/2,b-160,W*.16,Math.PI,0);x.fill();x.fillRect(W*.1,b-420,30,420);x.fillRect(W*.87,b-420,30,420);x.beginPath();x.moveTo(W*.1-6,b-420);x.lineTo(W*.1+15,b-470);x.lineTo(W*.1+36,b-420);x.fill();x.beginPath();x.moveTo(W*.87-6,b-420);x.lineTo(W*.87+15,b-470);x.lineTo(W*.87+36,b-420);x.fill()}
+ if(k==='fleurs'||k==='rose'){const fl=(cx,cy,r)=>{for(let i=0;i<6;i++){x.beginPath();x.ellipse(cx+Math.cos(i)*r,cy+Math.sin(i)*r,r*.9,r*.5,i,0,7);x.fill()}};x.fillStyle=acc;x.globalAlpha=.14;fl(90,110,40);fl(W-100,H-200,52);fl(W-70,140,30);fl(70,H-260,34);x.globalAlpha=.1;x.strokeStyle=acc;x.lineWidth=3;x.beginPath();x.moveTo(0,H*.35);x.bezierCurveTo(W*.2,H*.3,W*.1,H*.15,W*.3,H*.05);x.stroke()}
+ if(k==='emeraude'){x.strokeStyle=acc;x.globalAlpha=.18;x.lineWidth=2;for(let r=200;r<1400;r+=90){x.beginPath();x.arc(W/2,H*.42,r,0,7);x.stroke()}}
+ x.restore()}
+/* partage */
+function shText(c,o){return [c.ar,c.title,c.tl&&c.kind==='nom'?c.tl:'',c.fr,'— '+c.ref+(c.grade?' · '+c.grade:''),o&&o.msg?'\n'+o.msg:'','\nPartagé avec La Voie Éternelle 🤍'].filter(Boolean).join('\n')}
+function shBlob(){return new Promise(ok=>{const cv=$('#shcv');cv?cv.toBlob(b=>ok(b),'image/png'):ok(null)})}
+async function shShare(c){const o=shOpts(c),b=await shBlob(),name=`la-voie-eternelle-${c.id}.png`;
+ try{const f=new File([b],name,{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Un rappel pour toi 🤍',text:o.msg||'Un rappel pour toi 🤍'});shFx();return}}catch(e){if(e&&e.name==='AbortError')return}
+ try{if(navigator.share){await navigator.share({title:'Un rappel pour toi 🤍',text:shText(c,o)});shFx();return}}catch(e){if(e&&e.name==='AbortError')return}
+ shDl(c,b);toast('Image téléchargée','Le partage direct n’est pas disponible ici : envoie l’image depuis ta galerie.')}
+function shDl(c,b){const go=bb=>{const a=document.createElement('a');a.href=URL.createObjectURL(bb);a.download=`la-voie-eternelle-${c.id}.png`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000);shFx()};if(b)go(b);else shBlob().then(go)}
+function shFx(){const cv=$('.shcv');if(!cv)return;cv.classList.remove('fx');void cv.offsetWidth;cv.classList.add('fx')}
+V.addEventListener('click',e=>{const b=e.target.closest('[data-shopen],[data-shcat],[data-shmore],[data-shnot],[data-shoff],[data-sho],[data-shsend],[data-shwa],[data-shdl],[data-shcopy],[data-shfav],[data-shreset]');if(!b)return;e.preventDefault();e.stopPropagation();const q=b.dataset,id=(location.hash.match(/^#partage-(.+)$/)||[])[1],c=id&&shGet(id);
+ if(q.shopen){location.hash='#partage-'+q.shopen;return}
+ if(q.shcat){SHCAT=q.shcat;SHMORE=60;fillPartage().then(()=>{const g=$('.shcats');g&&g.scrollIntoView({block:'start'})});return}
+ if(q.shmore){SHMORE+=60;const y=V.scrollTop;fillPartage().then(()=>V.scrollTop=y);return}
+ if(q.shnot){S.shn=S.shn||{};S.shn[q.shnot]=S.shn[q.shnot]?0:1;save();if(S.shn[q.shnot]&&'Notification' in window&&Notification.permission==='default')Notification.requestPermission().catch(()=>{});const y=V.scrollTop;fillPartage().then(()=>V.scrollTop=y);return}
+ if(q.shoff){S.hoff=Math.max(-2,Math.min(2,(S.hoff||0)+ +q.shoff));save();const y=V.scrollTop;fillPartage().then(()=>V.scrollTop=y);return}
+ if(!c)return;
+ if(q.sho){const [k,v]=q.sho.split(':');shSet(c,{[k]:isNaN(+v)||k==='col'?v:+v});return}
+ if(q.shreset){if(S.shc)delete S.shc[c.id];save();const y=V.scrollTop;fillShView(c.id).then(()=>V.scrollTop=y);return}
+ if(q.shsend){shShare(c);return}
+ if(q.shwa){const u='https://wa.me/?text='+encodeURIComponent(shText(c,shOpts(c)));const a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';a.click();return}
+ if(q.shdl){shDl(c);return}
+ if(q.shcopy){copy(shText(c,shOpts(c)));return}
+ if(q.shfav){S.shf=S.shf||[];const i=S.shf.indexOf(c.id);if(i>=0)S.shf.splice(i,1);else S.shf.unshift(c.id);save();const on=i<0;b.classList.toggle('on',on);b.textContent=on?'♥ Favori':'♡ Favori';toast(on?'Ajouté à tes favoris 🤍':'Retiré des favoris','Retrouve-les dans « Mes favoris » de Partage un rappel.');return}},true);
+window.SHAPI={shLib,hijri,shEvents,shGet,get L(){return SHL}};
+/* rappel du jour et événements : notification à l’ouverture (facultative) */
+setTimeout(async()=>{try{const n=S.shn||{};if(!n.d&&!n.e)return;const t=isoD(new Date());if(S.shnd===t)return;S.shnd=t;save();const L=await shLib();const msgs=[];
+ if(n.d)msgs.push(['🤍 Ton rappel du jour est disponible','Et si tu le partageais avec une personne que tu aimes ?']);
+ if(n.e){const E=shEvents();const ev=E.find(x=>['ramadan','fitr','adha'].includes(x[0]))||E.find(x=>x[0]==='vendredi');if(ev)msgs.push([ev[0]==='vendredi'?'🕌 C’est vendredi !':ev[0]==='ramadan'?'🌙 Ramadan Mubarak !':'🤍 Aïd Mubarak !',ev[0]==='vendredi'?'Découvre un rappel à partager.':'Découvre nos cartes et partage tes vœux avec tes proches.'])}
+ msgs.forEach(([a,b2],i)=>setTimeout(()=>{toast(a,b2);try{if('Notification' in window&&Notification.permission==='granted')new Notification(a,{body:b2})}catch(e){}},i*4200))}catch(e){}},2500);
+
 function route(){
   if(route.lh!==location.hash){sayStop();route.lh=location.hash}
   const h=(location.hash||'#accueil').slice(1);if(STK[STK.length-1]!==h)STK.push(h);let html,after=()=>{},tab=h.split('-')[0];
@@ -2444,6 +2649,8 @@ function route(){
   else if((m=h.match(/^journal-(\d+)$/))){const n=+m[1];html=jentry(n);tab='journal';after=()=>{V.querySelectorAll('textarea[data-k]').forEach(t=>t.oninput=()=>{(S.jr[n]=S.jr[n]||{})[t.dataset.k]=t.value;S.jr[n].d=today();save();$('#jsaved').textContent='✓ Enregistré'});
     $('#jcopy').onclick=async()=>{const e=S.jr[n]||{};const tx=`${D[n-1].translit} — ${D[n-1].fr}\n\n`+JQ.map(([k,q])=>`${q}\n${e[k]||''}`).join('\n\n');try{await navigator.clipboard.writeText(tx);toast('Copié','Ta note est dans le presse-papiers.')}catch(_){toast('Copie impossible','Sélectionne le texte pour le copier.')}}}}
   else if((m=h.match(/^rev-(\d+)$/))){start('etape',+m[1]);html=session();tab='noms';try{history.replaceState(null,'','#reviser')}catch(_){}}
+  else if(h==='partage'){html=partage();tab='partage';after=fillPartage}
+  else if((m=h.match(/^partage-(.+)$/))){const id=m[1];html=shView(id);tab='partage';after=()=>fillShView(id)}
   else if(h==='hadith'){html=hadith();tab='hadith'}
   else if(h==='invocations'){html=invocations();tab='invocations';after=()=>{fillInv();const q=$('#iq');q.oninput=()=>{IQ=q.value;fillInv()}}}
   else if((m=h.match(/^cat-([a-z]+)$/))){html=catView(m[1]);tab='invocations'}
