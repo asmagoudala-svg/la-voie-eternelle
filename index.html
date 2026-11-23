@@ -1337,6 +1337,15 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .hcm{margin-bottom:6px}.hcm b{font-size:21px}.hcm b span{display:inline;font-size:17px;margin-left:4px}.hcm button{width:36px;height:36px}
 .hcg{gap:3px}.hcd{aspect-ratio:1/.92;border-radius:10px}.hcd b{font-size:15px}.hcd small{font-size:9.5px}
 .hcm b span{display:inline!important}.hcm small{display:block}.shoff{flex:none;white-space:nowrap}.shoff b{min-width:34px;text-align:center}
+
+/* v67 calendrier : cartes de l'événement du jour choisi */
+.hcd.pe{background:rgba(201,164,101,.14);border-color:rgba(201,164,101,.5)}.hcd.sel{box-shadow:0 0 0 2.5px #f3dca0;z-index:1}
+.hcpan{margin-top:10px;border:1px solid #c9a465;border-radius:18px;padding:12px;background:linear-gradient(160deg,rgba(201,164,101,.12),rgba(31,90,64,.15))}
+.hcph b{display:block;font:700 14px Mulish;text-transform:none}.hcph small{display:block;font-size:12.5px;opacity:.8;margin-top:4px}
+.hcpe{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:8px}.hcpe button{flex:none;border:1px solid rgba(201,164,101,.5);background:transparent;color:inherit;border-radius:99px;padding:6px 11px;font:700 12.5px Mulish}.hcpe button.on{background:#c9a465;color:#14251c}
+.hcrow{margin-top:10px}.hcrow .shc{width:136px;min-height:170px}
+.hcall2{display:block;width:100%;margin-top:8px;border:0;background:transparent;color:#c9a465;font:700 13px Mulish;padding:6px}
+#phone.light .hcpan{background:#fbf6e6}#phone.light .hcd.pe{background:#f6ecd4}
 </style>
 </head>
 <body>
@@ -2766,7 +2775,9 @@ V.addEventListener('click',e=>{const b=e.target.closest('[data-shopen],[data-shc
 /* ---------- v60 Calendrier hégirien des fêtes et dates religieuses ---------- */
 const HM=[['Muharram','مُحَرَّم'],['Safar','صَفَر'],['Rabîʿ al-awwal','رَبِيع الأَوَّل'],['Rabîʿ ath-thânî','رَبِيع الآخِر'],['Joumâdâ al-oûlâ','جُمَادَى الأُولَى'],['Joumâdâ ath-thâniya','جُمَادَى الآخِرَة'],['Rajab','رَجَب'],['Chaʿbân','شَعْبَان'],['Ramadan','رَمَضَان'],['Chawwâl','شَوَّال'],['Dhoul-Qiʿda','ذُو القَعْدَة'],['Dhoul-Hijja','ذُو الحِجَّة']];
 const HEV=[[1,1,'hijri','🗓️','Nouvel an hégirien','1er Muharram. Début de la nouvelle année ; ce n’est pas une fête religieuse instituée.'],[1,10,'achoura','📿','ʿĀchūrāʾ','10 Muharram.'],[9,1,'ramadan','🌙','Début du Ramadan','1er jour de jeûne. Les premières tarawîh ont lieu la veille au soir.'],[9,21,'ramadan','✨','Les dix dernières nuits','Laylat al-Qadr est recherchée pendant les dix dernières nuits, surtout les nuits impaires.'],[10,1,'fitr','🕌','Aïd al-Fitr','1er Chawwâl, fin du Ramadan.'],[12,1,'dhulhijja','🌄','Dix premiers jours de Dhoul-Hijja','Du 1er au 10 Dhoul-Hijja.'],[12,8,'hajj','🕋','Début du Hajj','8 Dhoul-Hijja (yawm at-tarwiya).'],[12,9,'arafat','⛰️','Jour de ʿArafat','9 Dhoul-Hijja.'],[12,10,'adha','🐑','Aïd al-Adha','10 Dhoul-Hijja.']];
-let HCF=null,HCAL=null,HCM=0,HCALL=0;
+let HCF=null,HCAL=null,HCM=0,HCALL=0,HCSEL=null;const HCSEL_EV={};
+/* événement associé à un jour (y compris les périodes : tout le Ramadan, les 10 jours de Dhoul-Hijja…) */
+function hDayEv(m,d,g){const L=[];if(m===9)L.push(d>=21?['ramadan','✨','Les dix dernières nuits du Ramadan']:['ramadan','🌙',d===1?'Début du Ramadan':'Ramadan']);if(m===10&&d<=3)L.push(['fitr','🕌','Aïd al-Fitr']);if(m===12){if(d===9)L.push(['arafat','⛰️','Jour de ʿArafat']);if(d>=10&&d<=13)L.push(['adha','🐑','Aïd al-Adha']);if(d===8)L.push(['hajj','🕋','Début du Hajj']);if(d<=10)L.push(['dhulhijja','🌄','Dix premiers jours de Dhoul-Hijja'])}if(m===1){if(d===1)L.push(['hijri','🗓️','Nouvel an hégirien']);if(d>=9&&d<=10)L.push(['achoura','📿','ʿĀchūrāʾ'])}if(d>=13&&d<=15)L.push(['blancs','🌕','Jours blancs']);if(g&&g.getDay()===5)L.push(['vendredi','🕌','Vendredi']);return L}
 function hOf(d){try{HCF=HCF||new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric',month:'numeric',year:'numeric'});const z=new Date(d);z.setDate(z.getDate()+(S.hoff||0));const p={};HCF.formatToParts(z).forEach(x=>p[x.type]=x.value);return {y:parseInt(p.year),m:+p.month,d:+p.day}}catch(e){return null}}
 function hBuild(){const t=new Date();t.setHours(12,0,0,0);const M=[],idx={};for(let i=-40;i<=420;i++){const d=new Date(t);d.setDate(t.getDate()+i);const h=hOf(d);if(!h)return null;const k=h.y+'-'+h.m;if(!(k in idx)){idx[k]=M.length;M.push({y:h.y,m:h.m,days:[]})}M[idx[k]].days.push({g:d,h:h.d,i})}
  const cur=hOf(t);return {M:M.filter(x=>x.days[0].h===1||x.y===cur.y&&x.m===cur.m).filter(x=>x.days.length>=29||x.y===cur.y&&x.m===cur.m),cur}}
@@ -2777,7 +2788,10 @@ function fillCal(){const el=$('#hcbody');if(!el)return;HCAL=hBuild();if(!HCAL){e
  const ev=(m,d)=>HEV.filter(e=>e[0]===m&&e[1]===d);
  const first=mo.days[0].g,lead=(first.getDay()+6)%7;
  const cells=Array(lead).fill('<span class="hcx"></span>').concat(mo.days.map(x=>{const E=ev(mo.m,x.h),bl=x.h>=13&&x.h<=15,today=x.i===0,fri=x.g.getDay()===5,past=x.i<0;
-   return `<button class="hcd${today?' td':''}${E.length?' ev':''}${bl?' bl':''}${past?' ps':''}${fri?' fr':''}" ${E.length?`data-hcev="${E[0][2]}"`:bl?'data-hcev="blancs"':''}><b>${x.h}</b><small>${x.g.getDate()}${x.g.getDate()===1||x.h===1?' '+x.g.toLocaleDateString('fr-FR',{month:'short'}):''}</small>${E.length?`<i>${E[0][3]}</i>`:bl?'<em></em>':''}</button>`})).join('');
+   const P=hDayEv(mo.m,x.h,x.g),per=P.length&&!fri||P.length>1;
+   return `<button class="hcd${today?' td':''}${E.length?' ev':''}${bl?' bl':''}${past?' ps':''}${fri?' fr':''}${per&&!E.length&&!bl?' pe':''}${HCSEL===x.i?' sel':''}" data-hcday="${x.i}"><b>${x.h}</b><small>${x.g.getDate()}${x.g.getDate()===1||x.h===1?' '+x.g.toLocaleDateString('fr-FR',{month:'short'}):''}</small>${E.length?`<i>${E[0][3]}</i>`:bl?'<em></em>':''}</button>`})).join('');
+ if(HCSEL===null||!mo.days.some(x=>x.i===HCSEL)){const t=mo.days.find(x=>x.i===0&&hDayEv(mo.m,x.h,x.g).length),f=mo.days.find(x=>x.i>=0&&hDayEv(mo.m,x.h).length)||mo.days.find(x=>hDayEv(mo.m,x.h).length);HCSEL=(t||f||mo.days.find(x=>x.i===0)||mo.days[0]).i}
+ const sd=mo.days.find(x=>x.i===HCSEL),SE=sd?hDayEv(mo.m,sd.h,sd.g):[];
  const up=[];M.forEach(m=>m.days.forEach(x=>{if(x.i<0)return;HEV.forEach(e=>{if(e[0]===m.m&&e[1]===x.h)up.push({e,g:x.g,i:x.i,y:m.y})})}));up.sort((a,b)=>a.i-b.i);
  let nb=null;for(const m of M){for(const x of m.days)if(x.i>=0&&x.h===13){nb={g:x.g,m:m.m,i:x.i};break}if(nb)break}
  const g0=mo.days[0].g,g1=mo.days[mo.days.length-1].g;
@@ -2786,19 +2800,24 @@ function fillCal(){const el=$('#hcbody');if(!el)return;HCAL=hBuild();if(!HCAL){e
  items.sort((a,b)=>a.i-b.i);const show=HCALL?items:items.slice(0,5);
  const when=x=>x.now?'En cours':x.i===0?'Aujourd’hui':x.i===1?'Demain':x.i<60?`dans ${x.i} j`:`dans ${Math.round(x.i/30.4)} mois`;
  el.innerHTML=`<div class="hctd"><div><small>Aujourd’hui</small><b>${cur.d} ${HM[cur.m-1][0]} ${cur.y}</b><em>${fD(new Date(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</em></div><span lang="ar">${cur.d} ${HM[cur.m-1][1]}<br>${cur.y} هـ</span></div>
- <h3 class="sht hcst">Prochaines dates</h3><div class="hcup">${show.map(x=>`<button class="hcu${x.i<=1?' soon':''}" data-hcev="${x.ev}"><span class="hci">${x.ic}</span><span class="hct"><b>${x.t}</b><small>${x.sub}</small></span><span class="hcn">${when(x)}</span></button>`).join('')}</div>
+ <h3 class="sht hcst">Prochaines dates</h3><div class="hcup">${show.map(x=>`<button class="hcu${x.i<=1?' soon':''}" data-hcev="${x.ev}" data-hci="${x.i}"><span class="hci">${x.ic}</span><span class="hct"><b>${x.t}</b><small>${x.sub}</small></span><span class="hcn">${when(x)}</span></button>`).join('')}</div>
  ${items.length>5?`<button class="hcmore" data-hcall="1">${HCALL?'Afficher moins':`Voir les ${items.length-5} autres dates`}</button>`:''}
  <h3 class="sht hcst">Calendrier du mois</h3>
  <div class="hcm"><button data-hcm="-1" ${ci+HCM<=0?'disabled':''} aria-label="Mois précédent">‹</button><div><b>${HM[mo.m-1][0]} ${mo.y} <span lang="ar">${HM[mo.m-1][1]}</span></b><small>${fD(g0,{day:'numeric',month:'short'})} – ${fD(g1,{day:'numeric',month:'short',year:'numeric'})}</small></div><button data-hcm="1" ${ci+HCM>=M.length-1?'disabled':''} aria-label="Mois suivant">›</button></div>
  <div class="hcg">${['L','M','M','J','V','S','D'].map(d=>`<span class="hcw">${d}</span>`).join('')}${cells}</div>
+ <div id="hcpan" class="hcpan">${sd?`<div class="hcph"><b>${sd.h} ${HM[mo.m-1][0]} · ${fD(sd.g,{weekday:'long',day:'numeric',month:'long'})}</b>${SE.length?`<div class="hcpe">${SE.map((e,k)=>`<button class="${k===(HCSEL_EV[HCSEL]||0)?'on':''}" data-hcpe="${k}">${e[1]} ${e[2]}</button>`).join('')}</div>`:'<small>Pas de fête ce jour-là. Touche une date marquée pour voir ses cartes.</small>'}</div><div class="hcpc"><p class="muted small">Chargement des cartes…</p></div>`:''}</div>
  <div class="hcleg"><span><i class="l1"></i>Aujourd’hui</span><span><i class="l2"></i>Fête / date importante</span><span><i class="l3"></i>Jours blancs</span></div>
  <div class="ptrow" style="margin-top:14px"><span><b>Correction du calendrier</b><br><small>Calendrier lunaire Umm al-Qurâ. Si ta mosquée annonce le mois un jour plus tôt ou plus tard, ajuste ici.</small></span><span class="shoff"><button data-hcoff="-1">−</button><b>${(S.hoff||0)>0?'+':''}${S.hoff||0} j</b><button data-hcoff="1">+</button></span></div>
- <p class="small muted" style="margin-top:8px">Touche une date pour trouver des cartes à partager avec tes proches.</p>`}
-V.addEventListener('click',e=>{const b=e.target.closest('[data-hcm],[data-hcev],[data-hcoff],[data-hcall]');if(!b||!$('#hcbody'))return;e.preventDefault();e.stopPropagation();const q=b.dataset;
+ <p class="small muted" style="margin-top:8px">Touche un jour du calendrier pour voir les cartes prêtes à partager.</p>`;
+ if(SE.length){const ev=SE[Math.min(HCSEL_EV[HCSEL]||0,SE.length-1)][0];shLib().then(L=>{const box=$('#hcpan .hcpc');if(!box)return;const C=L.filter(c=>c.cats.includes(ev));C.sort((a,b)=>(b.kind==='voeux')-(a.kind==='voeux'));box.innerHTML=C.length?`<div class="shrow hcrow">${C.map(c=>shThumb(c)).join('')}</div><button class="hcall2" data-hcgo="${ev}">Voir toutes les cartes « ${SHEV[ev]?SHEV[ev][1]:ev} » ›</button>`:'<p class="muted small">Aucune carte pour cet événement.</p>'})}else{const box=$('#hcpan .hcpc');box&&(box.innerHTML='')}}
+V.addEventListener('click',e=>{const b=e.target.closest('[data-hcm],[data-hcev],[data-hcoff],[data-hcall],[data-hcday],[data-hcpe],[data-hcgo]');if(!b||!$('#hcbody'))return;e.preventDefault();e.stopPropagation();const q=b.dataset;
+ if(q.hcday!==undefined){HCSEL=+q.hcday;const y=V.scrollTop;fillCal();V.scrollTop=y;const pn=$('#hcpan');pn&&setTimeout(()=>{const r=pn.getBoundingClientRect(),vr=V.getBoundingClientRect();if(r.bottom>vr.bottom-20)V.scrollTo({top:V.scrollTop+r.top-vr.top-120,behavior:'smooth'})},50);return}
+ if(q.hcpe!==undefined){HCSEL_EV[HCSEL]=+q.hcpe;const y=V.scrollTop;fillCal();V.scrollTop=y;return}
+ if(q.hcgo){SHCAT=q.hcgo;SHQ='';location.hash='#partage';return}
  if(q.hcall){HCALL=HCALL?0:1;const y=V.scrollTop;fillCal();V.scrollTop=y;return}
  if(q.hcm){const y=V.scrollTop;HCM+= +q.hcm;fillCal();V.scrollTop=y;return}
  if(q.hcoff){S.hoff=Math.max(-2,Math.min(2,(S.hoff||0)+ +q.hcoff));save();const y=V.scrollTop;fillCal();V.scrollTop=y;return}
- if(q.hcev){SHCAT=q.hcev;SHQ='';location.hash='#partage'}},true);
+ if(q.hcev){const d=+b.dataset.hci;if(!isNaN(d)&&HCAL){const k=HCAL.M.findIndex(m=>m.days.some(x=>x.i===d)),ci=HCAL.M.findIndex(x=>x.y===HCAL.cur.y&&x.m===HCAL.cur.m);if(k>=0){HCM=k-ci;HCSEL=d;fillCal();const pn=$('#hcpan');pn&&V.scrollTo({top:V.scrollTop+pn.getBoundingClientRect().top-V.getBoundingClientRect().top-230,behavior:'smooth'});return}}SHCAT=q.hcev;SHQ='';location.hash='#partage'}},true);
 window.SHAPI={shLib,hijri,shEvents,shGet,get L(){return SHL}};
 /* rappel du jour et événements : notification à l’ouverture (facultative) */
 setTimeout(async()=>{try{const n=S.shn||{};if(!n.d&&!n.e)return;const t=isoD(new Date());if(S.shnd===t)return;S.shnd=t;save();const L=await shLib();const msgs=[];
