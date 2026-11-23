@@ -1284,6 +1284,19 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .hcleg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;opacity:.85;margin:10px 0 0}.hcleg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}.hcleg .l1{background:#c9a465}.hcleg .l2{background:rgba(201,164,101,.45);border:1px solid #c9a465}.hcleg .l3{background:#f3e2b3;border-radius:50%}
 .hcup{display:grid;gap:8px}.hcu{display:flex;align-items:center;gap:12px;text-align:left;padding:12px;border-radius:16px;border:1px solid rgba(201,164,101,.35);background:rgba(255,255,255,.04);color:inherit;font:inherit}.hci{font-size:26px;flex:none}.hct{flex:1;min-width:0}.hct b{display:block;font:700 14.5px Mulish}.hct small{display:block;font-size:12px;opacity:.8;text-transform:none}.hct small::first-letter{text-transform:uppercase}.hct em{display:block;font-style:normal;font-size:11.5px;opacity:.65;margin-top:2px}.hcn{flex:none;font:700 11.5px Mulish;color:#c9a465;text-align:right}
 #phone.light .hcd{background:#fff}#phone.light .hcd.ev{background:#f3e9d2}#phone.light .hcd.bl{background:#fbf6e6}#phone.light .hcu{background:#fff}#phone.light .hclink{background:#f3e9d2}#phone.light .hcm b{color:#1f5a40}
+
+/* v61 objectifs adhkâr */
+.obp{padding:14px 16px 30px}.obtop{display:flex;align-items:center;gap:12px;margin-bottom:12px}.obtop small{font:700 11px Mulish;letter-spacing:.08em;color:var(--gold2)}.obtop h1{font:600 30px 'Barlow Condensed',sans-serif;color:var(--gd)}
+.obsum{position:sticky;top:0;z-index:3;background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:10px 14px;margin-bottom:12px;box-shadow:0 6px 14px rgba(41,71,53,.1)}.obsum b{display:block;font:700 15px Mulish;margin-bottom:6px}.obsum.ok b{color:var(--ok)}
+.obtog{margin:0 0 12px}
+.obc{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:14px;box-shadow:0 4px 12px rgba(41,71,53,.06);transition:.3s}.obc.ok{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 9%,var(--card))}
+.obh{display:flex;align-items:center;gap:10px;margin-bottom:8px}.obn{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;font:700 14px Mulish;color:#fff;background:linear-gradient(135deg,#294735,#4f7a5c)}.obc.ok .obn{background:var(--gold);color:#2a1e08}.obh b{flex:1;font:600 21px/1.1 'Barlow Condensed',sans-serif}.obh em{font:700 11.5px Mulish;font-style:normal;color:var(--gold2);background:color-mix(in srgb,var(--gold) 15%,transparent);padding:3px 8px;border-radius:99px}
+.obar{font-size:25px;line-height:2;text-align:center;white-space:pre-line;color:var(--gd);margin:4px 0}.obph{font-style:italic;font-size:16px;margin:4px 0}.obfr{font-size:15px;margin:6px 0;color:var(--ink)}.obsrc{font-size:12px;color:var(--mute);display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0 10px}
+.obtap{width:100%;min-height:52px;border:0;border-radius:16px;background:linear-gradient(135deg,#1d3327,#3d6a4d);color:#fff;font:700 15px Mulish;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}.obtap b{font:700 24px 'Barlow Condensed',sans-serif}.obtap.ok{background:linear-gradient(135deg,#a8843f,#d8b877);color:#2a1e08}
+.obed{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px}.obed h4{margin:0 0 8px;font:700 14px Mulish}
+.obsel{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 4px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:600 14.5px Mulish;cursor:pointer}.obsel i{width:24px;height:24px;flex:none;border-radius:7px;border:1.5px solid var(--gold);display:grid;place-items:center;font-style:normal;font-size:14px}.obsel.on i{background:var(--gold);color:#2a1e08}.obsel small{color:var(--mute)}
+.oball{display:block;text-align:center;margin-top:16px;font:700 14px Mulish;color:var(--gold2);text-decoration:none}
+#phone.night .obtop h1,#phone.night .obar{color:#f1ead9}
 </style>
 </head>
 <body>
@@ -1377,14 +1390,15 @@ function renderNav(tab){const sp=tab==='coran'?'coran':DAYTABS.includes(tab)?'da
  nav.querySelectorAll('a[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===cur));$('#navc').classList.toggle('on',tab==='accueil')}
 function hubMenu(){}
 /* ---------- v44 Engagement : checklist journalière, série et objectif ---------- */
-const DLG=[['coran','📖','Lire le Coran','versets',[5,10,20,50,100],10,'#sourate-1'],['priere','🕌','Les 5 prières','',null,0,'#priere'],['matin','🌅','Adhkâr du matin','',null,0,'#cat-matin'],['soir','🌙','Adhkâr du soir','',null,0,'#cat-soir'],['hadith','📜','Méditer le hadith du jour','',null,0,'#hadith'],['nom','✨','Découvrir ou réviser un nom d’Allah','',null,0,'#parcours'],['tasbih','📿','Tasbih','dhikr',[10,33,100,300,1000],100,'#tasbih']];
+const DLG=[['coran','📖','Lire le Coran','versets',[5,10,20,50,100],10,'#sourate-1'],['priere','🕌','Les 5 prières','',null,0,'#priere'],['matin','🌅','Adhkâr du matin','',null,0,'#obj-matin'],['soir','🌙','Adhkâr du soir','',null,0,'#obj-soir'],['hadith','📜','Méditer le hadith du jour','',null,0,'#hadith'],['nom','✨','Découvrir ou réviser un nom d’Allah','',null,0,'#parcours'],['tasbih','📿','Tasbih','dhikr',[10,33,100,300,1000],100,'#tasbih']];
 const PRN=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
 function DL(){if(!S.dl)S.dl={on:{coran:1,priere:1,matin:1,soir:1,hadith:1,nom:1},tg:{coran:10,tasbih:100},eng:{dur:40,start:today()},hist:{},best:0,log:{}};const d=S.dl;d.log=d.log||{};d.hist=d.hist||{};d.tg=d.tg||{};return d}
 function dlDay(k){const d=DL(),t=k||today();return d.log[t]||(d.log[t]={})}
 function dlMark(k,v){const x=dlDay();x[k]=v===undefined?1:v;save()}
 function dlRead(id){const x=dlDay();x.r=x.r||[];if(!x.r.includes(id)){x.r.push(id);if(x.r.length>400)x.r=x.r.slice(-400);x.rn=(x.rn||0)+1}}
 const nN=d=>d.n||1,dOk=(cid,i,d)=>(S.cnt[today()+'|'+cid+'-'+i]||0)>=nN(d);
-function dlCatDone(id){const c=CATS.find(c=>c.id===id);if(!c)return [0,0];return [c.items.filter((x,i)=>dOk(id,i,x)).length,c.items.length]}
+function dlSel(id){const d=DL(),c=CATS.find(x=>x.id===id);d.sel=d.sel||{};if(!d.sel[id])d.sel[id]=c.items.map((x,i)=>x.n?i:-1).filter(i=>i>=0);d.sel[id]=d.sel[id].filter(i=>c.items[i]);return d.sel[id]}
+function dlCatDone(id){const c=CATS.find(c=>c.id===id);if(!c)return [0,0];const L=dlSel(id);return [L.filter(i=>dOk(id,i,c.items[i])).length,L.length]}
 const ivNext=(c,from=0)=>{const L=c.items.length;for(let k=0;k<L;k++){const j=(from+k)%L;if(!dOk(c.id,j,c.items[j]))return j}return -1};
 function dlState(g){const d=DL(),x=dlDay(),k=g[0],tg=d.tg[k]||g[5];
  if(k==='coran'){const n=x.rn||0;return {ok:n>=tg,p:`${Math.min(n,tg)}/${tg}`}}
@@ -1410,7 +1424,7 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const ed=dlCard.edit?`<div class="dled"><h4>Mes objectifs quotidiens</h4>${DLG.map(([k,ic,l,u,opts,def])=>`<div class="dlo"><button type="button" class="dlsw${d.on[k]?' on':''}" data-dlt="${k}" aria-pressed="${!!d.on[k]}" aria-label="${l}"><i></i></button><span>${ic} ${l}</span>${opts?`<select data-dlg="${k}" aria-label="Objectif ${l}">${opts.map(o=>`<option value="${o}"${(d.tg[k]||def)===o?' selected':''}>${o} ${u}</option>`).join('')}</select>`:''}</div>`).join('')}
   <h4>Je m’engage pendant</h4><div class="dldur">${[7,21,40,90].map(v=>`<button type="button" class="${E.dur===v?'on':''}" data-dld="${v}">${v} jours</button>`).join('')}</div>
   <button type="button" class="btn gold wide" data-dlsave="1">Valider mes objectifs</button><button type="button" class="dlrs" data-dlrestart="1">Recommencer les objectifs à partir d’aujourd’hui</button></div>`:'';
- return `<section class="dlcard" id="dlc"><div class="dlh"><div><small>MON ENGAGEMENT</small><h3>Ma journée sur le chemin</h3></div><div class="dlfl${st?'':' off'}"><span>🔥</span><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div></div>
+ return `<section class="dlcard" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div><div class="dlfl${st?'':' off'}"><span>🔥</span><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div></div>
  <div class="dlpromise">${fin?`<b>Engagement tenu jusqu’au bout : ${E.dur} jours !</b> ${won} journées réussies. Renouvelle-le pour continuer.`:`« Je me suis fixé ${tot} objectif${tot>1?'s':''} par jour pendant <b>${E.dur} jours</b>. » · Jour ${inE}`}</div>
  <div class="dlprog"><div class="dlbar"><i style="width:${tot?n/tot*100:0}%"></i></div><span>Aujourd’hui <b>${n}/${tot}</b></span></div>
  <p class="dlmsg">${msg}</p><div class="dlitems">${rows}</div>
@@ -1641,22 +1655,42 @@ function tile(c){const [m,col,t]=CC[c.id]||['none',['#294735','#3f6b52']];const 
   return `<a class="tl ${w?'w':''}" href="#cat-${c.id}">${cardArt(m,col,{t:t||(w?'translate(150 30) scale(.8)':undefined)})}<b>${c.name.replace(/^(Le |La |Les |L')/,'').replace(/^./,x=>x.toUpperCase())}</b>${w?`<em>${c.sub}</em>`:''}</a>`}
 function treasure(){return `<a class="tl w tr" href="#cat-recompenses">${cardArt('chest',['#1d3327','#4a7a5c'],{t:'translate(120 40) scale(.85)'})}<b>Les trésors</b><em>Découvre les récompenses inestimables de l'invocation au quotidien</em></a>`}
 let IQ='';
+
+/* ---------- v61 Mes objectifs : adhkâr du matin / du soir à valider à la suite ---------- */
+let OBED=0;
+function objView(cid){const c=CATS.find(x=>x.id===cid);if(!c)return invocations();const L=dlSel(cid),[a,b]=dlCatDone(cid),isM=cid==='matin';
+ const cards=L.map((i,k)=>{const d=c.items[i],key=cid+'-'+i,cnt=S.cnt[today()+'|'+key]||0,n=nN(d),ok=cnt>=n;
+  return `<article class="obc${ok?' ok':''}" id="ob-${i}"><div class="obh"><span class="obn">${ok?'✓':k+1}</span><b>${esc(d.t)}</b>${n>1?`<em>${n} fois</em>`:''}</div>
+   ${S.dmode==='ph'?`<p class="obph">${esc(translit(d.ar))}</p>`:`<div class="ar obar" lang="ar">${d.ar}</div>`}<p class="obfr">${esc(d.fr)}</p>
+   <p class="obsrc">${gb(d.g)} <span>${esc(d.src)}</span></p>
+   <button class="obtap${ok?' ok':''}" data-obc="${i}">${ok?'✓ Validée · touche pour annuler':n>1?`<b>${cnt} / ${n}</b> Touche à chaque répétition`:'Valider cette invocation'}</button></article>`}).join('');
+ const ed=OBED?`<div class="obed"><h4>Choisis les invocations de ton objectif</h4>${c.items.map((d,i)=>`<button class="obsel${L.includes(i)?' on':''}" data-obsel="${i}"><i>${L.includes(i)?'✓':''}</i><span>${esc(d.t)}${d.n>1?` <small>· ${d.n} fois</small>`:''}</span></button>`).join('')}<button class="btn gold" data-obed="0" style="margin-top:12px">Enregistrer</button></div>`:'';
+ return `<div class="obp"><div class="obtop"><button class="ib back" data-go="accueil" aria-label="Retour">${I.back}</button><div><small>MES OBJECTIFS DU JOUR</small><h1>${isM?'🌅':'🌙'} Adhkâr du ${isM?'matin':'soir'}</h1></div></div>
+  <div class="obsum${b&&a===b?' ok':''}"><b>${b&&a===b?'✓ Objectif atteint, qu’Allah l’accepte':`${a} / ${b} validée${a>1?'s':''}`}</b><div class="prog"><i style="width:${b?a/b*100:0}%"></i></div></div>
+  <div class="dtog obtog" role="tablist"><button role="tab" class="${S.dmode!=='ph'?'on':''}" data-dmode="ar">Arabe</button><button role="tab" class="${S.dmode==='ph'?'on':''}" data-dmode="ph">Phonétique</button></div>
+  ${b?cards:'<p class="muted pad">Aucune invocation choisie : touche « Modifier mes invocations ».</p>'}
+  <button class="btn ghost" data-obed="${OBED?0:1}" style="margin-top:16px">${OBED?'Fermer':'✏️ Modifier mes invocations'}</button>${ed}
+  <a class="oball" href="#cat-${cid}">Voir toutes les invocations du ${isM?'matin':'soir'} ›</a></div>`}
+V.addEventListener('click',e=>{const b=e.target.closest('[data-obc],[data-obsel],[data-obed]');if(!b||!$('.obp'))return;e.preventDefault();e.stopPropagation();const q=b.dataset,cid=(location.hash.match(/^#obj-(\w+)/)||[])[1],c=CATS.find(x=>x.id===cid);if(!c)return;const y=V.scrollTop;
+ if(q.obed!==undefined){OBED=+q.obed;route();V.scrollTop=y;return}
+ if(q.obsel!==undefined){const L=dlSel(cid),i=+q.obsel,j=L.indexOf(i);if(j>=0)L.splice(j,1);else{L.push(i);L.sort((a,b)=>a-b)}save();route();V.scrollTop=y;return}
+ const i=+q.obc,d=c.items[i],k=today()+'|'+cid+'-'+i,n=nN(d),cur=S.cnt[k]||0;S.cnt[k]=cur>=n?0:cur+1;save();try{navigator.vibrate&&navigator.vibrate(S.cnt[k]>=n?60:15)}catch(_){}
+ route();V.scrollTop=y;if(S.cnt[k]>=n&&cur<n){const L=dlSel(cid),nx=L.find(j=>(S.cnt[today()+'|'+cid+'-'+j]||0)<nN(c.items[j]));const [a,bb]=dlCatDone(cid);if(a===bb){toast('Objectif atteint 🤍',`Adhkâr du ${cid} terminés. Qu’Allah les accepte de toi.`);V.scrollTo({top:0,behavior:'smooth'})}else if(nx!==undefined){const el=$('#ob-'+nx);el&&setTimeout(()=>V.scrollTo({top:V.scrollTop+el.getBoundingClientRect().top-V.getBoundingClientRect().top-12,behavior:'smooth'}),60)}}},true);
 function invocations(){const fv=Object.keys(S.fav).filter(k=>S.fav[k]&&duaByKey(k));
   return `<div class="ih"><h1 class="bc">Invocations</h1><a class="ib" href="#cat-favoris" aria-label="Mes favorites" style="color:#D9546E;text-decoration:none;background:var(--card)">${SVGS.heart(fv.length)}</a></div>
-  ${ivToday()}<div class="hs">${suggestCats().map(sqCard).join('')}</div>
+  <div class="hs">${suggestCats().map(sqCard).join('')}</div>
   <div class="search" style="position:static;background:transparent"><input type="search" id="iq" value="${esc(IQ)}" placeholder="Rechercher : pluie, colère, voyage, dette…" aria-label="Rechercher une invocation"></div>
   <div id="ires"></div>
   <div id="igrid"><h2 class="bc sec">Récompenses inestimables</h2><div class="tls">${treasure()}</div>
   <h2 class="bc sec">Catégories</h2><div class="tls">${CATS.filter(c=>!['matin','soir','sommeil','recompenses'].includes(c.id)).map(tile).join('')}</div></div>
   <p class="small muted pad" style="margin-top:18px">Textes du Coran et de hadiths authentiques (sahîh) ou bons (hasan), avec leur référence. Traductions proches du sens.</p>`}
-function ivToday(){const L=['matin','soir'].map(id=>{const c=CATS.find(x=>x.id===id),[a,b]=dlCatDone(id),nx=ivNext(c);return `<a class="ivt${a===b?' ok':''}" href="${nx>=0?`#dua-${id}-${nx}`:`#cat-${id}`}"><span>${id==='matin'?'🌅':'🌙'}</span><b>Adhkâr du ${id}</b><small>${a===b?'✓ Terminé':`${a}/${b} faites · ${a?'continuer':'commencer'} ›`}</small><i style="width:${Math.round(a/b*100)}%"></i></a>`}).join('');return `<div class="ivtw"><h3>Mes adhkâr du jour</h3><div class="ivtg">${L}</div></div>`}
 function fillInv(){const q=norm(IQ),r=$('#ires'),g=$('#igrid');if(!q){r.innerHTML='';g.style.display='';return}g.style.display='none';
   const out=[];CATS.forEach(c=>c.items.forEach((d,i)=>{if([d.t,d.h,d.fr,d.f,c.name,d.ar].some(v=>norm(v).includes(q)))out.push(row(c.id,i,d,out.length+1,c.name))}));
   r.innerHTML=`<div class="rows">${out.join('')||'<p class="muted pad">Aucune invocation trouvée.</p>'}</div>`}
 const SVGS={play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg>',copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 00-1-1H5a1 1 0 00-1 1v10a1 1 0 001 1h3"/></svg>',heart:f=>`<svg viewBox="0 0 24 24" width="22" height="22" fill="${f?'currentColor':'none'}" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`};
 const duaByKey=k=>{const i=k.lastIndexOf('-');const c=CATS.find(x=>x.id===k.slice(0,i));return c&&c.items[+k.slice(i+1)]};
-function row(cid,i,d,num,sub){const k=cid+'-'+i,c=S.cnt[today()+'|'+k]||0,ok=c>=nN(d);
-  return `<a class="ri${ok?' rok':''}" href="#dua-${k}"><span class="num ${ok?'ok':''}">${ok?'✓':num}</span><span class="tt">${esc(d.t)}<small>${sub?esc(sub):ok?'<span class="okt">✓ Faite aujourd’hui</span>':d.n>1?`À répéter ${d.n} fois`:'À dire 1 fois'}${d.f&&!sub?` · <span class="gold">★ Récompense</span>`:''}</small></span>${S.fav[k]?'<span class="fv">♥</span>':''}${CHEV}</a>`}
+function row(cid,i,d,num,sub){const k=cid+'-'+i,c=S.cnt[today()+'|'+k]||0,ok=d.n&&c>=d.n;
+  return `<a class="ri" href="#dua-${k}"><span class="num ${ok?'ok':''}">${ok?'✓':num}</span><span class="tt">${esc(d.t)}${sub||d.n||d.f?`<small>${sub?esc(sub):''}${d.n&&!sub?`À répéter ${d.n} fois`:''}${d.f&&!sub?`${d.n?' · ':''}<span class="gold">★ Récompense</span>`:''}</small>`:''}</span>${S.fav[k]?'<span class="fv">♥</span>':''}${CHEV}</a>`}
 const RC=['#294735','#E9E2CF','#2f6a5e','#C9A465','#3f6b4f','#1d3327','#DCE6D6','#4a7a6a'];
 function hero(c,title){return `<div class="chh">${c.id?cpic(c,'chero'):pic(c.sc,'chero')}<button class="ib back" data-back aria-label="Retour">${I.back}</button><h1 class="bc">${title}</h1></div>`}
 function catView(id){
@@ -1664,24 +1698,20 @@ function catView(id){
     return `${hero({sc:{s:['#FCE3E6','#FFF5F1'],c:'sun',l:'hills',m:'rose',g:['#BFE3A8','#94CC80','#6DB063']}},'MES FAVORITES')}<div class="sheet">${ks.length?`<div class="rows">${ks.map((k,n)=>{const j=k.lastIndexOf('-'),c=CATS.find(x=>x.id===k.slice(0,j));return row(c.id,+k.slice(j+1),duaByKey(k),n+1,c.name)}).join('')}</div>`:'<p class="muted pad">Touche le cœur d\'une invocation pour la retrouver ici.</p>'}</div>`}
   const c=CATS.find(x=>x.id===id);if(!c)return invocations();
   if(id==='recompenses')return `${hero({sc:{s:['#BFEBD2','#E9F8EE','#FFF6DC'],c:'sun',l:'hills',m:'chest',g:['#8ED19C','#5DB57A','#3E9A61']}},'RÉCOMPENSES<br>INESTIMABLES')}<div class="sheet"><div class="rcs">${c.items.map((d,i)=>{const bg=RC[i%RC.length],lt=['#E9E2CF','#C9A465','#DCE6D6'].includes(bg);return `<a class="rc" href="#dua-recompenses-${i}" style="background:${bg};color:${lt?'#1d3327':'#fff'};box-shadow:0 6px 16px rgba(41,71,53,.12)">${esc(d.h||d.t)}</a>`}).join('')}</div></div>`;
-  const done=dlCatDone(c.id)[0],tot=c.items.length,nx=ivNext(c),goal=['matin','soir'].includes(c.id)&&DL().on[c.id];
-  return `${hero(c,c.name.replace(/^(Le |La |Les |L')/,'').toUpperCase())}<div class="sheet"><div class="ivp${done===tot?' ok':''}"><div class="ivh"><b>${done===tot?'✓ Tout est fait aujourd’hui':`${done} / ${tot} faites aujourd’hui`}</b>${goal?'<span>🎯 Objectif du jour</span>':''}</div><div class="prog"><i style="width:${Math.round(done/tot*100)}%"></i></div>
-   <p>${done===tot?'Qu’Allah les accepte de toi. Tu peux les relire quand tu veux.':`Comment faire : ouvre l’invocation, récite-la, puis touche le compteur. Elle se coche ici${goal?' et compte pour ton objectif du jour':''}. Le bouton t’emmène toujours à la suivante à faire.`}</p>
-   ${nx>=0?`<a class="btn gold" href="#dua-${c.id}-${nx}">${done?'Continuer':'Commencer'} · ${nx+1}. ${esc(c.items[nx].t)}</a>`:''}</div><p class="lead">${c.sub} · ${tot} invocation${tot>1?'s':''}</p><div class="rows">${c.items.map((d,i)=>row(c.id,i,d,i+1)).join('')}</div></div>`}
+  const done=c.items.filter((d,i)=>d.n&&(S.cnt[today()+'|'+c.id+'-'+i]||0)>=d.n).length,withN=c.items.filter(d=>d.n).length;
+  return `${hero(c,c.name.replace(/^(Le |La |Les |L')/,'').toUpperCase())}<div class="sheet"><p class="lead">${c.sub} · ${c.items.length} invocation${c.items.length>1?'s':''}${withN?` · ${done}/${withN} répétées aujourd'hui`:''}</p><div class="rows">${c.items.map((d,i)=>row(c.id,i,d,i+1)).join('')}</div></div>`}
 function duaView(cid,i){const c=CATS.find(x=>x.id===cid),d=c&&c.items[i];if(!d)return invocations();
-  const key=cid+'-'+i,cnt=S.cnt[today()+'|'+key]||0,n=nN(d),[dn,tt]=dlCatDone(cid),nx=ivNext(c,i+1),full=cnt>=n;
+  const key=cid+'-'+i,cnt=S.cnt[today()+'|'+key]||0,n=d.n||0;
   return `<div class="chh sm">${cpic(c,'chero')}<button class="ib back" data-go="cat-${cid}" aria-label="Retour à ${c.name}">${I.back}</button><div class="dh"><span>${c.name} · ${i+1}/${c.items.length}</span><h1 class="bc" style="${(d.h||d.t).length>48?'font-size:27px':''}">${esc(d.h||d.t)}</h1></div></div>
   <div class="sheet">
-   <a class="ivs${dn===tt?' ok':''}" href="#cat-${cid}"><b>${dn===tt?'✓ Toutes faites':`${dn} / ${tt} faites aujourd’hui`}</b><span class="ivd">${c.items.map((x,k)=>`<i class="${dOk(cid,k,x)?'ok':''}${k===i?' on':''}"></i>`).join('')}</span><em>Liste ›</em></a>
    <div class="dtx2"><div class="dtog" role="tablist"><button role="tab" class="${S.dmode!=='ph'?'on':''}" aria-selected="${S.dmode!=='ph'}" data-dmode="ar">Arabe</button><button role="tab" class="${S.dmode==='ph'?'on':''}" aria-selected="${S.dmode==='ph'}" data-dmode="ph">Phonétique</button></div>
    ${S.dmode==='ph'?`<p class="dph">${esc(translit(d.ar))}</p>`:`<div class="ar dar2" lang="ar">${d.ar}</div>`}
    <p class="dfr">${esc(d.fr)}</p></div>
    ${d.f?`<div class="fadl"><b>${STAR.replace(/22/g,'14')} Récompense</b>${esc(d.f)}</div>`:''}
    <p class="dsrc">${gb(d.g)} <span>${esc(d.src)}</span></p>
-   <button class="tap ${full?'full':''}" data-cnt="${key}" data-n="${n}">${n>1?`<b>${Math.min(cnt,n)}<small> / ${n}</small></b>`:`<b>${full?'✓':'○'}</b>`}<span>${full?'Faite aujourd’hui · touche pour annuler':n>1?'Touche à chaque répétition':'Touche quand tu l’as récitée'}</span></button>
-   ${full?(nx>=0&&nx!==i?`<a class="btn gold ivnext" href="#dua-${cid}-${nx}">Invocation suivante à faire · ${nx+1}/${tt} ›</a>`:`<a class="btn gold ivnext" href="#cat-${cid}">✓ ${c.name} : tout est fait · voir la liste</a>`):''}
+   ${n?`<button class="tap ${cnt>=n?'full':''}" data-cnt="${key}" data-n="${n}"><b>${Math.min(cnt,n)}<small> / ${n}</small></b><span>${cnt>=n?'Accompli aujourd\'hui · touche pour recommencer':'Touche à chaque répétition'}</span></button>`:''}
    <div class="acts"><button class="cbtn" data-say="${key}">${SVGS.play} Écouter</button><button class="cbtn fav" data-fav="${key}" aria-label="Favorite">${SVGS.heart(S.fav[key])}</button><button class="cbtn" data-dcopy="${key}">${SVGS.copy} Copier</button></div>
-   <div class="swh">${i>0?'‹ ':''}Glisse du doigt pour changer d'invocation${i<c.items.length-1?' ›':''}</div>
+   <div class="swh">${i>0?'‹ ':''}Glisse du doigt pour changer d'invocation${i<c.items.length-1?' ›':''}<div class="tdots">${c.items.map((_,k)=>`<i class="${k===i?'on':''}"></i>`).join('')}</div></div>
    <p class="small muted" style="margin-top:14px">Audio : voix de synthèse (prototype) ; la version finale utilisera une récitation enregistrée.</p></div>`}
 /* ---------- Tasbih ---------- */
 const TS=[
@@ -2737,6 +2767,7 @@ function route(){
     $('#jcopy').onclick=async()=>{const e=S.jr[n]||{};const tx=`${D[n-1].translit} — ${D[n-1].fr}\n\n`+JQ.map(([k,q])=>`${q}\n${e[k]||''}`).join('\n\n');try{await navigator.clipboard.writeText(tx);toast('Copié','Ta note est dans le presse-papiers.')}catch(_){toast('Copie impossible','Sélectionne le texte pour le copier.')}}}}
   else if((m=h.match(/^rev-(\d+)$/))){start('etape',+m[1]);html=session();tab='noms';try{history.replaceState(null,'','#reviser')}catch(_){}}
   else if(h==='calendrier'){html=calendrier();tab='partage';after=()=>{HCM=0;fillCal()}}
+  else if((m=h.match(/^obj-(matin|soir)$/))){html=objView(m[1]);tab='accueil'}
   else if(h==='partage'){html=partage();tab='partage';after=fillPartage}
   else if((m=h.match(/^partage-(.+)$/))){const id=m[1];html=shView(id);tab='partage';after=()=>fillShView(id)}
   else if(h==='hadith'){html=hadith();tab='hadith'}
@@ -2767,7 +2798,7 @@ V.addEventListener('click',e=>{
   if(d.wk){const z=dOf(HD||iso(new Date()));z.setDate(z.getDate()+ +d.wk);HD=iso(z);V.innerHTML=hadith();return}
   if(d.hread){S.hd[d.hread]=S.hd[d.hread]?0:today();save();if(S.hd[d.hread]){$('#celh').textContent='Hadith médité';$('#celp').textContent="Qu'Allah t'en fasse profiter et t'aide à le vivre aujourd'hui.";$('#cel').classList.add('on');$('#celx').onclick=()=>{$('#cel').classList.remove('on');V.innerHTML=hadith()}}else V.innerHTML=hadith();return}
   if('hcopy' in d){const x=hadithFor(HD);copy(`${x.t}\n\n${x.ar}\n\n${translit(x.ar)}\n\nLe Prophète ﷺ a dit : ${x.fr}\n\n${x.src} — ${GR[x.g][0]}`);return}
-  if(d.cnt){const k=today()+'|'+d.cnt,n=+d.n;S.cnt[k]=Math.min((S.cnt[k]||0)+1,n);if((S.cnt[k]||0)>=n&&t.classList.contains('full')){S.cnt[k]=0}save();const c=S.cnt[k];t.classList.toggle('full',c>=n);if(t.classList.contains('tap')){if(c>=n||c===0){const y=V.scrollTop;route();V.scrollTop=y;if(c===n){try{navigator.vibrate&&navigator.vibrate(60)}catch(_){}const nb=V.querySelector('.ivnext');nb&&nb.scrollIntoView({block:'nearest',behavior:'smooth'});dlScore()}return}t.innerHTML=`<b>${c}<small> / ${n}</small></b><span>Touche à chaque répétition</span>`}else t.textContent=(c>=n?'✓ ':'')+c+' / '+n;if(c===n){try{navigator.vibrate&&navigator.vibrate(60)}catch(_){}toast('Accompli','Qu\'Allah l\'accepte de toi.')}return}
+  if(d.cnt){const k=today()+'|'+d.cnt,n=+d.n;S.cnt[k]=Math.min((S.cnt[k]||0)+1,n);if((S.cnt[k]||0)>=n&&t.classList.contains('full')){S.cnt[k]=0}save();const c=S.cnt[k];t.classList.toggle('full',c>=n);if(t.classList.contains('tap'))t.innerHTML=`<b>${c}<small> / ${n}</small></b><span>${c>=n?'Accompli aujourd\'hui · touche pour recommencer':'Touche à chaque répétition'}</span>`;else t.textContent=(c>=n?'✓ ':'')+c+' / '+n;if(c===n){try{navigator.vibrate&&navigator.vibrate(60)}catch(_){}toast('Accompli','Qu\'Allah l\'accepte de toi.')}return}
   if((d.say||d.sayar)&&t.classList.contains('playing')){sayStop();return}
   if(d.say){sayStop();const x=duaByKey(d.say),rf=x.g==='q'?refOf(x.src):null;if(rf){recite(rf,t,x.ar);return}speak(x,t);return}
   if(d.fav){S.fav[d.fav]=!S.fav[d.fav];save();t.innerHTML=SVGS.heart(S.fav[d.fav]);toast(S.fav[d.fav]?'Ajoutée aux favorites':'Retirée des favorites',duaByKey(d.fav).t);return}
