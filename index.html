@@ -1382,6 +1382,16 @@ button,a{transition:opacity .12s}
 .tl.ph b,.tl.ph em{z-index:2;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 .chh .pic>img.hph{z-index:0}
 .pic>img.hph,.tl>img.hph{z-index:1}.chero:after,.hcard .pic:after,.himg .pic:after,.sq:after,.tl.ph:after{z-index:1!important}.sq span{z-index:2}.chh .back,.chh>h1,.chh .dh{z-index:3}
+
+/* v79 rubriques uniformes */
+.tl.t3{box-shadow:0 8px 18px rgba(0,0,0,.18)}.tl.t3:after{display:none}
+.tl.t3 .ico3{position:absolute;right:-4px;bottom:-6px;width:56%;max-width:140px;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));z-index:1}
+.tl.t3.w .ico3{width:38%;max-width:150px;right:10px;bottom:-4px}
+.tl.t3 b,.tl.t3 em{z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+.pic.p3{position:relative;overflow:hidden}.pic.p3>.ico3{position:absolute;right:6%;bottom:6%;height:72%;max-height:190px;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 12px 18px rgba(0,0,0,.35))}
+.sq .pic.p3>.ico3{height:62%;right:8%;bottom:14%}.chh .pic.p3>.ico3{height:62%;bottom:24%}
+.tls{grid-auto-flow:row dense}
+.sq .pic.p3{position:absolute;inset:0}.sq:after{background:linear-gradient(transparent 55%,rgba(0,0,0,.25))}
 </style>
 </head>
 <body>
@@ -1768,7 +1778,7 @@ function hadith(){
 /* ---------- Invocations ---------- */
 const hour=()=>new Date().getHours();
 const CC={maison:['house',['#1f4a35','#3f7a57']],priere:['rugobj',['#18463f','#2f7468']],purification:['fountain',['#174a5a','#2f7f8f']],mosquee:['mosque',['#223d2e','#3d6a4d'],'translate(110 30) scale(.85)'],nourriture:['dates',['#7a4a1c','#b8803c']],maladie:['honey',['#22513f','#4a8a69']],protection:['shield',['#16301f','#2f5a40']],humeur:['sunburst',['#8a6420','#c9a245']],peur:['lantern',['#132a33','#2a5560'],'translate(130 30) scale(.9)'],mariage:['rings',['#6a2c3e','#a9566c']],jeune:['crescentobj',['#1a2c3a','#38586a']],salutation:['dove',['#245a4a','#4f8f78'],'translate(70 20) scale(.9)'],assemblee:['tea',['#5a3418','#94602f']],hajj:['kaaba',['#6a5020','#a88a44']],omra:['kaaba',['#1d4a48','#3f7f78']],deces:['tree',['#36423b','#66786c'],'translate(60 20) scale(.9)'],evenements:['hourglass',['#4a3a1c','#8a6c38']],nature:['cloudrain',['#2a5a34','#4f8a52']],biens:['wheat',['#7a5a14','#b8923a']],rabbana:['book',['#1d3327','#3d6a4d'],'translate(150 40) scale(.8)'],coran:['hands',['#1a3a44','#3a6a70'],'translate(140 20) scale(.9)']};
-const WIDE={rabbana:1,coran:1};
+const WIDE={rabbana:1,coran:1,voyage:1,mariage:1,purification:1};
 const CHEV='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>';
 function suggestCats(){const h=hour(),first=h>=3&&h<12?'matin':h>=21||h<3?'sommeil':'soir';return [first,...['matin','soir','sommeil'].filter(x=>x!==first)].map(i=>CATS.find(c=>c.id===i))}
 const LBL={matin:'Matin',soir:'Soir',sommeil:'Nuit'};
@@ -1776,11 +1786,15 @@ const PC={matin:{time:'dawn',land:'hills',subj:'palm',trees:1,birds:1,fg:'grass'
 /* v78 : photos libres de droits (Unsplash) en lien avec chaque rubrique d'invocations ; l'ancienne illustration reste en secours */
 const CPH={matin:'1514241516423-6c0a5e031aa2',soir:'1568801556940-e5b3a55fa6ea',sommeil:'1507502707541-f369a3b18502',maison:'1517574394752-94986fc2c084',priere:'1591624298055-3cfb0aa676c5',purification:'1746487836224-a0ca46cdbf1c',mosquee:'1627790497727-41fb43f961be',nourriture:'1629738601425-494c3d6ba3e2',maladie:'1587049352851-8d4e89133924',protection:'1662360367054-c5caf18872f4',humeur:'1426170042593-200f250dfdaf',peur:'1510218830377-2e994ea9087d',mariage:'1606800052052-a08af7148866',jeune:'1587617425953-9075d28b8c46',salutation:'1507126882445-434b04530d1a',assemblee:'1766232574096-4c4380105cc7',hajj:'1592326871020-04f58c1a52f3',omra:'1627728734379-a5f8c099763e',deces:'1543078000-04cf3153e032',evenements:'1518281361980-b26bfd556770',nature:'1487017931017-0e0d9e02bb0c',biens:'1529511582893-2d7e684dd128',rabbana:'1599659593072-10de2e109486',coran:'1609599006353-e629aaabfeae',recompenses:'1489493512598-d08130f49bea'};
 const phImg=(id,w=700)=>CPH[id]?`<img class="hph" src="https://images.unsplash.com/photo-${CPH[id]}?w=${w}&h=${Math.round(w*.66)}&fit=crop&q=70&auto=format" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:'';
-const cpic=(c,cls='',cap='')=>{const base=PC[c.id]?ppic(PC[c.id],cls,cap):pic(c.sc,cls,cap);return CPH[c.id]?base.replace(/<div class="pic ([^"]*)">/,(m)=>m+phImg(c.id,cls==='chero'?900:500)):base};
+/* v79 : style uniforme des rubriques — dégradé + objet 3D (Fluent Emoji 3D de Microsoft, licence MIT, fichiers dans ico/) */
+const C3PAL=[['#15125a','#5a57bb'],['#0a4f60','#127a8a'],['#0b7a67','#0c3a31'],['#0a358a','#3d68b0']],C3W=['#56267a','#e3679c'];
+const c3g=id=>{if(WIDE[id]||id==='recompenses')return C3W;const i=CATS.findIndex(c=>c.id===id);return C3PAL[(i<0?0:i)%C3PAL.length]};
+const c3ico=id=>`<img class="ico3" src="ico/${id}.webp" alt="" decoding="async" onerror="this.remove()">`;
+const cpic=(c,cls='',cap='')=>{if(c.id){const [a,b]=c3g(c.id);return `<div class="pic p3 ${cls}" style="background:linear-gradient(135deg,${a},${b})">${c3ico(c.id)}${cap}</div>`}const base=PC[c.id]?ppic(PC[c.id],cls,cap):pic(c.sc,cls,cap);return CPH[c.id]?base.replace(/<div class="pic ([^"]*)">/,(m)=>m+phImg(c.id,cls==='chero'?900:500)):base};
 function sqCard(c){return `<a class="sq" href="#cat-${c.id}">${cpic(c)}<span>${LBL[c.id]||c.name}</span></a>`}
-function tile(c){const [m,col,t]=CC[c.id]||['none',['#294735','#3f6b52']];const w=WIDE[c.id];
+function tile(c){const w=WIDE[c.id],[ga,gb]=c3g(c.id);return `<a class="tl t3 ${w?'w':''}" href="#cat-${c.id}" style="background:linear-gradient(135deg,${ga},${gb})">${c3ico(c.id)}<b>${c.name.replace(/^(Le |La |Les |L')/,'').replace(/^./,x=>x.toUpperCase())}</b>${w?`<em>${c.sub}</em>`:''}</a>`;const [m,col,t]=CC[c.id]||['none',['#294735','#3f6b52']];
   return `<a class="tl ${w?'w':''}${CPH[c.id]?' ph':''}" href="#cat-${c.id}">${memo('ca'+c.id,()=>cardArt(m,col,{t:t||(w?'translate(150 30) scale(.8)':undefined)}))}${phImg(c.id,w?800:420)}<b>${c.name.replace(/^(Le |La |Les |L')/,'').replace(/^./,x=>x.toUpperCase())}</b>${w?`<em>${c.sub}</em>`:''}</a>`}
-function treasure(){return `<a class="tl w tr ph" href="#cat-recompenses">${cardArt('chest',['#1d3327','#4a7a5c'],{t:'translate(120 40) scale(.85)'})}${phImg('recompenses',800)}<b>Les trésors</b><em>Découvre les récompenses inestimables de l'invocation au quotidien</em></a>`}
+function treasure(){return `<a class="tl w tr t3" href="#cat-recompenses" style="background:linear-gradient(135deg,${C3W[0]},${C3W[1]})">${c3ico('recompenses')}<b>Les trésors</b><em>Découvre les récompenses inestimables de l'invocation au quotidien</em></a>`}
 let IQ='';
 
 /* ---------- v61 Mes objectifs : adhkâr du matin / du soir à valider à la suite ---------- */
