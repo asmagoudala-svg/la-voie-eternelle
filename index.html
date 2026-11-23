@@ -1220,6 +1220,7 @@ nav.sp-coran{grid-template-columns:.85fr repeat(4,1fr)!important}#phone.mush nav
 .qfvh{display:flex;justify-content:space-between;align-items:center;gap:8px}.qfvr{background:none;border:0;color:#e2c88e;font:800 14px Mulish,sans-serif;cursor:pointer;padding:6px 0;text-align:left}
 .qfva{font-family:'Amiri Quran',Amiri,serif;font-size:24px;line-height:2;direction:rtl;text-align:right;color:#f3ead2;margin:6px 0}.qfvf{font-size:14.5px;line-height:1.5;color:#d9cfb3;margin:0}
 #phone.light .qfv{background:#fff;border-color:rgba(184,148,90,.35)}#phone.light .qfvr{color:#8a6a2f}#phone.light .qfva{color:#1f3a2b}#phone.light .qfvf{color:#4a4231}
+#phone.mush .mushz{touch-action:pan-y}
 </style>
 </head>
 <body>
@@ -2372,6 +2373,14 @@ V.addEventListener('click',e=>{const b=e.target.closest('[data-vemo],[data-vrese
  if(q.vldel){const [f,i]=q.vldel.split('|');(S.vlink[f]||[]).splice(+i,1);save();fillVocab(n);return}
  if(q.vladd){const box=b.closest('.vladd'),s=+box.querySelector('[data-vls]').value,v=+box.querySelector('[data-vlv]').value,note=box.querySelector('[data-vln]').value.trim(),mx=QIDX[s-1][5];if(!(v>=1&&v<=mx)){toast('Verset introuvable',`${QIDX[s-1][2]} compte ${mx} versets.`);return}S.vlink=S.vlink||{};(S.vlink[q.vladd]=S.vlink[q.vladd]||[]).push({s,v,n:note});save();fillVocab(n);return}},true);
 V.addEventListener('change',e=>{const f=e.target.dataset&&e.target.dataset.vimgf;if(f&&e.target.files[0])vImgSave(f,e.target.files[0])});
+/* v56 zoom au doigt (pincement) dans le Mushaf */
+(()=>{let P=null;const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+ V.addEventListener('touchstart',e=>{if(e.touches.length!==2||!$('#phone').classList.contains('mush'))return;const z=$('.mushz');if(!z)return;
+  const mx=(e.touches[0].clientX+e.touches[1].clientX)/2,my=(e.touches[0].clientY+e.touches[1].clientY)/2,el=document.elementFromPoint(mx,my),mv=el&&el.closest('.mv');
+  P={d:dist(e.touches),s:QSET().size,z,mv,off:mv?mv.getBoundingClientRect().top:0};e.preventDefault()},{passive:false});
+ V.addEventListener('touchmove',e=>{if(!P||e.touches.length!==2)return;e.preventDefault();const sz=Math.max(70,Math.min(220,Math.round(P.s*dist(e.touches)/P.d)));if(sz===P.cur)return;P.cur=sz;
+  document.querySelectorAll('.qrd').forEach(x=>x.style.setProperty('--qz',sz/100));if(P.mv){const t=P.mv.getBoundingClientRect().top;V.scrollTop+=t-P.off}},{passive:false});
+ const end=e=>{if(!P)return;if(e.touches.length<2){if(P.cur){QSET().size=P.cur;save()}P=null}};V.addEventListener('touchend',end);V.addEventListener('touchcancel',end)})();
 /* ---------- Réglages ---------- */
 function qReglages(){const s=QSET(),sw=(k,t,dsc)=>`<button class="qsw" data-qset="${k}" role="switch" aria-checked="${!!s[k]}"><span><b>${t}</b><small>${dsc}</small></span><i class="${s[k]?'on':''}"></i></button>`,
  stp=(k,lab,dsc,val)=>`<div class="qstp"><span><b>${lab}</b><small>${dsc}</small></span><div class="qzoom"><button data-qstep="${k}" data-d="-1" aria-label="Réduire">−</button><span>${val}</span><button data-qstep="${k}" data-d="1" aria-label="Augmenter">+</button></div></div>`;
