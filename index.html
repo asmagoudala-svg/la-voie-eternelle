@@ -1756,6 +1756,26 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .dli .dlc{align-self:center;width:30px!important;height:30px!important;border-color:var(--a)!important}
 .dli.ok{background:linear-gradient(120deg,rgba(127,191,143,.28),rgba(127,191,143,.06) 70%)!important;border-color:rgba(127,191,143,.5)!important}.dli.ok .dlst{color:#a8dcb6!important}
 .dlw.ok b{box-shadow:0 0 10px rgba(255,180,90,.45)}
+
+/* v104 carte objectifs : nuit dorée, cartes claires, anneaux de progression */
+.dlcard{background:radial-gradient(ellipse 85% 55% at 100% 0,rgba(241,200,120,.32),transparent 62%),radial-gradient(ellipse 70% 50% at 0 100%,rgba(140,90,170,.28),transparent 60%),linear-gradient(160deg,#1c2142 0%,#2a2040 50%,#3b2a24 100%)!important;border:1px solid rgba(241,215,156,.6)!important}
+.dlh small{color:#f1d79c!important}
+.dlpromise{background:rgba(255,255,255,.08)!important;border-left-color:#f1d79c!important;color:#f3ead2!important}
+.dlmsg{color:#fff3d1!important}
+.dli{background:linear-gradient(135deg,#fffaf0,#f4ead6)!important;border:0!important;box-shadow:0 6px 16px rgba(0,0,0,.25);align-items:center!important}
+.dli:before{width:5px!important;top:0!important;bottom:0!important;border-radius:0!important}
+.dli.c-coran{--a:#b8862f}.dli.c-priere{--a:#2f8f62}.dli.c-matin{--a:#e07a2e}.dli.c-soir{--a:#4f63c9}.dli.c-hadith{--a:#a0703a}.dli.c-nom{--a:#b8942f}.dli.c-tasbih{--a:#c2475a}
+.dli .dlx b{color:#1d2a20!important}.dli .dlx>small{color:#6b6150!important}
+.dlic{background:#fff!important;border:1px solid rgba(0,0,0,.06)!important;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.dlrb{background:rgba(0,0,0,.08)!important}.dlrb i{background:var(--a)!important}
+.dlst{color:var(--a)!important}
+.dli .dlpr button{color:#3b3426;border-color:rgba(0,0,0,.18)}.dli .dlpr button.on{background:#2f8f62;border-color:#2f8f62;color:#fff}
+.dlring{flex:none;align-self:center;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--a) calc(var(--p)*1%),rgba(0,0,0,.09) 0)}
+.dlring b{width:46px;height:46px;border-radius:50%;background:#fffaf0;display:grid;place-items:center;font:900 17px Mulish,sans-serif;color:var(--a);line-height:1}
+.dlring b{display:flex!important;align-items:baseline;justify-content:center;padding-top:4px;box-sizing:border-box}.dlring.ok b{align-items:center;padding:0}.dlring b small{font-size:11px;color:#8a7f68;font-weight:800}
+.dlring.ok b{background:var(--a);color:#fff;font-size:22px}
+.dli.ok{background:linear-gradient(135deg,#f3fbf5,#e2f2e7)!important}.dli.ok .dlst{color:#2f8f62!important}
+.dlw.ok b{background:linear-gradient(135deg,#ffb35c,#f1d79c)!important}
 </style>
 </head>
 <body>
@@ -1883,10 +1903,10 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const rows=G.map(g=>{const [k,ic,l,u]=g,x=dlState(g),tg=dlTgt(k),dd=dlDay();
   const cur=k==='coran'?Math.min(dd.rn||0,tg):k==='priere'?(dd.p||[]).filter(Boolean).length:k==='matin'||k==='soir'?dlCatDone(k)[0]:k==='tasbih'?Math.min(tTot(),tg):(x.ok?1:0),tot=k==='priere'?5:u?tg:1,pc=Math.round(cur/tot*100);
   const goal=u?`${tg} ${u} par jour`:k==='priere'?'les 5 prières chaque jour':'chaque jour';
-  const left=x.ok?'Objectif atteint aujourd’hui ✓':u?(cur?`Encore ${tot-cur} ${u} · ${cur} sur ${tot}`:`À faire aujourd’hui · 0 sur ${tot}`):k==='priere'?(cur?`Encore ${5-cur} prière${5-cur>1?'s':''}`:'Coche chaque prière accomplie'):'À faire aujourd’hui';
+  const left=x.ok?'Objectif atteint aujourd’hui ✓':u?(cur?`Encore ${tot-cur} ${u}`:'À faire aujourd’hui'):k==='priere'?(cur?`Encore ${5-cur} prière${5-cur>1?'s':''}`:'Coche chaque prière accomplie'):'À faire aujourd’hui';
   const bar=`<span class="dlrb"><i style="width:${pc}%"></i></span><small class="dlst">${left}</small>`;
-  if(k==='priere'){const p=dd.p||[];return `<div class="dli c-${k}${x.ok?' ok':''}"><span class="dlic">${ic}</span><span class="dlx"><b>${l}</b><small>Ton objectif : ${goal}</small><span class="dlpr">${PRN.map((nm,i)=>`<button type="button" class="${p[i]?'on':''}" data-dlp="${i}" aria-pressed="${!!p[i]}">${nm}</button>`).join('')}</span>${bar}</span><span class="dlc">${x.ok?'✓':''}</span></div>`}
-  return `<a class="dli c-${k}${x.ok?' ok':''}" href="${k==='coran'&&S.ql?'#sourate-'+S.ql.s:g[6]}" ${k==='coran'&&S.ql?'data-qjump="1"':''}><span class="dlic">${ic}</span><span class="dlx"><b>${l}</b><small>Ton objectif : ${goal}</small>${bar}</span><span class="dlc">${x.ok?'✓':''}</span></a>`}).join('');
+  if(k==='priere'){const p=dd.p||[];return `<div class="dli c-${k}${x.ok?' ok':''}"><span class="dlic">${ic}</span><span class="dlx"><b>${l}</b><small>Ton objectif : ${goal}</small><span class="dlpr">${PRN.map((nm,i)=>`<button type="button" class="${p[i]?'on':''}" data-dlp="${i}" aria-pressed="${!!p[i]}">${nm}</button>`).join('')}</span>${bar}</span><span class="dlring${x.ok?' ok':''}" style="--p:${pc}"><b>${x.ok?'✓':u||k==='priere'?`${cur}<small>/${tot}</small>`:'—'}</b></span></div>`}
+  return `<a class="dli c-${k}${x.ok?' ok':''}" href="${k==='coran'&&S.ql?'#sourate-'+S.ql.s:g[6]}" ${k==='coran'&&S.ql?'data-qjump="1"':''}><span class="dlic">${ic}</span><span class="dlx"><b>${l}</b><small>Ton objectif : ${goal}</small>${bar}</span><span class="dlring${x.ok?' ok':''}" style="--p:${pc}"><b>${x.ok?'✓':u||k==='priere'?`${cur}<small>/${tot}</small>`:'—'}</b></span></a>`}).join('');
  const ed=dlCard.edit?dlWiz():'';
  return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div><div class="dlfl${st?'':' off'}"><span>🔥</span><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div></div>
  <div class="dlpromise">${fin?`<b>Objectifs tenus jusqu’au bout : ${E.dur} jours !</b> ${won} journées réussies. Fixe-en de nouveaux pour continuer.`:`« Je me suis fixé ${tot} objectif${tot>1?'s':''} par jour pendant <b>${E.dur} jours</b>. » · Jour ${inE}`}</div>
@@ -2974,9 +2994,9 @@ function dlqClick(e){const b=e.target.closest('[data-dlq]');if(!b)return;const [
  if(c==='restart'){DLQ={i:0,sel:[],tg:{},dur:0,no:{},full:DLQ.full};return dlqDraw()}
  if(c==='set'){if(k==='dur')DLQ.dur=+n;else if(DLQA[k]&&DLQA[k][2]){DLQ.no=DLQ.no||{};if(+n){delete DLQ.no[k];DLQ.tg[k]=1}else{DLQ.no[k]=1;DLQ.tg[k]=0}}else DLQ.tg[k]=+n;b.classList.add('on');setTimeout(()=>{DLQ.i++;dlqDraw()},160);return}
  if(c==='own')return dlqOwn();
- if(c==='done'){const d=DL();const K=dlqKeep();if(!K.length)return;d.on={};K.forEach(x=>{d.on[x]=1;if(DLQA[x][3])d.tg[x]=DLQ.tg[x]});d.eng={dur:DLQ.dur,start:today()};const n=K.length,du=DLQ.dur,fu=DLQ.full;S.onb=1;save();dlqClose();if(fu&&location.hash!=='#accueil'&&location.hash)location.hash='#accueil';else route();
+ if(c==='done'){const d=DL();const K=dlqKeep();if(!K.length)return;d.on={};K.forEach(x=>{d.on[x]=1;if(DLQA[x][3])d.tg[x]=DLQ.tg[x]});d.eng={dur:DLQ.dur,start:today()};const n=K.length,du=DLQ.dur,fu=DLQ.full;S.onb=2;save();dlqClose();if(fu&&location.hash!=='#accueil'&&location.hash)location.hash='#accueil';else route();
   toast('Objectifs fixés, bismillah 🤲',`${n} objectif${n>1?'s':''} à valider chaque jour pendant ${du} jours.`)}}
-setTimeout(()=>{if(!S.onb)dlqOpen(1)},60);
+setTimeout(()=>{if((S.onb||0)<2)dlqOpen(1)},60);
 V.addEventListener('click',e=>{const b=e.target.closest('[data-dlqopen]');if(!b)return;e.preventDefault();e.stopPropagation();dlqOpen()},true);
 let QSHS=1,QNOTE=null;
 function qSheetClose(){const sh=$('#qsheet');sh&&sh.classList.remove('on')}
