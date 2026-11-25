@@ -1843,6 +1843,16 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 #phone.light .dli .dlpr button{color:#3b4a3e;border-color:#e3d7bd;background:#fff}#phone.light .dli .dlpr button.on{background:#2f8f62;border-color:#2f8f62;color:#fff}
 #phone.light .dledit{border-color:#d9c08a!important;color:#8a6a2c!important;background:#fff!important}
 #phone.light .dlcta p{color:#3b4a3e}
+
+/* v115 série en flammes */
+.dlfire{align-self:flex-start;display:inline-flex;align-items:center;gap:1px;margin-top:7px;padding:4px 11px 4px 8px;border-radius:999px;background:rgba(255,170,90,.12);border:1px solid rgba(255,180,100,.32)}
+.dlfire i{font-style:normal;font-size:17px;line-height:1;animation:dlFl 1.8s ease-in-out infinite}
+.dlfire i:nth-child(2n){animation-delay:.4s}.dlfire i:nth-child(3n){animation-delay:.8s}
+.dlfire i.off{filter:grayscale(1);opacity:.35;animation:none}
+.dlfire em{font-style:normal;font:800 11px Mulish,sans-serif;color:#ffc56e;margin:0 2px}
+.dlfire small{margin-left:6px;font:800 12px Mulish,sans-serif;color:#ffd79a}
+@keyframes dlFl{0%,100%{transform:scale(1)}50%{transform:scale(1.12) translateY(-1px)}}
+#phone.light .dlfire{background:#fff4e2;border-color:#f0c98a}#phone.light .dlfire small,#phone.light .dlfire em{color:#b0560f}
 </style>
 </head>
 <body>
@@ -1978,7 +1988,7 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const SHORT={coran:'Coran',priere:'Prières',matin:'Matin',soir:'Soir',hadith:'Hadith',nom:'Nom d’Allah',tasbih:'Tasbih'},left=G.filter(g=>!dlState(g).ok),R=Math.round(tot?n/tot*100:0);
  return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div></div>
  ${tot?`<div class="dlhero"><div class="dlbig${done?' ok':''}" style="--p:${R}"><div><b>${n}<small>/${tot}</small></b><span>aujourd’hui</span></div></div>
-  <div class="dlmot">${done?`<b>Journée tenue 🤍</b><small>Tous tes objectifs sont faits.</small>`:n===0?`<b>Bismillah 🤲</b><small>Commence par un petit pas, le reste suivra.</small>`:`<b>Plus que ${tot-n} objectif${tot-n>1?'s':''}</b><small>${tot-n===1?'Tu y es presque, encore un effort !':'Continue, chaque pas compte.'}</small>`}${(()=>{const rest=Math.max(0,E.dur-inE);return `<span class="dlser${st?'':' cold'}">${st?`🔥 <b>${st}</b> jour${st>1?'s':''} de suite${rest?`<i>· encore ${rest} jour${rest>1?'s':''}</i>`:'<i>· dernier jour !</i>'}`:rest?`⏳ Encore <b>${rest}</b> jour${rest>1?'s':''}`:'⏳ Dernier jour !'}</span>`})()}</div></div>
+  <div class="dlmot">${done?`<b>Journée tenue 🤍</b><small>Tous tes objectifs sont faits.</small>`:n===0?`<b>Bismillah 🤲</b><small>Commence par un petit pas, le reste suivra.</small>`:`<b>Plus que ${tot-n} objectif${tot-n>1?'s':''}</b><small>${tot-n===1?'Tu y es presque, encore un effort !':'Continue, chaque pas compte.'}</small>`}${(()=>{const L=Math.min(st,7),more=st-L,dim=done?0:1;return `<span class="dlfire">${'<i>🔥</i>'.repeat(L)}${more?`<em>+${more}</em>`:''}${dim?'<i class="off">🔥</i>':''}<small>${st?`${st} jour${st>1?'s':''} d’affilée`:'Allume ta première flamme'}</small></span>`})()}</div></div>
   <div class="dlleft${done?' fin':''}">${done?`<span class="dlbravo">🌟</span><p><b>Macha’Allah, bravo !</b> Qu’Allah te récompense, accepte tes efforts et t’accorde la constance. À demain, in cha’Allah 🤍</p>`:`<span>Il te reste :</span>${left.map(g=>`<em>${g[1]} ${SHORT[g[0]]||g[2]}</em>`).join('')}`}</div>
   ${fin?`<p class="dlfin">Objectifs tenus jusqu’au bout : ${E.dur} jours ! Fixe-en de nouveaux pour continuer.</p>`:''}
   <div class="dlitems">${rows}</div>
