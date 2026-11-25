@@ -1640,6 +1640,29 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 #qa-res i{font-style:normal;font-family:'Amiri',serif;font-size:18px;color:#e2c88e}
 #qa-res p{margin:4px;font:600 13px Mulish,sans-serif;opacity:.7}
 #phone.light #qa-q{background:#fffdf7;color:#1f3a2b;border-color:#e3d7bd}#phone.light #qa-res button{background:#f4eee1;color:#1f3a2b}#phone.light #qa-res b,#phone.light #qa-res i{color:#8a6a2c}
+
+/* v95 assistant d'objectifs */
+.dlcta{margin:10px 0 6px;text-align:center}.dlcta p{margin:0 0 10px;font:600 14px/1.5 Mulish,sans-serif;opacity:.85}
+.dlw-h small{font:800 11px Mulish,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.dlw-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.12);margin:6px 0 12px;overflow:hidden}.dlw-bar i{display:block;height:100%;background:linear-gradient(90deg,#b8945a,#e2c88e);transition:width .25s}
+.dled.dlz h4{margin:4px 0 4px;font:800 17px/1.35 Mulish,sans-serif;letter-spacing:0;text-transform:none;color:inherit}.dlw-s{margin:0 0 10px;font-size:13px;opacity:.75}
+.dlw-cats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dlw-cats button{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:7px;text-align:left;padding:10px;border-radius:14px;border:1.5px solid rgba(201,164,101,.3);background:rgba(255,255,255,.04);color:inherit;cursor:pointer}
+.dlw-cats span{grid-row:1/3;font-size:20px}.dlw-cats b{font:800 13px Mulish,sans-serif}.dlw-cats small{font:600 11px/1.3 Mulish,sans-serif;opacity:.7}
+.dlw-cats button.on{border-color:#e2c88e;background:rgba(201,164,101,.2)}
+.dlw-q{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}.dlw-q:last-child{border:0}
+.dlw-chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 8px}
+.dlw-chips button{min-height:38px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(201,164,101,.4);background:transparent;color:inherit;font:800 14px Mulish,sans-serif;cursor:pointer}
+.dlw-chips button.on{background:linear-gradient(135deg,#b8945a,#e2c88e);color:#1a2a1f;border-color:transparent}
+.dlw-own{display:flex;align-items:center;gap:8px;font:600 13px Mulish,sans-serif;opacity:.9}
+.dlw-own input{width:84px;height:38px;border-radius:11px;border:1px solid rgba(201,164,101,.45);background:rgba(0,0,0,.2);color:inherit;text-align:center;font:800 16px Mulish,sans-serif}
+.dlw-rec{padding:12px 14px;border-radius:14px;background:rgba(201,164,101,.1);border:1px solid rgba(201,164,101,.35)}.dlw-rec p{margin:0 0 6px;font:600 14px Mulish,sans-serif}.dlw-rec ul{margin:0 0 8px;padding-left:4px;list-style:none;display:grid;gap:5px;font:600 14px Mulish,sans-serif}.dlw-rec small{opacity:.7}
+.dlw-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px}.dlw-nav .btn{flex:1;min-height:46px}.dlw-nav .btn:disabled{opacity:.4}
+.dlw-b{background:none;border:0;color:#e2c88e;font:800 14px Mulish,sans-serif;padding:10px 4px;cursor:pointer}
+#phone.light .dlw-own input{background:#fffdf7}#phone.light .dlw-b{color:#8a6a2c}
+
+.dlcard.empty .dlpromise,.dlcard.empty .dlprog,.dlcard.empty .dlweek,.dlcard.empty .dlstats,.dlcard.empty .dlfl{display:none}
+.dlz .dlw-rec b{color:#e2c88e}#phone.light .dlz .dlw-rec b{color:#8a6a2c}
 </style>
 </head>
 <body>
@@ -1736,7 +1759,7 @@ function hubMenu(){}
 /* ---------- v44 Engagement : checklist journalière, série et objectif ---------- */
 const DLG=[['coran','📖','Lire le Coran','versets',[5,10,20,50,100],10,'#sourate-1'],['priere','🕌','Les 5 prières','',null,0,'#priere'],['matin','🌅','Adhkâr du matin','invocations',[],0,'#obj-matin'],['soir','🌙','Adhkâr du soir','invocations',[],0,'#obj-soir'],['hadith','📜','Méditer le hadith du jour','',null,0,'#hadith'],['nom','✨','Découvrir ou réviser un nom d’Allah','',null,0,'#parcours'],['tasbih','📿','Tasbih','dhikr',[10,33,100,300,1000],100,'#tasbih']];
 const PRN=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
-function DL(){if(!S.dl)S.dl={on:{coran:1,priere:1,matin:1,soir:1,hadith:1,nom:1},tg:{coran:10,tasbih:100},eng:{dur:40,start:today()},hist:{},best:0,log:{}};const d=S.dl;d.log=d.log||{};d.hist=d.hist||{};d.tg=d.tg||{};return d}
+function DL(){if(!S.dl)S.dl={on:{},tg:{coran:10,tasbih:100},eng:{dur:40,start:today()},hist:{},best:0,log:{}};const d=S.dl;d.log=d.log||{};d.hist=d.hist||{};d.tg=d.tg||{};return d}
 function dlDay(k){const d=DL(),t=k||today();return d.log[t]||(d.log[t]={})}
 function dlMark(k,v){const x=dlDay();x[k]=v===undefined?1:v;save()}
 function dlRead(id){const x=dlDay();x.r=x.r||[];if(!x.r.includes(id)){x.r.push(id);if(x.r.length>400)x.r=x.r.slice(-400);x.rn=(x.rn||0)+1}}
@@ -1767,18 +1790,41 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const rows=G.map(g=>{const [k,ic,l,u]=g,x=dlState(g),tg=dlTgt(k);
   if(k==='priere'){const p=dlDay().p||[];return `<div class="dli${x.ok?' ok':''}"><span class="dlc">${x.ok?'✓':''}</span><span class="dlx"><b>${ic} ${l}</b><span class="dlpr">${PRN.map((nm,i)=>`<button type="button" class="${p[i]?'on':''}" data-dlp="${i}" aria-pressed="${!!p[i]}">${nm}</button>`).join('')}</span></span><em>${x.p}</em></div>`}
   return `<a class="dli${x.ok?' ok':''}" href="${k==='coran'&&S.ql?'#sourate-'+S.ql.s:g[6]}" ${k==='coran'&&S.ql?'data-qjump="1"':''}><span class="dlc">${x.ok?'✓':''}</span><span class="dlx"><b>${ic} ${l}</b>${u?`<small>Objectif : ${tg} ${u}</small>`:''}</span><em>${x.p}</em></a>`}).join('');
- const ed=dlCard.edit?`<div class="dled"><h4>Mes objectifs quotidiens</h4>${DLG.map(([k,ic,l,u,opts,def])=>`<div class="dlo"><button type="button" class="dlsw${d.on[k]?' on':''}" data-dlt="${k}" aria-pressed="${!!d.on[k]}" aria-label="${l}"><i></i></button><span>${ic} ${l}</span>${opts?`<span class="dlnum"><button type="button" data-dlstep="${k}:-1" aria-label="Moins">−</button><input type="number" inputmode="numeric" min="1" max="${k==='matin'||k==='soir'?dlSel(k).length:dlMax[k]}" data-dlg="${k}" value="${dlTgt(k)}" aria-label="Objectif ${l}"><button type="button" data-dlstep="${k}:1" aria-label="Plus">+</button><small>${k==='matin'||k==='soir'?`sur ${dlSel(k).length}`:u}</small></span>`:''}</div>`).join('')}
-  <h4>Je m’engage pendant</h4><div class="dldur">${[7,21,40,90].map(v=>`<button type="button" class="${E.dur===v?'on':''}" data-dld="${v}">${v} jours</button>`).join('')}</div>
-  <button type="button" class="btn gold wide" data-dlsave="1">Valider mes objectifs</button><button type="button" class="dlrs" data-dlrestart="1">Recommencer les objectifs à partir d’aujourd’hui</button></div>`:'';
- return `<section class="dlcard" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div><div class="dlfl${st?'':' off'}"><span>🔥</span><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div></div>
+ const ed=dlCard.edit?dlWiz():'';
+ return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div><div class="dlfl${st?'':' off'}"><span>🔥</span><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div></div>
  <div class="dlpromise">${fin?`<b>Engagement tenu jusqu’au bout : ${E.dur} jours !</b> ${won} journées réussies. Renouvelle-le pour continuer.`:`« Je me suis fixé ${tot} objectif${tot>1?'s':''} par jour pendant <b>${E.dur} jours</b>. » · Jour ${inE}`}</div>
  <div class="dlprog"><div class="dlbar"><i style="width:${tot?n/tot*100:0}%"></i></div><span>Aujourd’hui <b>${n}/${tot}</b></span></div>
- <p class="dlmsg">${msg}</p><div class="dlitems">${rows}</div>
+ ${tot?`<p class="dlmsg">${msg}</p><div class="dlitems">${rows}</div>`:dlCard.edit?'':`<div class="dlcta"><p>Tu n’as pas encore d’objectif. Réponds à 4 petites questions pour créer le tien.</p><button type="button" class="btn gold wide" data-dledit="1">✍️ Fixer mon objectif</button></div>`}
  <div class="dlweek">${wk}</div>
  <div class="dlstats"><span><b>${inE}<small>/${E.dur}</small></b><small>jours d’engagement</small></span><span><b>${won}</b><small>journées tenues</small></span><span><b>${Math.max(d.best||0,st)}</b><small>meilleure série</small></span></div>
- <button type="button" class="dledit" data-dledit="1">${dlCard.edit?'Fermer':'⚙️ Modifier mes objectifs'}</button>${ed}</section>`}
+ ${dlCard.edit?ed:tot?`<button type="button" class="dledit" data-dledit="1">✍️ Changer mes objectifs</button>`:''}</section>`}
+let DLW=null;
+const DLWQ={coran:['Combien de versets du Coran chaque jour ?',[3,5,10,20,50],'versets'],tasbih:['Combien de dhikr au tasbih chaque jour ?',[33,100,300,1000],'dhikr'],matin:['Combien d’invocations du matin chaque jour ?',null,'invocations'],soir:['Combien d’invocations du soir chaque jour ?',null,'invocations']};
+const DLWD={coran:'Lire chaque jour quelques versets',priere:'Cocher tes 5 prières',matin:'Les invocations du matin',soir:'Les invocations du soir',hadith:'Méditer le hadith du jour',nom:'Apprendre ou réviser un nom d’Allah',tasbih:'Faire ton dhikr au tasbih'};
+const dlwSug=k=>k==='matin'||k==='soir'?[...new Set([3,5,dlSel(k).length].filter(n=>n<=dlSel(k).length))]:DLWQ[k][1];
+const dlwMax=k=>k==='matin'||k==='soir'?dlSel(k).length:dlMax[k];
+function dlWiz(){if(!DLW)DLW={st:1,sel:[],tg:{},dur:0};const W=DLW,steps=['Mes catégories','Combien ?','Combien de temps ?','Mon engagement'],Q=W.sel.filter(k=>DLWQ[k]);
+ const head=`<div class="dlw-h"><small>Étape ${W.st} sur 4 · ${steps[W.st-1]}</small><div class="dlw-bar"><i style="width:${W.st*25}%"></i></div></div>`;
+ let body='',can=true;
+ if(W.st===1){body=`<h4>Sur quoi veux-tu progresser ?</h4><p class="dlw-s">Choisis une ou plusieurs catégories.</p><div class="dlw-cats">${DLG.map(([k,ic,l])=>`<button type="button" class="${W.sel.includes(k)?'on':''}" data-dlw="cat:${k}"><span>${ic}</span><b>${l}</b><small>${DLWD[k]||''}</small></button>`).join('')}</div>`;can=W.sel.length>0}
+ else if(W.st===2){body=Q.length?Q.map(k=>{const [q,,u]=DLWQ[k],v=W.tg[k];return `<div class="dlw-q"><h4>${q}</h4><div class="dlw-chips">${dlwSug(k).map(n=>`<button type="button" class="${v===n?'on':''}" data-dlw="tg:${k}:${n}">${n===dlwMax(k)&&(k==='matin'||k==='soir')?`Toutes (${n})`:n}</button>`).join('')}</div><label class="dlw-own">Ou ton nombre : <input type="number" inputmode="numeric" min="1" max="${dlwMax(k)}" value="${v||''}" placeholder="…" data-dlwn="${k}"> ${u}</label></div>`}).join(''):`<h4>Rien à compter ici 👍</h4><p class="dlw-s">Les catégories choisies se cochent simplement chaque jour.</p>`;can=Q.every(k=>W.tg[k]>0)}
+ else if(W.st===3){body=`<h4>Pendant combien de jours veux-tu tenir ?</h4><p class="dlw-s">Un objectif court et tenu vaut mieux qu’un long abandonné.</p><div class="dlw-chips">${[[7,'1 semaine'],[21,'21 jours'],[30,'1 mois'],[40,'40 jours'],[90,'3 mois']].map(([n,l])=>`<button type="button" class="${W.dur===n?'on':''}" data-dlw="dur:${n}">${l}</button>`).join('')}</div><label class="dlw-own">Ou ton nombre : <input type="number" inputmode="numeric" min="1" max="365" value="${W.dur||''}" placeholder="…" data-dlwn="dur"> jours</label>`;can=W.dur>0}
+ else{const end=new Date(today()+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+W.dur-1);
+  body=`<h4>Ton engagement</h4><div class="dlw-rec"><p>« Chaque jour, pendant <b>${W.dur} jours</b>, je m’engage à : »</p><ul>${W.sel.map(k=>{const g=DLG.find(x=>x[0]===k);return `<li>${g[1]} ${DLWQ[k]?`${g[2]} : <b>${W.tg[k]} ${DLWQ[k][2]}</b>`:g[2]}</li>`}).join('')}</ul><small>Du ${new Date(today()+'T12:00:00Z').toLocaleDateString('fr-FR',{day:'numeric',month:'long'})} au ${end.toLocaleDateString('fr-FR',{day:'numeric',month:'long'})}</small></div>`}
+ return `<div class="dled dlz">${head}${body}<div class="dlw-nav"><button type="button" class="dlw-b" data-dlw="${W.st===1?'cancel':'back'}">${W.st===1?'Annuler':'‹ Retour'}</button>${W.st<4?`<button type="button" class="btn gold" data-dlw="next"${can?'':' disabled'}>Suivant ›</button>`:`<button type="button" class="btn gold" data-dlw="go">Je m’engage, bismillah</button>`}</div></div>`}
+function dlwAct(a){const W=DLW,d=DL();if(!W)return;const [c,k,n]=a.split(':');
+ if(c==='cat'){W.sel=W.sel.includes(k)?W.sel.filter(x=>x!==k):[...W.sel,k];W.sel.sort((x,y)=>DLG.findIndex(g=>g[0]===x)-DLG.findIndex(g=>g[0]===y))}
+ else if(c==='tg')W.tg[k]=+n;
+ else if(c==='dur')W.dur=+k;
+ else if(c==='next')W.st=Math.min(4,W.st+1);
+ else if(c==='back')W.st=Math.max(1,W.st-1);
+ else if(c==='cancel'){DLW=null;dlCard.edit=false}
+ else if(c==='go'){d.on={};W.sel.forEach(x=>d.on[x]=1);W.sel.forEach(x=>{if(W.tg[x])d.tg[x]=W.tg[x]});d.eng={dur:W.dur,start:today()};DLW=null;dlCard.edit=false;save();
+  toast('Objectif fixé, bismillah 🤲',`Tiens ${W.sel.length} objectif${W.sel.length>1?'s':''} chaque jour pendant ${W.dur} jours. Une journée est tenue quand tout est coché.`)}}
 function dlRefresh(){const c=$('#dlc');if(c&&c.isConnected){try{c.outerHTML=dlCard()}catch(e){}}}
-V.addEventListener('click',e=>{const b=e.target.closest('[data-dlp],[data-dlt],[data-dld],[data-dlsave],[data-dledit],[data-dlrestart],[data-dlstep]');if(!b)return;e.preventDefault();e.stopPropagation();const d=DL(),q=b.dataset;
+V.addEventListener('click',e=>{const b=e.target.closest('[data-dlp],[data-dlt],[data-dld],[data-dlsave],[data-dledit],[data-dlrestart],[data-dlstep],[data-dlw]');if(!b)return;e.preventDefault();e.stopPropagation();const d=DL(),q=b.dataset;
+ if(q.dlw){dlwAct(q.dlw);save();dlRefresh();const c=$('#dlc');c&&c.getBoundingClientRect().top<0&&c.scrollIntoView({block:'start'});return}
+ if(q.dledit!==undefined){DLW=null}
  if(q.dlp!==undefined){const x=dlDay();x.p=x.p||[0,0,0,0,0];x.p[+q.dlp]=x.p[+q.dlp]?0:1;navigator.vibrate&&navigator.vibrate(10)}
  else if(q.dlstep){const [k,st]=q.dlstep.split(':'),up=+st>0,mx=k==='matin'||k==='soir'?dlSel(k).length:dlMax[k],cur=dlTgt(k),ref=up?cur:cur-1,step=k==='tasbih'?(ref<33?1:ref<100?33:100):k==='coran'?(ref<10?1:5):1;d.tg[k]=Math.max(1,Math.min(mx,cur+(up?step:-step)));const y=V.scrollTop;save();dlRefresh();V.scrollTop=y;return}
  else if(q.dlt){d.on[q.dlt]=d.on[q.dlt]?0:1}
@@ -1787,6 +1833,9 @@ V.addEventListener('click',e=>{const b=e.target.closest('[data-dlp],[data-dlt],[
  else if(q.dlsave){dlCard.edit=false;toast('Objectifs validés',`Tu t’engages pendant ${d.eng.dur} jours. Une journée est tenue quand tous tes objectifs sont cochés.`)}
  else if(q.dlrestart){d.eng.start=today();dlCard.edit=false;toast('Objectifs recommencés','Tes objectifs recommencent aujourd’hui. Ta série et ton historique restent conservés.')}
  save();dlRefresh()},true);
+V.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.dlwn;if(!k||!DLW)return;const mx=k==='dur'?365:dlwMax(k),v=Math.max(0,Math.min(mx,Math.round(+e.target.value)||0));if(k==='dur')DLW.dur=v;else DLW.tg[k]=v;
+ const c=$('#dlc');c&&c.querySelectorAll('.dlw-chips button').forEach(x=>{const p=x.dataset.dlw.split(':');x.classList.toggle('on',p[0]==='dur'?(k==='dur'&&+p[1]===v):(p[1]===k&&+p[2]===v))});
+ const nx=c&&c.querySelector('[data-dlw="next"]');if(nx){const W=DLW;nx.disabled=W.st===2?!W.sel.filter(x=>DLWQ[x]).every(x=>W.tg[x]>0):W.st===3?!(W.dur>0):false}});
 V.addEventListener('change',e=>{if(e.target.id==='mcalf'){const f=e.target.files[0];if(!f)return;if(f.size>2e6){toast('Fichier trop lourd','Exporte le calendrier en CSV (texte), moins de 2 Mo.');return}f.text().then(txt=>{MCALP=mcalParse(txt);MCALP.name=f.name;qSheet('mcal')});e.target.value='';return}const t=e.target;if(t.dataset&&t.dataset.dlg){const k=t.dataset.dlg,mx=k==='matin'||k==='soir'?dlSel(k).length:dlMax[k];DL().tg[k]=Math.max(1,Math.min(mx,Math.round(+t.value)||1));save();dlRefresh()}});
 /* ---------- Accueil ---------- */
 function home(){
