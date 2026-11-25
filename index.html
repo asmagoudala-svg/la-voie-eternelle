@@ -1768,18 +1768,21 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .dlring{box-shadow:0 0 12px rgba(226,200,142,.25);background:conic-gradient(#e2c88e calc(var(--p)*1%),rgba(226,200,142,.28) 0)!important}.dlring.ok{background:linear-gradient(135deg,#7fbf8f,#b4e0bf)!important}
 .dli.ok{background:linear-gradient(180deg,rgba(159,208,172,.22),rgba(127,191,143,.08))!important;border-color:rgba(159,208,172,.55)!important}
 
-/* v107 essai : objectifs en tuiles (2 colonnes) */
-.dlitems{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important}
-.dli{flex-direction:column!important;align-items:flex-start!important;gap:8px!important;min-height:158px;padding:12px!important;border-radius:20px!important}
-.dli.c-priere{grid-column:1/-1;min-height:0;order:-1}.dlitems{grid-auto-flow:dense}
-.dlic{width:44px!important;height:44px!important;font-size:23px!important;border-radius:14px!important}
-.dli .dlring{position:absolute;top:10px;right:10px}
-.dlx{width:100%}
-.dlx b{font-size:14px!important;line-height:1.25}
-.dlx>small{font-size:11.5px!important;line-height:1.3}
-.dli:not(.c-priere) .dlst{font-size:11px!important}
-.dli.c-priere .dlx{padding-right:0}
-.dli.c-priere .dlx b,.dli.c-priere .dlx>small{padding-right:58px}
+
+/* v108 carte objectifs compacte */
+.dlpromise,.dlmsg{display:none!important}
+.dlprog{margin:10px 0 8px}
+.dlitems{gap:6px!important}
+.dli{padding:8px 10px!important;min-height:0!important;gap:10px!important;border-radius:14px!important}
+.dlic{width:32px!important;height:32px!important;font-size:17px!important;border-radius:10px!important}
+.dlx{gap:1px!important}.dlx b{font-size:13.5px!important}.dlx>small{font-size:11px!important}
+.dli .dlrb,.dli .dlst{display:none!important}
+.dlring{width:38px!important;height:38px!important}.dlring b{width:31px!important;height:31px!important;font-size:12px!important;padding-top:0!important;align-items:center!important}.dlring b small{font-size:9px!important}
+.dlpr{gap:4px!important;margin-top:4px!important;flex-wrap:nowrap!important}
+.dlpr button{min-height:26px!important;padding:0 7px!important;font-size:10.5px!important}
+.dlweek{margin:10px 0 6px!important}.dlw b{width:24px!important;height:24px!important;font-size:11px!important}
+.dlstats{padding:6px 0!important}.dlstats b{font-size:16px!important}
+.dledit{min-height:36px!important;margin-top:8px!important}
 </style>
 </head>
 <body>
