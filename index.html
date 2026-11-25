@@ -1955,7 +1955,6 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
   <div class="dlleft${done?' fin':''}">${done?`<span class="dlbravo">🌟</span><p><b>Macha’Allah, bravo !</b> Qu’Allah te récompense, accepte tes efforts et t’accorde la constance. À demain, in cha’Allah 🤍</p>`:`<span>Il te reste :</span>${left.map(g=>`<em>${g[1]} ${SHORT[g[0]]||g[2]}</em>`).join('')}`}</div>
   ${fin?`<p class="dlfin">Objectifs tenus jusqu’au bout : ${E.dur} jours ! Fixe-en de nouveaux pour continuer.</p>`:''}
   <div class="dlitems">${rows}</div>
-  <div class="dlweek">${wk}</div>
   <button type="button" class="dledit" data-dlqopen="1">✍️ Changer mes objectifs</button>`:`<div class="dlcta"><p>Choisis ce qui t’intéresse et fixe tes propres objectifs, en quelques questions.</p><button type="button" class="btn gold wide" data-dlqopen="1">✨ Commencer</button></div>`}</section>`}
 let DLW=null;
 const DLWQ={coran:['Combien de versets du Coran chaque jour ?',[3,5,10,20,50],'versets'],tasbih:['Combien de dhikr au tasbih chaque jour ?',[33,100,300,1000],'dhikr'],matin:['Combien d’invocations du matin chaque jour ?',null,'invocations'],soir:['Combien d’invocations du soir chaque jour ?',null,'invocations']};
