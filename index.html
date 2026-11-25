@@ -1804,6 +1804,18 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .dli.ok{opacity:.75}.dlring.ok b{font-size:16px!important}
 .dlweek{margin:12px 0 4px!important;padding-top:10px;border-top:1px solid rgba(217,185,119,.15)}
 #phone.light .dlbig>div{background:#fffdf7}#phone.light .dlbig b{color:#1f3a2b}#phone.light .dlst3>div{background:#fff;border-color:#e3d7bd}#phone.light .dlst3 b{color:#1f3a2b}#phone.light .dlleft em{background:#f4eee1;color:#1f3a2b}#phone.light .dlleft span,#phone.light .dlday b{color:#8a6a2c}
+
+/* v110 motivation simple + félicitations */
+.dlmot{display:flex;flex-direction:column;gap:3px}
+.dlmot b{font:800 17px/1.25 Mulish,sans-serif;color:#f6e7bf}
+.dlmot small{font:600 13px/1.4 Mulish,sans-serif;color:#cdbf9c}
+.dlser{align-self:flex-start;margin-top:6px;padding:4px 10px;border-radius:999px;background:rgba(255,170,90,.15);border:1px solid rgba(255,180,100,.35);font:800 12px Mulish,sans-serif;color:#ffd79a}
+.dlleft.fin{border:1px solid rgba(159,208,172,.5);background:linear-gradient(135deg,rgba(159,208,172,.18),rgba(226,200,142,.12));flex-wrap:nowrap;gap:10px;animation:dlPop .5s ease both}
+.dlleft.fin p{margin:0;font:600 13.5px/1.5 Mulish,sans-serif;color:#f3ead2}.dlleft.fin p b{color:#cfe9d5;font-size:15px}
+.dlbravo{flex:none;font-size:30px!important;margin:0!important;line-height:1;animation:dlGlow 2.4s ease-in-out infinite}
+@keyframes dlPop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+@keyframes dlGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(241,215,156,0))}50%{filter:drop-shadow(0 0 10px rgba(241,215,156,.8))}}
+#phone.light .dlmot b{color:#1f3a2b}#phone.light .dlmot small{color:#6b5f48}#phone.light .dlleft.fin p{color:#1f3a2b}
 </style>
 </head>
 <body>
@@ -1939,8 +1951,8 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const SHORT={coran:'Coran',priere:'Prières',matin:'Matin',soir:'Soir',hadith:'Hadith',nom:'Nom d’Allah',tasbih:'Tasbih'},left=G.filter(g=>!dlState(g).ok),R=Math.round(tot?n/tot*100:0);
  return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div>${tot?`<span class="dlday">Jour <b>${inE}</b>/${E.dur}</span>`:''}</div>
  ${tot?`<div class="dlhero"><div class="dlbig${done?' ok':''}" style="--p:${R}"><div><b>${n}<small>/${tot}</small></b><span>aujourd’hui</span></div></div>
-  <div class="dlst3"><div class="s1${st?'':' off'}"><i>🔥</i><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div><div><i>✅</i><b>${won}</b><small>journée${won>1?'s':''} tenue${won>1?'s':''}</small></div><div><i>🏆</i><b>${Math.max(d.best||0,st)}</b><small>meilleure série</small></div></div></div>
-  <div class="dlleft">${done?`<b>Journée tenue, al-hamdulillah 🤍</b>`:`<span>Il te reste :</span>${left.map(g=>`<em>${g[1]} ${SHORT[g[0]]||g[2]}</em>`).join('')}`}</div>
+  <div class="dlmot">${done?`<b>Journée tenue 🤍</b><small>Tous tes objectifs sont faits.</small>`:n===0?`<b>Bismillah 🤲</b><small>Commence par un petit pas, le reste suivra.</small>`:`<b>Plus que ${tot-n} objectif${tot-n>1?'s':''}</b><small>${tot-n===1?'Tu y es presque, encore un effort !':'Continue, chaque pas compte.'}</small>`}${st?`<span class="dlser">🔥 ${st} jour${st>1?'s':''} de suite</span>`:''}</div></div>
+  <div class="dlleft${done?' fin':''}">${done?`<span class="dlbravo">🌟</span><p><b>Macha’Allah, bravo !</b> Qu’Allah te récompense, accepte tes efforts et t’accorde la constance. À demain, in cha’Allah 🤍</p>`:`<span>Il te reste :</span>${left.map(g=>`<em>${g[1]} ${SHORT[g[0]]||g[2]}</em>`).join('')}`}</div>
   ${fin?`<p class="dlfin">Objectifs tenus jusqu’au bout : ${E.dur} jours ! Fixe-en de nouveaux pour continuer.</p>`:''}
   <div class="dlitems">${rows}</div>
   <div class="dlweek">${wk}</div>
