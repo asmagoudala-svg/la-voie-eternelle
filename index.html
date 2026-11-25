@@ -1690,6 +1690,29 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 #dlq.full .dlq-in{max-height:none;height:100%;border-radius:0;border:0;background:none;padding-top:calc(16px + env(safe-area-inset-top));display:flex;flex-direction:column}
 #dlq.full .dlq-body{flex:1;display:flex;flex-direction:column;justify-content:center}
 .dlq-hi{margin:0 0 6px!important;font:800 11px Mulish,sans-serif!important;letter-spacing:.12em;text-transform:uppercase;color:#e2c88e;opacity:1!important}
+
+/* v99 page de garde */
+#dlq.cov{background:#07130e;display:block;overflow-y:auto}
+.cov-sky{position:absolute;left:0;right:0;bottom:0;height:62%;pointer-events:none}
+.cov-sky svg{width:100%;height:100%;display:block}
+.cv-st circle{animation:cvTw 3.6s ease-in-out infinite}
+@keyframes cvTw{0%,100%{opacity:.25}50%{opacity:1}}
+.cv-glow{animation:cvGl 5s ease-in-out infinite}@keyframes cvGl{0%,100%{opacity:.7}50%{opacity:1}}
+.cv-win{animation:cvGl 4s ease-in-out infinite}
+.cov-in{position:relative;z-index:1;min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;padding:calc(34px + env(safe-area-inset-top)) 24px calc(26px + env(safe-area-inset-bottom));color:#f3ead2}
+.cov-in>*{opacity:0;transform:translateY(14px);animation:cvUp .8s cubic-bezier(.2,.7,.2,1) forwards}
+.cov-in>*:nth-child(2){animation-delay:.15s}.cov-in>*:nth-child(3){animation-delay:.3s}.cov-in>*:nth-child(4){animation-delay:.5s}.cov-in>*:nth-child(5){animation-delay:.7s}.cov-in>*:nth-child(6){animation-delay:.9s}.cov-in>*:nth-child(7){animation-delay:1s}
+@keyframes cvUp{to{opacity:1;transform:none}}
+.cov-logo{display:flex;align-items:center;gap:10px;font:800 13px Mulish,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#e2c88e}
+.cov-cal{margin-top:18px;font-family:'Amiri Quran','Amiri',serif;font-size:50px;line-height:1.5;color:#f1d79c;text-shadow:0 0 24px rgba(241,215,156,.35)}
+.cov-tag{margin:2px 0 0;max-width:300px;font:600 15px/1.55 Mulish,sans-serif;opacity:.85}
+.cov-v{margin:22px 0 0;padding:14px 16px;max-width:330px;border-radius:18px;background:rgba(7,19,14,.55);border:1px solid rgba(217,185,119,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cov-ar{margin:0;font-family:'Amiri Quran','Amiri',serif;font-size:25px;line-height:1.9;color:#f1d79c}
+.cov-v figcaption{font:500 14px/1.5 'Cormorant Garamond',serif;font-style:italic;font-size:17px;opacity:.92}.cov-v small{display:block;margin-top:4px;font:700 11px Mulish,sans-serif;font-style:normal;letter-spacing:.04em;color:#e2c88e;opacity:.85}
+.cov-f{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px}.cov-f span{padding:5px 11px;border-radius:999px;background:rgba(7,19,14,.5);border:1px solid rgba(217,185,119,.3);font:700 12px Mulish,sans-serif}
+.cov-go{margin-top:auto;min-height:56px;font-size:17px;box-shadow:0 10px 30px rgba(226,200,142,.3)}
+.cov-in .cov-go{margin-top:28px}
+.cov-s{margin-top:10px;font:600 12px Mulish,sans-serif;opacity:.75}
 </style>
 </head>
 <body>
@@ -2854,13 +2877,38 @@ document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&e.target.i
 const DLQA={priere:['Les 5 prières','Veux-tu cocher tes 5 prières chaque jour ?','yn',null,'Cocher mes 5 prières'],hadith:['Le hadith','Veux-tu lire et méditer le hadith du jour chaque jour ?','yn',null,'Lire et méditer le hadith du jour'],nom:['Les 99 noms d’Allah','Veux-tu découvrir ou réviser un nom d’Allah chaque jour ?','yn',null,'Découvrir ou réviser un nom d’Allah'],
  coran:['Le Coran','Combien de versets veux-tu lire chaque jour ?',null,'versets'],tasbih:['Le tasbih','Combien de dhikr veux-tu faire chaque jour ?',null,'dhikr'],matin:['Adhkâr du matin','Combien d’invocations du matin veux-tu faire chaque jour ?',null,'invocations'],soir:['Adhkâr du soir','Combien d’invocations du soir veux-tu faire chaque jour ?',null,'invocations']};
 const dlqKeep=()=>DLQ.sel.filter(k=>!(DLQ.no||{})[k]);
+const DLQ_COVER=`<div class="cov-sky"><svg viewBox="0 0 400 330" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs>
+<linearGradient id="cvG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07130e"/><stop offset=".55" stop-color="#14301f"/><stop offset=".86" stop-color="#3d4a2a"/><stop offset="1" stop-color="#6b5a2e"/></linearGradient>
+<radialGradient id="cvH" cx=".5" cy=".92" r=".6"><stop offset="0" stop-color="#f1d79c" stop-opacity=".55"/><stop offset=".5" stop-color="#d9b977" stop-opacity=".12"/><stop offset="1" stop-color="#d9b977" stop-opacity="0"/></radialGradient>
+<radialGradient id="cvM" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f6e7bf" stop-opacity=".55"/><stop offset="1" stop-color="#f6e7bf" stop-opacity="0"/></radialGradient>
+<mask id="cvC"><rect width="400" height="330" fill="#fff"/><circle cx="313" cy="155" r="13" fill="#000"/></mask>
+<radialGradient id="cvW" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe3a0" stop-opacity=".9"/><stop offset="1" stop-color="#ffe3a0" stop-opacity="0"/></radialGradient></defs>
+<rect width="400" height="330" fill="url(#cvG)"/><g class="cv-st"><circle cx="169" cy="42" r="1.2" fill="#f6e7bf" style="animation-delay:2.60s"/><circle cx="41" cy="141" r="0.6" fill="#f6e7bf" style="animation-delay:1.46s"/><circle cx="33" cy="133" r="0.8" fill="#f6e7bf" style="animation-delay:0.15s"/><circle cx="226" cy="111" r="0.6" fill="#f6e7bf" style="animation-delay:0.96s"/><circle cx="286" cy="112" r="0.6" fill="#f6e7bf" style="animation-delay:3.31s"/><circle cx="67" cy="61" r="1.5" fill="#f6e7bf" style="animation-delay:3.79s"/><circle cx="299" cy="153" r="1.2" fill="#f6e7bf" style="animation-delay:0.20s"/><circle cx="117" cy="15" r="1.5" fill="#f6e7bf" style="animation-delay:3.43s"/><circle cx="152" cy="111" r="0.8" fill="#f6e7bf" style="animation-delay:2.16s"/><circle cx="296" cy="82" r="1.5" fill="#f6e7bf" style="animation-delay:3.26s"/><circle cx="96" cy="30" r="1.5" fill="#f6e7bf" style="animation-delay:2.28s"/><circle cx="100" cy="99" r="0.6" fill="#f6e7bf" style="animation-delay:2.19s"/><circle cx="36" cy="148" r="0.6" fill="#f6e7bf" style="animation-delay:2.48s"/><circle cx="258" cy="140" r="1.2" fill="#f6e7bf" style="animation-delay:3.11s"/><circle cx="242" cy="153" r="1.2" fill="#f6e7bf" style="animation-delay:1.45s"/><circle cx="131" cy="50" r="0.8" fill="#f6e7bf" style="animation-delay:0.33s"/><circle cx="157" cy="138" r="1.2" fill="#f6e7bf" style="animation-delay:3.50s"/><circle cx="377" cy="118" r="1" fill="#f6e7bf" style="animation-delay:2.44s"/><circle cx="41" cy="34" r="1.5" fill="#f6e7bf" style="animation-delay:1.67s"/><circle cx="391" cy="91" r="0.8" fill="#f6e7bf" style="animation-delay:3.73s"/><circle cx="219" cy="14" r="0.6" fill="#f6e7bf" style="animation-delay:3.06s"/><circle cx="297" cy="84" r="1" fill="#f6e7bf" style="animation-delay:2.78s"/><circle cx="308" cy="131" r="1.5" fill="#f6e7bf" style="animation-delay:3.19s"/><circle cx="39" cy="27" r="1" fill="#f6e7bf" style="animation-delay:1.90s"/><circle cx="344" cy="20" r="0.6" fill="#f6e7bf" style="animation-delay:2.92s"/><circle cx="162" cy="169" r="1.5" fill="#f6e7bf" style="animation-delay:3.97s"/><circle cx="232" cy="76" r="1.2" fill="#f6e7bf" style="animation-delay:3.55s"/><circle cx="181" cy="9" r="1.2" fill="#f6e7bf" style="animation-delay:1.42s"/><circle cx="316" cy="33" r="1.2" fill="#f6e7bf" style="animation-delay:0.24s"/><circle cx="151" cy="37" r="0.8" fill="#f6e7bf" style="animation-delay:1.59s"/><circle cx="258" cy="24" r="0.8" fill="#f6e7bf" style="animation-delay:1.80s"/><circle cx="285" cy="75" r="0.8" fill="#f6e7bf" style="animation-delay:3.28s"/><circle cx="285" cy="75" r="1.2" fill="#f6e7bf" style="animation-delay:3.95s"/><circle cx="353" cy="101" r="0.8" fill="#f6e7bf" style="animation-delay:0.60s"/><circle cx="94" cy="42" r="0.8" fill="#f6e7bf" style="animation-delay:2.63s"/><circle cx="10" cy="128" r="1.5" fill="#f6e7bf" style="animation-delay:0.73s"/><circle cx="148" cy="5" r="0.8" fill="#f6e7bf" style="animation-delay:1.68s"/><circle cx="193" cy="160" r="1.5" fill="#f6e7bf" style="animation-delay:1.27s"/><circle cx="68" cy="135" r="1.5" fill="#f6e7bf" style="animation-delay:2.62s"/><circle cx="382" cy="17" r="1.2" fill="#f6e7bf" style="animation-delay:3.60s"/><circle cx="352" cy="147" r="1.2" fill="#f6e7bf" style="animation-delay:1.59s"/><circle cx="205" cy="30" r="1.2" fill="#f6e7bf" style="animation-delay:2.54s"/><circle cx="35" cy="52" r="0.6" fill="#f6e7bf" style="animation-delay:3.94s"/><circle cx="229" cy="45" r="0.6" fill="#f6e7bf" style="animation-delay:1.36s"/><circle cx="30" cy="30" r="0.6" fill="#f6e7bf" style="animation-delay:2.27s"/><circle cx="278" cy="29" r="1" fill="#f6e7bf" style="animation-delay:2.45s"/></g><rect width="400" height="330" fill="url(#cvH)"/>
+<circle cx="304" cy="162" r="40" fill="url(#cvM)" class="cv-glow"/><circle cx="304" cy="162" r="15" fill="#f3e2b3" mask="url(#cvC)"/>
+<g fill="#0a1711"><path d="M0 330V300h18v-6q9-12 18 0v6h16v-20h3l1.5-8 1.5 8h3v20h18v-10q11-15 22 0v10h14V330zM300 330V296h16v-8q10-14 20 0v8h12v-22h3l1.5-8 1.5 8h3v22h20v-6q9-12 18 0v6h15V330z" opacity=".75"/>
+<rect x="128" y="206" width="11" height="124"/><path d="M125 226h17v5h-17zM126 206l7-28 7 28z"/><rect x="261" y="206" width="11" height="124"/><path d="M258 226h17v5h-17zM259 206l7-28 7 28z"/>
+<path d="M144 330v-44q15-24 30 0v44zM226 330v-44q15-24 30 0v44z"/><rect x="152" y="268" width="96" height="62"/><path d="M158 270q0-56 42-72 42 16 42 72z"/><rect x="0" y="322" width="400" height="8"/></g>
+<g fill="none" stroke="#e2c88e" stroke-linecap="round" opacity=".7"><path d="M166 244q12-34 34-44 22 10 34 44" stroke-width="1.3"/><path d="M200 198v-14" stroke-width="1.2"/></g>
+<path d="M203.8 178.5a5.4 5.4 0 1 1-3.8-9.3 4.3 4.3 0 1 0 3.8 9.3z" fill="#e2c88e"/>
+<ellipse cx="200" cy="304" rx="46" ry="18" fill="url(#cvW)" class="cv-win"/><g fill="#f6d891" class="cv-win"><path d="M176 314v-13q4-6 8 0v13zM192 314v-15q4-8 8-8 4 0 8 8v15zM210 314v-13q4-6 8 0v13z"/><rect x="131" y="236" width="4" height="7" rx="2"/><rect x="264" y="236" width="4" height="7" rx="2"/></g></svg></div>
+<div class="cov-in">
+ <div class="cov-logo"><svg width="30" height="36" viewBox="0 0 34 40"><path d="M2 39V18C2 8 17 1 17 1s15 7 15 17v21z" fill="none" stroke="#C9A465" stroke-width="2"/><path d="M17 12l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#C9A465"/></svg><span>La Voie Éternelle</span></div>
+ <div class="cov-cal" lang="ar">ٱلطَّرِيقُ ٱلْخَالِدُ</div>
+ <p class="cov-tag">Ton compagnon pour le Coran, la prière et le rappel d’Allah, chaque jour.</p>
+ <figure class="cov-v"><p class="cov-ar" lang="ar" dir="rtl">أَلَا بِذِكْرِ ٱللَّهِ تَطْمَئِنُّ ٱلْقُلُوبُ</p><figcaption>« N’est-ce point par l’évocation d’Allah que se tranquillisent les cœurs ? »<small>Sourate Ar-Raʿd (13), verset 28</small></figcaption></figure>
+ <div class="cov-f"><span>📖 Coran</span><span>🕌 Prière</span><span>🤲 Invocations</span><span>📜 Prophètes</span></div>
+ <button class="btn gold wide cov-go" data-dlq="next0">Commencer mon chemin</button>
+ <small class="cov-s">Quelques questions pour créer tes objectifs</small>
+</div>`;
 let DLQ=null;
-const dlqSteps=()=>['cats',...DLQ.sel,'dur','rec'];
+const dlqSteps=()=>[...(DLQ.full?['cover']:[]),'cats',...DLQ.sel,'dur','rec'];
 function dlqOpen(full){DLQ={i:0,sel:[],tg:{},dur:0,no:{},full:!!full};dlqDraw()}
 function dlqClose(){const o=$('#dlq');o&&o.remove();DLQ=null}
 function dlqDraw(){let o=$('#dlq');if(!o){o=document.createElement('div');o.id='dlq';$('#phone').appendChild(o);o.onclick=dlqClick;o.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.dlqn!==undefined){e.preventDefault();dlqOwn()}})}
  const St=dlqSteps(),st=St[DLQ.i],pc=Math.round((DLQ.i+1)/St.length*100);let h='';
- if(st==='cats')h=`${DLQ.full?'<p class="dlq-hi">Bienvenue · La Voie Éternelle</p>':''}<span class="dlq-ic">✨</span><h2>Qu’est-ce qui t’intéresse ?</h2><p>Choisis une ou plusieurs catégories.</p><div class="dlq-cats">${DLG.map(([k,ic,l])=>`<button class="${DLQ.sel.includes(k)?'on':''}" data-dlq="cat:${k}"><span>${ic}</span>${l}</button>`).join('')}</div><button class="btn gold wide dlq-go" data-dlq="next"${DLQ.sel.length?'':' disabled'}>Suivant</button>`;
+ if(st==='cover'){o.classList.add('cov');o.innerHTML=DLQ_COVER;o.classList.toggle('full',true);requestAnimationFrame(()=>o.classList.add('on'));return}
+ o.classList.remove('cov');
+ if(st==='cats')h=`<span class="dlq-ic">✨</span><h2>Qu’est-ce qui t’intéresse ?</h2><p>Choisis une ou plusieurs catégories.</p><div class="dlq-cats">${DLG.map(([k,ic,l])=>`<button class="${DLQ.sel.includes(k)?'on':''}" data-dlq="cat:${k}"><span>${ic}</span>${l}</button>`).join('')}</div><button class="btn gold wide dlq-go" data-dlq="next"${DLQ.sel.length?'':' disabled'}>Suivant</button>`;
  else if(st==='dur')h=`<span class="dlq-ic">📅</span><h2>Pendant combien de temps ?</h2><p>Tu valideras tes objectifs chaque jour.</p><div class="dlq-opts">${[[7,'1 semaine'],[21,'21 jours'],[30,'1 mois'],[40,'40 jours'],[90,'3 mois']].map(([n,l])=>`<button class="${DLQ.dur===n?'on':''}" data-dlq="set:dur:${n}">${l}</button>`).join('')}</div><div class="dlq-own"><input type="number" inputmode="numeric" min="1" max="365" placeholder="Autre : nombre de jours" data-dlqn="dur" enterkeyhint="go"><button data-dlq="own">OK</button></div>`;
  else if(st==='rec'){const end=new Date(today()+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+DLQ.dur-1);
   const K=dlqKeep();h=K.length?`<span class="dlq-ic">🎯</span><h2>Tes objectifs</h2><p>Chaque jour, pendant <b>${DLQ.dur} jours</b>, jusqu’au ${end.toLocaleDateString('fr-FR',{day:'numeric',month:'long'})} :</p><ul class="dlq-rec">${K.map(k=>{const g=DLG.find(x=>x[0]===k),A=DLQA[k];return `<li><span>${g[1]}</span>${A[2]?A[4]:`${g[2]} : <b>${DLQ.tg[k]} ${A[3]}</b>`}</li>`}).join('')}</ul><button class="btn gold wide dlq-go" data-dlq="done">Valider mes objectifs, bismillah</button>`:`<span class="dlq-ic">🤍</span><h2>Aucun objectif choisi</h2><p>Tu as répondu « non » à tout. Recommence et choisis au moins un objectif.</p><button class="btn gold wide dlq-go" data-dlq="restart">Recommencer</button>`}
@@ -2874,6 +2922,7 @@ function dlqClick(e){const b=e.target.closest('[data-dlq]');if(!b)return;const [
  if(c==='back'){DLQ.i=Math.max(0,DLQ.i-1);return dlqDraw()}
  if(c==='cat'){DLQ.sel=DLQ.sel.includes(k)?DLQ.sel.filter(x=>x!==k):[...DLQ.sel,k];DLQ.sel.sort((x,y)=>DLG.findIndex(g=>g[0]===x)-DLG.findIndex(g=>g[0]===y));return dlqDraw()}
  if(c==='next'){if(DLQ.sel.length){DLQ.i++;dlqDraw()}return}
+ if(c==='next0'){DLQ.i++;return dlqDraw()}
  if(c==='restart'){DLQ={i:0,sel:[],tg:{},dur:0,no:{},full:DLQ.full};return dlqDraw()}
  if(c==='set'){if(k==='dur')DLQ.dur=+n;else if(DLQA[k]&&DLQA[k][2]){DLQ.no=DLQ.no||{};if(+n){delete DLQ.no[k];DLQ.tg[k]=1}else{DLQ.no[k]=1;DLQ.tg[k]=0}}else DLQ.tg[k]=+n;b.classList.add('on');setTimeout(()=>{DLQ.i++;dlqDraw()},160);return}
  if(c==='own')return dlqOwn();
