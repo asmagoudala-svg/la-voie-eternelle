@@ -1853,6 +1853,12 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .dlfire small{margin-left:6px;font:800 12px Mulish,sans-serif;color:#ffd79a}
 @keyframes dlFl{0%,100%{transform:scale(1)}50%{transform:scale(1.12) translateY(-1px)}}
 #phone.light .dlfire{background:#fff4e2;border-color:#f0c98a}#phone.light .dlfire small,#phone.light .dlfire em{color:#b0560f}
+
+/* v116 une seule flamme, en haut à droite */
+.dlfl1{flex:none;display:inline-flex;align-items:center;gap:4px;padding:6px 12px 6px 9px;border-radius:999px;background:rgba(255,170,90,.14);border:1px solid rgba(255,180,100,.4)}
+.dlfl1 i{font-style:normal;font-size:20px;line-height:1}.dlfl1 b{font:800 17px Mulish,sans-serif;color:#ffc56e}
+.dlfl1.off{background:rgba(255,255,255,.05);border-color:rgba(217,185,119,.3)}.dlfl1.off i{filter:grayscale(1);opacity:.45}.dlfl1.off b{color:#a99f84}
+#phone.light .dlfl1{background:#fff4e2;border-color:#f0c98a}#phone.light .dlfl1 b{color:#c2620f}#phone.light .dlfl1.off{background:#f7f0e0;border-color:#e3d2a8}#phone.light .dlfl1.off b{color:#9a8a68}
 </style>
 </head>
 <body>
@@ -1986,9 +1992,9 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
   return `<a class="dli c-${k}${x.ok?' ok':''}" href="${k==='coran'&&S.ql?'#sourate-'+S.ql.s:g[6]}" ${k==='coran'&&S.ql?'data-qjump="1"':''}><span class="dlic">${ic}</span><span class="dlx"><b>${l}</b><small>Ton objectif : ${goal}</small>${bar}</span><span class="dlring${x.ok?' ok':''}" style="--p:${pc}"><b>${x.ok?'✓':u||k==='priere'?`${cur}<small>/${tot}</small>`:'—'}</b></span></a>`}).join('');
  const ed=dlCard.edit?dlWiz():'';
  const SHORT={coran:'Coran',priere:'Prières',matin:'Matin',soir:'Soir',hadith:'Hadith',nom:'Nom d’Allah',tasbih:'Tasbih'},left=G.filter(g=>!dlState(g).ok),R=Math.round(tot?n/tot*100:0);
- return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div></div>
+ return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div>${tot?`<span class="dlfl1${st?'':' off'}" title="Jours d’affilée"><i>🔥</i><b>${st}</b></span>`:''}</div>
  ${tot?`<div class="dlhero"><div class="dlbig${done?' ok':''}" style="--p:${R}"><div><b>${n}<small>/${tot}</small></b><span>aujourd’hui</span></div></div>
-  <div class="dlmot">${done?`<b>Journée tenue 🤍</b><small>Tous tes objectifs sont faits.</small>`:n===0?`<b>Bismillah 🤲</b><small>Commence par un petit pas, le reste suivra.</small>`:`<b>Plus que ${tot-n} objectif${tot-n>1?'s':''}</b><small>${tot-n===1?'Tu y es presque, encore un effort !':'Continue, chaque pas compte.'}</small>`}${(()=>{const L=Math.min(st,7),more=st-L,dim=done?0:1;return `<span class="dlfire">${'<i>🔥</i>'.repeat(L)}${more?`<em>+${more}</em>`:''}${dim?'<i class="off">🔥</i>':''}<small>${st?`${st} jour${st>1?'s':''} d’affilée`:'Allume ta première flamme'}</small></span>`})()}</div></div>
+  <div class="dlmot">${done?`<b>Journée tenue 🤍</b><small>Tous tes objectifs sont faits.</small>`:n===0?`<b>Bismillah 🤲</b><small>Commence par un petit pas, le reste suivra.</small>`:`<b>Plus que ${tot-n} objectif${tot-n>1?'s':''}</b><small>${tot-n===1?'Tu y es presque, encore un effort !':'Continue, chaque pas compte.'}</small>`}</div></div>
   <div class="dlleft${done?' fin':''}">${done?`<span class="dlbravo">🌟</span><p><b>Macha’Allah, bravo !</b> Qu’Allah te récompense, accepte tes efforts et t’accorde la constance. À demain, in cha’Allah 🤍</p>`:`<span>Il te reste :</span>${left.map(g=>`<em>${g[1]} ${SHORT[g[0]]||g[2]}</em>`).join('')}`}</div>
   ${fin?`<p class="dlfin">Objectifs tenus jusqu’au bout : ${E.dur} jours ! Fixe-en de nouveaux pour continuer.</p>`:''}
   <div class="dlitems">${rows}</div>
