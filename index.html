@@ -1628,6 +1628,18 @@ nav.sp-day svg.nvi{width:26px!important;height:26px!important}
 nav.sp-coran a{font-size:8.5px!important;letter-spacing:-.02em}
 nav.sp-coran .nve{width:28px!important;height:28px!important;font-size:18px!important}
 nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
+
+/* v94 recherche de sourate dans l'accès rapide */
+.qa-sr{margin-top:8px}
+#qa-q{width:100%;box-sizing:border-box;height:42px;padding:0 14px;border-radius:13px;border:1px solid rgba(217,185,119,.4);background:rgba(0,0,0,.22);color:#f3ead2;font:600 16px Mulish,sans-serif;outline:none}
+#qa-q:focus{border-color:#e2c88e}
+#qa-res{display:grid;gap:4px;margin-top:4px}#qa-res:empty{display:none}
+#qa-res button{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:8px;text-align:left;padding:7px 10px;border-radius:12px;border:0;background:rgba(217,185,119,.1);color:#f3ead2;cursor:pointer}
+#qa-res b{font:800 13px Mulish,sans-serif;color:#e2c88e;text-align:center}
+#qa-res span{min-width:0;font:800 14px Mulish,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#qa-res small{display:block;font:600 11px Mulish,sans-serif;opacity:.65}
+#qa-res i{font-style:normal;font-family:'Amiri',serif;font-size:18px;color:#e2c88e}
+#qa-res p{margin:4px;font:600 13px Mulish,sans-serif;opacity:.7}
+#phone.light #qa-q{background:#fffdf7;color:#1f3a2b;border-color:#e3d7bd}#phone.light #qa-res button{background:#f4eee1;color:#1f3a2b}#phone.light #qa-res b,#phone.light #qa-res i{color:#8a6a2c}
 </style>
 </head>
 <body>
@@ -2640,7 +2652,15 @@ async function qaOpen(){await qIndex();const P=qaPref(),cs=mHeadUpd.s||+V.datase
  qSheet('quick');qaUpd(1)}
 function qaBody(){return `<div class="qsp"><span class="qgrip"></span><div class="qsh2"><div><h3>Accès rapide</h3></div><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div>${qaInner()}</div>`}
 function qaInit(){const P=qaPref(),cs=mHeadUpd.s||+V.dataset.qs||1,cv=mHeadUpd.v||1;if(P.s){QA.s=+P.s;QA.v=qaPrefV(P.s)||1}else{QA.s=cs;QA.v=cv}QA.v=Math.min(Math.max(1,QA.v),qaCnt(QA.s))}
-function qaInner(){return `
+const qaKey=x=>norm(String(x||'')).replace(/ou/g,'u').replace(/[^a-z0-9]/g,'').replace(/(.)\1+/g,'$1').replace(/e/g,'i');
+function qaFind(q){q=(q||'').trim();if(!q||!QIDX)return [];const m=q.match(/^(\d{1,3})\s*[:.,\s]\s*(\d{1,3})$/);
+ if(m){const n=+m[1],v=+m[2];return n>=1&&n<=114&&v>=1&&v<=QIDX[n-1][5]?[[n,v]]:[]}
+ if(/^\d{1,3}$/.test(q)){const n=+q;return n>=1&&n<=114?[[n,0]]:[]}
+ const ar=/[\u0600-\u06ff]/.test(q),k=qaKey(q).replace(/[aiu]+$/,'');if(!ar&&k.length<2)return [];
+ const out=[];for(const r of QIDX){const hit=ar?r[1].includes(q):(qaKey(r[2]).includes(k)||qaKey(r[3]).includes(k));if(hit){out.push([r[0],0]);if(out.length>=6)break}}return out}
+function qaSearch(){const el=$('#qa-res'),q=$('#qa-q');if(!el||!q)return;const L=qaFind(q.value);
+ el.innerHTML=q.value.trim()?(L.length?L.map(([n,v])=>{const r=QIDX[n-1];return `<button data-qa="pick:${n}:${v}"><b>${n}</b><span>${r[2]}${v?` · verset ${v}`:''}<small>${r[3]} · ${r[5]} versets</small></span><i lang="ar">${r[1]}</i></button>`}).join(''):'<p>Aucune sourate trouvée</p>'):''}
+function qaInner(){return `<div class="qa-sr"><input type="search" id="qa-q" enterkeyhint="go" autocomplete="off" placeholder="🔎 Sourate : nom, numéro ou 2:255" aria-label="Rechercher une sourate"><div id="qa-res"></div></div>
  
  <div class="qa-c"><div class="qa-h"><label for="qa-s">Sourate</label><div class="qa-val"><output id="qa-sl"></output></div></div>
   <div class="qa-row"><button data-qa="s-" aria-label="Sourate précédente">−</button><input id="qa-s" type="range" min="1" max="114" step="1" aria-label="Choisir la sourate"><button data-qa="s+" aria-label="Sourate suivante">+</button></div>
@@ -2664,6 +2684,7 @@ function qaUpd(full){const sh=$('#qsheet');if(!sh||!(sh.dataset.kind==='quick'||
 function qaSetS(n){n=Math.min(114,Math.max(1,+n||1));if(n!==QA.s){QA.s=n;QA.v=Math.min(qaPrefV(n)||1,qaCnt(n))}qaUpd()}
 function qaSetV(v){QA.v=Math.min(qaCnt(QA.s),Math.max(1,+v||1));qaUpd()}
 function qaClick(k){const P=qaPref();
+ if(k.startsWith('pick:')){const [,n,v]=k.split(':').map(Number);QA.s=n;QA.v=v||Math.min(qaPrefV(n)||1,qaCnt(n));const q=$('#qa-q');if(q){q.value='';q.blur()}qaSearch();qaUpd(1);return}
  if(k.startsWith('rec:')){recPick(k.slice(4));qaUpd();return}
  if(k==='recadd'){qSheet('rec');return}
  if(k==='s-')return qaSetS(QA.s-1);if(k==='s+')return qaSetS(QA.s+1);if(k==='v-')return qaSetV(QA.v-1);if(k==='v+')return qaSetV(QA.v+1);
@@ -2749,6 +2770,8 @@ function prQBind(){const el=$('#prqz');if(!el)return;el.onclick=e=>{const b=e.ta
  else if(d.pqa==='again'){PQZ={id:PQZ.id,i:0,sc:0,pick:null}}
  else return;
  el.innerHTML=prQuizHTML();V.scrollTop=0}}
+
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&e.target.id==='qa-q'){e.preventDefault();const b=$('#qa-res button');b&&b.click()}});
 let QSHS=1,QNOTE=null;
 function qSheetClose(){const sh=$('#qsheet');sh&&sh.classList.remove('on')}
 function fillSurList(){const el=$('#qlist');if(!el||!QIDX)return;const q=norm(QQ);
@@ -2757,7 +2780,7 @@ function fillSurList(){const el=$('#qlist');if(!el||!QIDX)return;const q=norm(QQ
  const c=$('#qcs');c&&(c.textContent=`${QSHS} · ${QIDX[QSHS-1][2]}`)}
 function qFillRange(n,a,b){const c=QIDX[n-1][5],o=Array.from({length:c},(_,i)=>`<option value="${i+1}">Verset ${i+1}</option>`).join('');$('#qra').innerHTML=o;$('#qrb').innerHTML=o;$('#qra').value=a;$('#qrb').value=b}
 function qNoteWords(){const {s,v,sel}=QNOTE,t=QC[s].ar[v-1];let wi=0;$('#qnw').innerHTML=toks(t).filter(k=>k.w).map(k=>{wi++;return `<button class="qwc ${sel.has(wi)?'on':''}" data-qnw="${wi}">${k.x}</button>`}).join('');$('#qncount').textContent=`${sel.size} mot${sel.size>1?'s':''} surligné${sel.size>1?'s':''}`}
-function qSheetInput(e){if(e.target.id==='qa-s')return qaSetS(e.target.value);if(e.target.id==='qa-v')return qaSetV(e.target.value);if(e.target.id==='plq'){clearTimeout(PLT);const v=e.target.value;PLT=setTimeout(()=>plSearch(v),250);return}if(e.target.id&&e.target.id.startsWith('qn-'))return qNavSync(e.target.id,e.target.value);if(e.target.id==='cq'){QQ=e.target.value;fillSurList()}if(e.target.id==='mqq'){MQQ=e.target.value;clearTimeout(MQT);const w=MQQ.trim();if(w.length<2){MQC=null;MQR=null;MQERR='';mqRender();return}MQT=setTimeout(()=>mqDoCity(w),300)}}
+function qSheetInput(e){if(e.target.id==='qa-q')return qaSearch();if(e.target.id==='qa-s')return qaSetS(e.target.value);if(e.target.id==='qa-v')return qaSetV(e.target.value);if(e.target.id==='plq'){clearTimeout(PLT);const v=e.target.value;PLT=setTimeout(()=>plSearch(v),250);return}if(e.target.id&&e.target.id.startsWith('qn-'))return qNavSync(e.target.id,e.target.value);if(e.target.id==='cq'){QQ=e.target.value;fillSurList()}if(e.target.id==='mqq'){MQQ=e.target.value;clearTimeout(MQT);const w=MQQ.trim();if(w.length<2){MQC=null;MQR=null;MQERR='';mqRender();return}MQT=setTimeout(()=>mqDoCity(w),300)}}
 function qSheetClick(e){const sh=$('#qsheet');if(e.target===sh)return qSheetClose();const b=e.target.closest('button');if(!b)return;const d=b.dataset;if(d.qa)return qaClick(d.qa);
  if(d.qclose)return qSheetClose();
  if(d.pvgo){const [a,c]=d.pvgo.split(':').map(Number);qSheetClose();S.qrange=null;save();qGoTo(a,c);return}
