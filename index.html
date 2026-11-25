@@ -1601,6 +1601,22 @@ button,a{transition:opacity .12s}
 nav.sp-day{grid-template-columns:.75fr repeat(7,1fr)!important}
 nav.sp-day a{font-size:8px!important;letter-spacing:-.02em}
 nav.sp-day svg.nvi{width:26px!important;height:26px!important}
+
+/* v92 numéros en arche, versets à 3 chiffres, récitateurs favoris */
+.qs8.qarc{width:34px;height:40px}.qs8.qarc b{margin-top:9px;font-size:12px}
+.mk.mk3{width:2.05em;height:2.05em;font-size:.45em;letter-spacing:-.04em;vertical-align:.4em}
+.qrr{display:flex;align-items:stretch;gap:6px}.qrr .qrow{flex:1;min-width:0}
+.qrfav{flex:none;width:44px;border-radius:14px;border:1px solid rgba(201,164,101,.35);background:transparent;color:#c9a465;font-size:20px;cursor:pointer}
+.qrfav.on{background:linear-gradient(135deg,#b8945a,#e2c88e);color:#7a1f2b;border:0}
+.qrfh{display:flex;align-items:center;justify-content:space-between;margin:12px 4px 6px;font:800 11px Mulish,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#cdbf9c}.qrfh small{font-size:11px;opacity:.7}
+.qa-rf{margin-top:8px;padding:7px 8px;border-radius:14px;border:1px solid rgba(217,185,119,.25);background:rgba(255,255,255,.03)}
+.qa-rf>span{display:block;font:800 10px Mulish,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#cdbf9c;margin:0 2px 6px}
+#qa-rfl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#qa-rfl button.add{grid-column:1/-1}
+#qa-rfl button{min-width:0;display:grid;place-items:center;line-height:1.2;min-height:38px;padding:4px 8px;border-radius:12px;font-size:11.5px!important;border:1px solid rgba(217,185,119,.45);background:transparent;color:#e2c88e;font:800 12px Mulish,sans-serif;cursor:pointer}
+#qa-rfl button.on{background:linear-gradient(135deg,#b8945a,#e2c88e);color:#1a2a1f;border:0}
+#qa-rfl button.add{border-style:dashed}
+#qa-rfl button span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+#phone.light .qa-rf>span,#phone.light .qrfh{color:#8a6a2c}#phone.light #qa-rfl button{color:#8a6a2c}
 </style>
 </head>
 <body>
@@ -2373,7 +2389,12 @@ function qiblaBody(){const P=qpos(),b=qbear(P.lat,P.lon),d=qdist(P.lat,P.lon);
    <div class="card"><div class="lab">Parole d'Allah</div>${S.lang==='fr'?'<p class="hq" style="font-family:\'Cormorant Garamond\',serif;font-size:21px;margin:0">« Tourne donc ton visage vers la Mosquée sacrée. Où que vous soyez, tournez-y vos visages. »</p>':tri('',V2144)}${CHIPS(V2144,[2,144])}<div class="srcs"><span>Sourate Al-Baqara · 2:144</span></div></div>
    <div class="card"><div class="lab">Le Prophète ﷺ a dit</div>${tri("« Quand tu te lèves pour la prière, fais parfaitement tes ablutions, puis tourne-toi vers la qibla et dis : Allâhu akbar. »",H6251)}${CHIPS(H6251)}${SRC('bm','Al-Bukhârî n° 6251, Muslim n° 397')}</div>`}
 /* ---------- Le Coran v20 : Mushaf · Carnet · Béquille · Traduction · Vocab · Réglages ---------- */
-const RECS=[['Alafasy_128kbps','Mishary Rashid Alafasy'],['Abdul_Basit_Murattal_192kbps','Abdul Basit (murattal)'],['Abdul_Basit_Mujawwad_128kbps','Abdul Basit (mujawwad)'],['Husary_128kbps','Mahmoud Khalil Al-Husary'],['Minshawy_Murattal_128kbps','Muhammad Al-Minshawi'],['Abdurrahmaan_As-Sudais_192kbps','Abdurrahman As-Sudais'],['Saood_ash-Shuraym_128kbps','Saoud Ash-Shuraym'],['MaherAlMuaiqly128kbps','Maher Al-Muaiqly'],['Ghamadi_40kbps','Saad Al-Ghamdi'],['Yasser_Ad-Dussary_128kbps','Yasser Ad-Dossary'],['Abu_Bakr_Ash-Shaatree_128kbps','Abu Bakr Ash-Shatri'],['Hani_Rifai_192kbps','Hani Ar-Rifai'],['Nasser_Alqatami_128kbps','Nasser Al-Qatami'],['Hudhaify_128kbps','Ali Al-Hudhaify'],['Muhammad_Ayyoub_128kbps','Muhammad Ayyoub'],['Muhammad_Jibreel_128kbps','Muhammad Jibreel'],['Fares_Abbad_64kbps','Fares Abbad'],['Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net','Ahmed Al-Ajmi']];
+const RECS=[['Alafasy_128kbps','Mishary Rashid Alafasy'],['Abdul_Basit_Murattal_192kbps','Abdul Basit (murattal)'],['Abdul_Basit_Mujawwad_128kbps','Abdul Basit (mujawwad)'],['Husary_128kbps','Mahmoud Khalil Al-Husary'],['Minshawy_Murattal_128kbps','Muhammad Al-Minshawi'],['Abdurrahmaan_As-Sudais_192kbps','Abdurrahman As-Sudais'],['Saood_ash-Shuraym_128kbps','Saoud Ash-Shuraym'],['MaherAlMuaiqly128kbps','Maher Al-Muaiqly'],['Ghamadi_40kbps','Saad Al-Ghamdi'],['Yasser_Ad-Dussary_128kbps','Yasser Ad-Dossary'],['Abu_Bakr_Ash-Shaatree_128kbps','Abu Bakr Ash-Shatri'],['Hani_Rifai_192kbps','Hani Ar-Rifai'],['Nasser_Alqatami_128kbps','Nasser Al-Qatami'],['Hudhaify_128kbps','Ali Al-Hudhaify'],['Muhammad_Ayyoub_128kbps','Muhammad Ayyoub'],['Muhammad_Jibreel_128kbps','Muhammad Jibreel'],['Fares_Abbad_64kbps','Fares Abbad'],['Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net','Ahmed Al-Ajmi'],
+['Minshawy_Mujawwad_192kbps','Muhammad Al-Minshawi (mujawwad)'],['Husary_Mujawwad_128kbps','Al-Husary (mujawwad)'],['Husary_Muallim_128kbps','Al-Husary (enseignement)'],['Salah_Al_Budair_128kbps','Salah Al-Budair'],['Khaalid_Abdullaah_al-Qahtaanee_192kbps','Khalid Al-Qahtani'],['Abdullah_Basfar_192kbps','Abdullah Basfar'],['Abdullaah_3awwaad_Al-Juhaynee_128kbps','Abdullah Al-Juhany'],['Ali_Jaber_64kbps','Ali Jaber'],['Mohammad_al_Tablaway_128kbps','Mohamed Al-Tablawi'],['Muhsin_Al_Qasim_192kbps','Muhsin Al-Qasim'],['Salaah_AbdulRahman_Bukhatir_128kbps','Salah Bukhatir'],['Mustafa_Ismail_48kbps','Mustafa Ismail'],['Mahmoud_Ali_Al_Banna_32kbps','Mahmoud Ali Al-Banna'],['Abdullah_Matroud_128kbps','Abdullah Al-Matrood'],['Akram_AlAlaqimy_128kbps','Akram Al-Alaqimy'],['Ahmed_Neana_128kbps','Ahmed Neana'],['aziz_alili_128kbps','Aziz Alili'],['khalefa_al_tunaiji_64kbps','Khalifa Al-Tunaiji'],['Muhammad_AbdulKareem_128kbps','Muhammad Abdul Kareem'],['Sahl_Yassin_128kbps','Sahl Yassin'],['Ayman_Sowaid_64kbps','Ayman Sowaid'],['Ibrahim_Akhdar_32kbps','Ibrahim Al-Akhdar']];
+const recFav=()=>(Array.isArray(S.recfav)?S.recfav:[]).filter(id=>RECS.some(r=>r[0]===id)).slice(0,3);
+const recNm=id=>(RECS.find(r=>r[0]===id)||[,id])[1];
+function recPick(id){QSET().rec=id;save();const P=QPLAY;if(P&&P.seq){if(P.a){P.a.onended=null;P.a.pause()}clearTimeout(qStep.t);P.paused=0;qStep();toast('Récitateur',recNm(id)+' · reprise au verset en cours')}else toast('Récitateur',recNm(id))}
+function recFavTog(id){let f=recFav();if(f.includes(id))f=f.filter(x=>x!==id);else{if(f.length>=3){toast('3 favoris maximum','Retire d’abord un favori (♥) pour en ajouter un autre.');return false}f.push(id)}S.recfav=f;save();return true}
 let QIDX=null,QC={},QW={},QMETA=null,QCUM=[0],QQ='',QPLAY=null,QJUMP=0,QCUR=0,QPEND=null,QCF='rev',QVQ='',QVO='',QB=null,QBR=null,QLPF=0;
 const QSET=()=>{const o=S.qset||{};const d={rec:S.qrec||'Alafasy_128kbps',tl:1,tj:S.qtj===0?0:1,vol:100,hl:1,follow:1,gamme:2,grep:1,vrep:0,gap:0,size:S.qsize||100,arv:1,frv:1};S.qset=Object.assign(d,o);return S.qset};
 const qrec=()=>QSET().rec,qtj=()=>!!QSET().tj,qsz=()=>QSET().size,qrep=()=>S.qrep||1;
@@ -2398,7 +2419,7 @@ const qRange=s=>{const r=S.qrange,c=QIDX[s-1][5];return r&&r.s===s?[Math.max(1,r
 const linked=(s,v)=>!!(S.qlink&&S.qlink[s+':'+v]);
 const noteSet=()=>{const o=new Set();(S.qnotes||[]).forEach(e=>{if(!e.acq)e.w.forEach(w=>o.add(e.s+':'+e.v+':'+w))});return o};
 const QSUB=()=>S.qsub||'mushaf';
-const STAR8=n=>`<span class="qs8"><svg viewBox="0 0 40 40"><path d="M20 2l5 7.9 9.1-1.8-1.8 9.1L40 20l-7.7 2.8 1.8 9.1-9.1-1.8L20 38l-5-7.9-9.1 1.8 1.8-9.1L0 20l7.7-2.8-1.8-9.1 9.1 1.8z" fill="none" stroke="#C9A465" stroke-width="1.6"/></svg><b>${n}</b></span>`;
+const STAR8=n=>`<span class="qs8 qarc"><svg viewBox="0 0 40 46" aria-hidden="true"><path d="M7 44V21C7 11.5 12.8 5.2 20 2c7.2 3.2 13 9.5 13 19v23z" fill="rgba(201,164,101,.10)" stroke="#C9A465" stroke-width="1.5"/><path d="M11 44V22.5C11 15 15 10 20 7.4c5 2.6 9 7.6 9 15.1V44" fill="none" stroke="#C9A465" stroke-width=".7" opacity=".55"/></svg><b>${n}</b></span>`;
 const QI={book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v13"/></svg>',
  note:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A1.5 1.5 0 005 4.5v15A1.5 1.5 0 006.5 21h11a1.5 1.5 0 001.5-1.5V8z"/><path d="M14 3v5h5M8.5 12.5h7M8.5 16h5"/></svg>',
  crutch:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 15.5a2 2 0 01-2 2H8l-4 3.5V5a2 2 0 012-2h12a2 2 0 012 2z"/></svg>',
@@ -2478,7 +2499,7 @@ function suraBlock(n,d,ra,rb){const [,a,t,f,ty,cnt]=QIDX[n-1],NS=noteSet(),bis=n
   if(v>ra&&QMETA.page[pg+1]===id){pg++;const jz=QMETA.juz.indexOf(id);html+=`</p><div class="pgsep"><span>PAGE ${pg}${jz>0?` · JUZ ${jz}`:''}</span></div><p class="mtxt" lang="ar">`}
   let wi=0,inner='';for(const k of toks(t2)){if(k.w){wi++;inner+=`<span class="w${NS.has(n+':'+v+':'+wi)?' nt':''}" data-w="${wi}">${tjRun(t2,c,k.s,k.e)}</span> `}else inner+=`<span class="pm">${tjRun(t2,c,k.s,k.e)}</span> `}
   const lk=linked(n,v);
-  html+=`<span class="mv" id="v-${n}-${v}" data-s="${n}" data-v="${v}">${inner}</span><button class="mk${lk?' lk':''}" data-qlink="${v}" data-s="${n}" ${v<rb?'':'disabled'} aria-pressed="${lk}" aria-label="${v<rb?(lk?`Désunir les versets ${v} et ${v+1}`:`Unir les versets ${v} et ${v+1}`):`Fin du verset ${v}`}">${arNum(v)}</button> `}
+  html+=`<span class="mv" id="v-${n}-${v}" data-s="${n}" data-v="${v}">${inner}</span><button class="mk${lk?' lk':''}${v>99?' mk3':''}" data-qlink="${v}" data-s="${n}" ${v<rb?'':'disabled'} aria-pressed="${lk}" aria-label="${v<rb?(lk?`Désunir les versets ${v} et ${v+1}`:`Unir les versets ${v} et ${v+1}`):`Fin du verset ${v}`}">${arNum(v)}</button> `}
  return `<div class="mfr" data-s="${n}"><div class="mpage"><span class="morn t">✦</span><div class="msh" role="button" tabindex="0" data-qsheet="sur" aria-label="Choisir la sourate et les versets"><span>❖</span><div><div class="mn" lang="ar">${a}</div><small>${n}. ${t.toUpperCase()} · VERSETS ${ra}–${rb}</small></div><span>❖</span></div>
   <div class="mlab">PAGE ${partOf(QMETA.page,AID(n,ra))} · JUZ ${partOf(QMETA.juz,AID(n,ra))}</div>${bis?`<div class="mbis" lang="ar">${tjHtml(QBIS,QBIST)}</div>`:''}
   <p class="mtxt" lang="ar">${html}</p><div class="mend"><span>۞</span>${rb-ra+1} versets<span>۞</span></div><span class="morn b">✦</span></div></div>`}
@@ -2524,7 +2545,7 @@ function qStep(){const P=QPLAY;if(!P||!P.seq)return;if(P.i>=P.seq.length){qStop(
  if(el){setCur(s,v);if(+V.dataset.qs!==s){V.dataset.qs=s;try{history.replaceState(null,'','#sourate-'+s)}catch(_){}}}qFabUI();
  const a=new Audio(`https://everyayah.com/data/${qrec()}/${pad3(s)}${pad3(v)}.mp3`);a.volume=QSET().vol/100;P.a=a;
  a.onended=()=>{if(QPLAY!==P)return;const gap=P.gaps.has(P.i)?GAPS[QSET().gap]*1000:0;P.i++;clearTimeout(qStep.t);qStep.t=setTimeout(qStep,gap)};
- a.play().catch(()=>{if(QPLAY!==P)return;if(P.imm){P.a=null;toast('Son bloqué par l’aperçu Claude',"Les 18 récitateurs sont bien branchés (EveryAyah), mais l’aperçu claude.ai interdit tout son venant d’un autre site. Une fois l’application mise en ligne ou installée, la récitation se lance. Touche ■ en bas pour quitter.");return}qStop();if(!qStep.warned){qStep.warned=1;toast('Récitation indisponible ici',"L'aperçu en ligne bloque le son venant d'EveryAyah. Elle fonctionne dans la version téléchargée (index.html) et dans l'application finale.")}})}
+ a.play().catch(e=>{if(QPLAY!==P)return;if(e&&e.name==='NotSupportedError'&&navigator.onLine!==false){qStop();toast('Récitateur indisponible',recNm(qrec())+' ne répond pas pour ce verset. Choisis un autre récitateur.');return}if(P.imm){P.a=null;toast('Son bloqué par l’aperçu Claude',"Les récitateurs sont bien branchés (EveryAyah), mais l’aperçu claude.ai interdit tout son venant d’un autre site. Une fois l’application mise en ligne ou installée, la récitation se lance. Touche ■ en bas pour quitter.");return}qStop();if(!qStep.warned){qStep.warned=1;toast('Récitation indisponible ici',"L'aperçu en ligne bloque le son venant d'EveryAyah. Elle fonctionne dans la version téléchargée (index.html) et dans l'application finale.")}})}
 
 /* v40 bandeau du Mushaf (sourate · verset · juz · page) + navigateur Aller à / Juz / Sourate */
 let QNT='go',QNG=null;
@@ -2588,7 +2609,8 @@ function qSheet(kind,o){let sh=$('#qsheet');if(!sh){sh=document.createElement('d
  else if(kind==='nav'){QNG=null;sh.innerHTML=`<div class="qsp qnav"><span class="qgrip"></span><div class="qsh2"><h3>Aller à</h3><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div><div class="qnseg" role="tablist">${[['go','Aller à'],['juz','Juz'],['sur','Sourate']].map(([k,l])=>`<button role="tab" aria-selected="${QNT===k}" class="${QNT===k?'on':''}" data-qnt="${k}">${l}</button>`).join('')}</div><div class="qnb">${qNavBody()}</div></div>`;setTimeout(()=>{const c=sh.querySelector('.qnr.cur');c&&c.scrollIntoView({block:'center'})},60)}
  else if(kind==='info')sh.innerHTML=`<div class="qsp"><span class="qgrip"></span><div class="qsh2"><h3>${o.t}</h3><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div><p class="qsd" style="font-size:15px;line-height:1.6">${o.m}</p><button class="btn gold wide" data-qclose="1">J'ai compris</button></div>`;
  else sh.innerHTML=`<div class="qsp"><span class="qgrip"></span><div class="qsh2"><h3>Choisir le récitateur</h3><button class="qx" data-qclose="1" aria-label="Fermer">✕</button></div>
-    <div class="qlist">${RECS.map(([id,nm])=>`<button class="qrow ${qrec()===id?'on':''}" data-qrecid="${id}"><span class="qmic">${QI.mic}</span><span class="qn"><b>${nm}</b></span><span class="qck">${qrec()===id?'✓':''}</span></button>`).join('')}</div>
+    ${(()=>{const F=recFav(),row=([id,nm])=>`<div class="qrr"><button class="qrow ${qrec()===id?'on':''}" data-qrecid="${id}"><span class="qmic">${QI.mic}</span><span class="qn"><b>${nm}</b></span><span class="qck">${qrec()===id?'✓':''}</span></button><button class="qrfav${F.includes(id)?' on':''}" data-qrecfav="${id}" aria-pressed="${F.includes(id)}" aria-label="${F.includes(id)?'Retirer des favoris':'Ajouter aux favoris'}">${F.includes(id)?'♥':'♡'}</button></div>`;
+ return `<div class="qrfh">♥ Mes favoris <small>${F.length}/3</small></div>${F.length?`<div class="qlist">${F.map(id=>row([id,recNm(id)])).join('')}</div>`:'<p class="qsd" style="margin:2px 4px 10px">Touche ♡ à côté d’un récitateur pour l’ajouter (3 au maximum).</p>'}<div class="qrfh">Tous les récitateurs <small>${RECS.length}</small></div><div class="qlist">${RECS.map(row).join('')}</div>`})()}
     <p class="small muted" style="margin:10px 4px 0">Récitations diffusées par EveryAyah.</p></div>`;
  requestAnimationFrame(()=>sh.classList.add('on'))}
 
@@ -2610,6 +2632,7 @@ function qaBody(){return `<div class="qsp"><span class="qgrip"></span><div class
   <div class="qa-row"><button data-qa="s-" aria-label="Sourate précédente">−</button><input id="qa-s" type="range" min="1" max="114" step="1" aria-label="Choisir la sourate"><button data-qa="s+" aria-label="Sourate suivante">+</button></div>
  <div class="qa-h qa-h2"><label for="qa-v">Verset</label><div class="qa-val"><output id="qa-vl"></output></div></div>
   <div class="qa-row"><button data-qa="v-" aria-label="Verset précédent">−</button><input id="qa-v" type="range" min="1" step="1" aria-label="Choisir le verset"><button data-qa="v+" aria-label="Verset suivant">+</button></div></div>
+ <div class="qa-rf"><span>🎙️ Mes récitateurs</span><div id="qa-rfl"></div></div>
  <div class="qa-bm" id="qa-bm"><span class="qa-bmi">${QA_MK}</span><button class="qa-bmt" data-qa="bmo" id="qa-bmt"><b>Marque-page</b><small id="qa-bms"></small></button><button class="qa-bmo" id="qa-bmo" data-qa="bmo">Ouvrir</button><button class="qa-bmb" id="qa-bmb" data-qa="bm"></button></div>
  <div class="qa-pv" aria-live="polite"><div class="qa-pvh"><span>Aperçu</span><span id="qa-ref"></span></div><div id="qa-pb"></div></div>
  <button class="btn gold wide qa-go" data-qa="go">Ouvrir</button></div>`}
@@ -2617,6 +2640,7 @@ function qaUpd(full){const sh=$('#qsheet');if(!sh||sh.dataset.kind!=='quick'||!Q
  const si=$('#qa-s'),vi=$('#qa-v');if(full||document.activeElement!==si)si.value=n;vi.max=c;if(full||document.activeElement!==vi)vi.value=v;
  $('#qa-sl').textContent=`${n}. ${r[2]}`;$('#qa-vl').textContent=`Verset ${v} / ${c}`;$('#qa-ref').textContent=`${r[2]} · v. ${v}`;
  sh.querySelector('[data-qa="s-"]').disabled=n<=1;sh.querySelector('[data-qa="s+"]').disabled=n>=114;sh.querySelector('[data-qa="v-"]').disabled=v<=1;sh.querySelector('[data-qa="v+"]').disabled=v>=c;
+ {const F=recFav(),rl=$('#qa-rfl');if(rl)rl.innerHTML=F.length?F.map(id=>`<button class="${qrec()===id?'on':''}" data-qa="rec:${id}"><span>${esc(recNm(id))}</span></button>`).join(''):`<button class="add" data-qa="recadd">♡ Choisir mes 3 favoris</button>`}
  const hb=!!P.s,here=hb&&+P.s===n&&qaPrefV(n)===v,bm=$('#qa-bm'),bb=$('#qa-bmb');bm.classList.toggle('on',here);
  $('#qa-bms').textContent=hb?`${QIDX[P.s-1][2]} · verset ${qaPrefV(P.s)||1}${here?' · ici':''}`:'Aucun · l’accès rapide s’ouvre là où tu lis';
  bb.textContent=here?'Retirer':(hb?'Déplacer ici':'Poser ici');bm.classList.toggle('has',hb);$('#qa-bmo').hidden=!hb;$('#qa-bmt').disabled=!hb;if(hb)$('#qa-bmo').setAttribute('aria-label',`Ouvrir le marque-page : ${QIDX[P.s-1][2]}, verset ${qaPrefV(P.s)||1}`);bb.setAttribute('aria-label',here?'Retirer le marque-page':`Poser le marque-page sur ${r[2]}, verset ${v}`);
@@ -2626,6 +2650,8 @@ function qaUpd(full){const sh=$('#qsheet');if(!sh||sh.dataset.kind!=='quick'||!Q
 function qaSetS(n){n=Math.min(114,Math.max(1,+n||1));if(n!==QA.s){QA.s=n;QA.v=Math.min(qaPrefV(n)||1,qaCnt(n))}qaUpd()}
 function qaSetV(v){QA.v=Math.min(qaCnt(QA.s),Math.max(1,+v||1));qaUpd()}
 function qaClick(k){const P=qaPref();
+ if(k.startsWith('rec:')){recPick(k.slice(4));qaUpd();return}
+ if(k==='recadd'){qSheet('rec');return}
  if(k==='s-')return qaSetS(QA.s-1);if(k==='s+')return qaSetS(QA.s+1);if(k==='v-')return qaSetV(QA.v-1);if(k==='v+')return qaSetV(QA.v+1);
  if(k==='bm'){const here=P.s&&+P.s===QA.s&&qaPrefV(QA.s)===QA.v;if(here){P.s=null;P.v={}}else{P.s=QA.s;P.v={[QA.s]:QA.v}}save();qaUpd();qaDot();
   toast(here?'Marque-page retiré':'🔖 Marque-page posé',here?'L’accès rapide s’ouvrira là où tu lis.':`${QIDX[QA.s-1][2]}, verset ${QA.v}. L’accès rapide s’ouvrira ici.`);return}
@@ -2761,7 +2787,8 @@ function qSheetClick(e){const sh=$('#qsheet');if(e.target===sh)return qSheetClos
  if(d.qpick){QSHS=+d.qpick;fillSurList();qFillRange(QSHS,1,QIDX[QSHS-1][5]);return}
  if(d.qrange){const n=QSHS,c=QIDX[n-1][5];let a=+$('#qra').value,bb=+$('#qrb').value;if(bb<a)[a,bb]=[bb,a];S.qrange=d.qrange==='all'||(a===1&&bb===c)?null:{s:n,a,b:bb};S.ql={s:n,v:a};QJUMP=1;save();qSheetClose();
    const sub=QSUB();if(sub==='mushaf'){if(location.hash==='#sourate-'+n)route();else location.hash='#sourate-'+n}else route();return}
- if(d.qrecid){QSET().rec=d.qrecid;save();qSheetClose();const P=QPLAY;if(P&&P.seq){if(P.a){P.a.onended=null;P.a.pause()}clearTimeout(qStep.t);P.paused=0;qStep();toast('Récitateur',recName()+' · reprise au verset en cours')}else toast('Récitateur',recName());if(QSUB()==='reglages')route();return}
+ if(d.qrecfav){if(recFavTog(d.qrecfav)){const l=sh.querySelector('.qsp'),y=l?l.scrollTop:0;qSheet(sh.dataset.kind);const l2=sh.querySelector('.qsp');l2&&(l2.scrollTop=y)}return}
+ if(d.qrecid){qSheetClose();recPick(d.qrecid);if(QSUB()==='reglages')route();return}
  if(d.qnw){const w=+d.qnw;QNOTE.sel.has(w)?QNOTE.sel.delete(w):QNOTE.sel.add(w);qNoteWords();return}
  if(d.qnclear){QNOTE.sel.clear();qNoteWords();return}
  if(d.qnsave){const {s,v,id,sel}=QNOTE;if(!sel.size){toast('Choisis au moins un mot','Touche les mots à surveiller dans le verset.');return}
@@ -2833,7 +2860,7 @@ function fillSeance(){if(!QB)return;Promise.all([qIndex(),qSura(QB.s)]).then(([,
 function qbAudio(){if(!QB)return;const b=$('#qblisten');if(QBR&&QBR.a){if(QBR.a.paused){QBR.a.play().catch(()=>{});b.textContent='❚❚ Pause'}else{QBR.a.pause();b.textContent='▶ Reprendre'}return}
  QBR={v:QB.a};const go=()=>{if(!QB||!QBR)return;const a=new Audio(`https://everyayah.com/data/${qrec()}/${pad3(QB.s)}${pad3(QBR.v)}.mp3`);a.volume=QSET().vol/100;QBR.a=a;
   a.onended=()=>{if(!QBR)return;QBR.v++;if(QBR.v>QB.b){QBR=null;const bb=$('#qblisten');bb&&(bb.textContent='▶ Écouter');return}go()};
-  a.play().then(()=>{const bb=$('#qblisten');bb&&(bb.textContent='❚❚ Pause')}).catch(()=>{QBR=null;toast('Son bloqué par l’aperçu Claude',"Les 18 récitateurs sont bien branchés (EveryAyah), mais l’aperçu claude.ai interdit tout son venant d’un autre site. Une fois l’application mise en ligne ou installée, la récitation se lance.")})};go()}
+  a.play().then(()=>{const bb=$('#qblisten');bb&&(bb.textContent='❚❚ Pause')}).catch(()=>{QBR=null;toast('Son bloqué par l’aperçu Claude',"Les récitateurs sont bien branchés (EveryAyah), mais l’aperçu claude.ai interdit tout son venant d’un autre site. Une fois l’application mise en ligne ou installée, la récitation se lance.")})};go()}
 function qbStop(){if(QBR&&QBR.a)QBR.a.pause();QBR=null}
 function qbEnd(){dlMark('beq');const l=BL.find(x=>x.p===QB.p),secs=Math.round((Date.now()-QB.t0)/1000),r=QB.mask.size?QB.h/QB.mask.size:0;qbStop();
  const msg=!QB.h?'Aucun indice utilisé. Le rappel était solide.':r<.25?'Quelques indices seulement : la mémoire tient bien.':r<.6?'Le rappel se construit, continue à ce rythme.':'Beaucoup d’indices : c’est normal, refais ce palier plus tard.';
