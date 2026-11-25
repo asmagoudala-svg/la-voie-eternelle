@@ -1816,6 +1816,9 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 @keyframes dlPop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
 @keyframes dlGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(241,215,156,0))}50%{filter:drop-shadow(0 0 10px rgba(241,215,156,.8))}}
 #phone.light .dlmot b{color:#1f3a2b}#phone.light .dlmot small{color:#6b5f48}#phone.light .dlleft.fin p{color:#1f3a2b}
+
+.dlser{display:inline-flex;align-items:baseline;gap:5px;flex-wrap:wrap}.dlser b{font-size:14px;color:#ffc56e}.dlser i{font-style:normal;font-weight:700;color:#e9dcc0;opacity:.85}
+.dlser.cold{background:rgba(255,255,255,.06);border-color:rgba(217,185,119,.3);color:#e2c88e}
 </style>
 </head>
 <body>
@@ -1951,7 +1954,7 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const SHORT={coran:'Coran',priere:'Prières',matin:'Matin',soir:'Soir',hadith:'Hadith',nom:'Nom d’Allah',tasbih:'Tasbih'},left=G.filter(g=>!dlState(g).ok),R=Math.round(tot?n/tot*100:0);
  return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div></div>
  ${tot?`<div class="dlhero"><div class="dlbig${done?' ok':''}" style="--p:${R}"><div><b>${n}<small>/${tot}</small></b><span>aujourd’hui</span></div></div>
-  <div class="dlmot">${done?`<b>Journée tenue 🤍</b><small>Tous tes objectifs sont faits.</small>`:n===0?`<b>Bismillah 🤲</b><small>Commence par un petit pas, le reste suivra.</small>`:`<b>Plus que ${tot-n} objectif${tot-n>1?'s':''}</b><small>${tot-n===1?'Tu y es presque, encore un effort !':'Continue, chaque pas compte.'}</small>`}${st?`<span class="dlser">🔥 ${st} jour${st>1?'s':''} de suite</span>`:''}</div></div>
+  <div class="dlmot">${done?`<b>Journée tenue 🤍</b><small>Tous tes objectifs sont faits.</small>`:n===0?`<b>Bismillah 🤲</b><small>Commence par un petit pas, le reste suivra.</small>`:`<b>Plus que ${tot-n} objectif${tot-n>1?'s':''}</b><small>${tot-n===1?'Tu y es presque, encore un effort !':'Continue, chaque pas compte.'}</small>`}${(()=>{const rest=Math.max(0,E.dur-inE);return `<span class="dlser${st?'':' cold'}">${st?`🔥 <b>${st}</b> jour${st>1?'s':''} de suite${rest?`<i>· encore ${rest} jour${rest>1?'s':''}</i>`:'<i>· dernier jour !</i>'}`:rest?`⏳ Encore <b>${rest}</b> jour${rest>1?'s':''}`:'⏳ Dernier jour !'}</span>`})()}</div></div>
   <div class="dlleft${done?' fin':''}">${done?`<span class="dlbravo">🌟</span><p><b>Macha’Allah, bravo !</b> Qu’Allah te récompense, accepte tes efforts et t’accorde la constance. À demain, in cha’Allah 🤍</p>`:`<span>Il te reste :</span>${left.map(g=>`<em>${g[1]} ${SHORT[g[0]]||g[2]}</em>`).join('')}`}</div>
   ${fin?`<p class="dlfin">Objectifs tenus jusqu’au bout : ${E.dur} jours ! Fixe-en de nouveaux pour continuer.</p>`:''}
   <div class="dlitems">${rows}</div>
