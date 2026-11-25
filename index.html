@@ -1783,6 +1783,27 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .dlweek{margin:10px 0 6px!important}.dlw b{width:24px!important;height:24px!important;font-size:11px!important}
 .dlstats{padding:6px 0!important}.dlstats b{font-size:16px!important}
 .dledit{min-height:36px!important;margin-top:8px!important}
+
+/* v109 carte objectifs : tableau de bord motivant */
+.dlday{flex:none;padding:5px 11px;border-radius:999px;border:1px solid rgba(217,185,119,.45);font:700 12px Mulish,sans-serif;color:#cdbf9c}.dlday b{color:#f1d79c}
+.dlhero{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin:14px 0 10px}
+.dlbig{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#e2c88e calc(var(--p)*1%),rgba(226,200,142,.16) 0);box-shadow:0 0 22px rgba(226,200,142,.18)}
+.dlbig>div{width:86px;height:86px;border-radius:50%;background:radial-gradient(circle at 50% 30%,#22452f,#132519);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dlbig b{font:800 28px Mulish,sans-serif;color:#f6e7bf;line-height:1}.dlbig b small{font-size:15px;color:#cdbf9c}.dlbig span{font:700 10px Mulish,sans-serif;color:#cdbf9c;margin-top:3px;letter-spacing:.03em}
+.dlbig.ok{background:conic-gradient(#9fd0ac 100%,transparent 0)}.dlbig.ok b{color:#cfe9d5}
+.dlst3{display:grid;gap:6px}
+.dlst3>div{display:grid;grid-template-columns:24px auto 1fr;align-items:center;gap:6px;padding:6px 10px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(217,185,119,.18)}
+.dlst3 i{font-style:normal;font-size:15px}.dlst3 b{font:800 17px Mulish,sans-serif;color:#f3ead2}.dlst3 small{font:600 11.5px Mulish,sans-serif;color:#bdb49a}
+.dlst3 .s1{background:linear-gradient(90deg,rgba(255,170,90,.16),rgba(255,255,255,.04));border-color:rgba(255,180,100,.35)}.dlst3 .s1 b{color:#ffd79a}.dlst3 .s1.off{background:rgba(255,255,255,.05);border-color:rgba(217,185,119,.18)}.dlst3 .s1.off b{color:#f3ead2}
+.dlleft{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 12px;padding:9px 10px;border-radius:14px;background:rgba(226,200,142,.08);border:1px dashed rgba(226,200,142,.35)}
+.dlleft span{font:800 12px Mulish,sans-serif;color:#e2c88e;margin-right:2px}.dlleft em{font:700 12px Mulish,sans-serif;font-style:normal;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.22);color:#f3ead2}
+.dlleft b{font:800 13.5px Mulish,sans-serif;color:#cfe9d5}
+.dlfin{margin:0 0 10px;font:700 13px Mulish,sans-serif;color:#f1d79c}
+.dlcard .dlstats,.dlcard .dlprog{display:none!important}
+.dli{background:rgba(255,255,255,.045)!important;border:1px solid rgba(217,185,119,.2)!important;box-shadow:none!important}
+.dli.ok{opacity:.75}.dlring.ok b{font-size:16px!important}
+.dlweek{margin:12px 0 4px!important;padding-top:10px;border-top:1px solid rgba(217,185,119,.15)}
+#phone.light .dlbig>div{background:#fffdf7}#phone.light .dlbig b{color:#1f3a2b}#phone.light .dlst3>div{background:#fff;border-color:#e3d7bd}#phone.light .dlst3 b{color:#1f3a2b}#phone.light .dlleft em{background:#f4eee1;color:#1f3a2b}#phone.light .dlleft span,#phone.light .dlday b{color:#8a6a2c}
 </style>
 </head>
 <body>
@@ -1907,7 +1928,7 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
  const done=tot&&n===tot,fin=day>E.dur;
  const msg=!tot?'Choisis au moins un objectif pour commencer.':done?`Journée tenue, al-hamdulillah ! ${st>1?`Ta série continue : ${st} jours.`:'Ta série commence aujourd’hui.'}`:n===0?(st?`Ta série de ${st} jour${st>1?'s':''} t’attend : commence par une petite action.`:'Bismillah : une petite action suffit pour commencer.'):`Plus que ${tot-n} objectif${tot-n>1?'s':''} pour tenir ta journée.`;
  const wk=[...Array(7)].map((_,i)=>{const z=new Date(now);z.setUTCDate(z.getUTCDate()-6+i);const k=z.toISOString().slice(0,10),h=d.hist[k],isT=i===6,cl=dlOK(h)?'ok':h&&h.n>0?'mid':isT?'now':'ko';return `<span class="dlw ${cl}"><i>${'LMMJVSD'[(z.getUTCDay()+6)%7]}</i><b>${dlOK(h)?'✓':h&&h.n>0?'•':''}</b></span>`}).join('');
- const rows=G.map(g=>{const [k,ic,l,u]=g,x=dlState(g),tg=dlTgt(k),dd=dlDay();
+ const rows=[...G].sort((a,b)=>dlState(a).ok-dlState(b).ok).map(g=>{const [k,ic,l,u]=g,x=dlState(g),tg=dlTgt(k),dd=dlDay();
   const cur=k==='coran'?Math.min(dd.rn||0,tg):k==='priere'?(dd.p||[]).filter(Boolean).length:k==='matin'||k==='soir'?dlCatDone(k)[0]:k==='tasbih'?Math.min(tTot(),tg):(x.ok?1:0),tot=k==='priere'?5:u?tg:1,pc=Math.round(cur/tot*100);
   const goal=u?`${tg} ${u} par jour`:k==='priere'?'les 5 prières chaque jour':'chaque jour';
   const left=x.ok?'Objectif atteint aujourd’hui ✓':u?(cur?`Encore ${tot-cur} ${u}`:'À faire aujourd’hui'):k==='priere'?(cur?`Encore ${5-cur} prière${5-cur>1?'s':''}`:'Coche chaque prière accomplie'):'À faire aujourd’hui';
@@ -1915,13 +1936,15 @@ function dlCard(){const d=DL(),[n,tot]=dlScore(),st=dlStreak(),G=dlGoals(),E=d.e
   if(k==='priere'){const p=dd.p||[];return `<div class="dli c-${k}${x.ok?' ok':''}"><span class="dlic">${ic}</span><span class="dlx"><b>${l}</b><small>Ton objectif : ${goal}</small><span class="dlpr">${PRN.map((nm,i)=>`<button type="button" class="${p[i]?'on':''}" data-dlp="${i}" aria-pressed="${!!p[i]}">${nm}</button>`).join('')}</span>${bar}</span><span class="dlring${x.ok?' ok':''}" style="--p:${pc}"><b>${x.ok?'✓':u||k==='priere'?`${cur}<small>/${tot}</small>`:'—'}</b></span></div>`}
   return `<a class="dli c-${k}${x.ok?' ok':''}" href="${k==='coran'&&S.ql?'#sourate-'+S.ql.s:g[6]}" ${k==='coran'&&S.ql?'data-qjump="1"':''}><span class="dlic">${ic}</span><span class="dlx"><b>${l}</b><small>Ton objectif : ${goal}</small>${bar}</span><span class="dlring${x.ok?' ok':''}" style="--p:${pc}"><b>${x.ok?'✓':u||k==='priere'?`${cur}<small>/${tot}</small>`:'—'}</b></span></a>`}).join('');
  const ed=dlCard.edit?dlWiz():'';
- return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div><div class="dlfl${st?'':' off'}"><span>🔥</span><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div></div>
- <div class="dlpromise">${fin?`<b>Objectifs tenus jusqu’au bout : ${E.dur} jours !</b> ${won} journées réussies. Fixe-en de nouveaux pour continuer.`:`« Je me suis fixé ${tot} objectif${tot>1?'s':''} par jour pendant <b>${E.dur} jours</b>. » · Jour ${inE}`}</div>
- <div class="dlprog"><div class="dlbar"><i style="width:${tot?n/tot*100:0}%"></i></div><span>Aujourd’hui <b>${n}/${tot}</b></span></div>
- ${tot?`<p class="dlmsg">${msg}</p><div class="dlitems">${rows}</div>`:`<div class="dlcta"><p>Choisis ce qui t’intéresse et fixe tes propres objectifs, en quelques questions.</p><button type="button" class="btn gold wide" data-dlqopen="1">✨ Commencer</button></div>`}
- <div class="dlweek">${wk}</div>
- <div class="dlstats"><span><b>${inE}<small>/${E.dur}</small></b><small>jours d’objectifs</small></span><span><b>${won}</b><small>journées tenues</small></span><span><b>${Math.max(d.best||0,st)}</b><small>meilleure série</small></span></div>
- ${tot?`<button type="button" class="dledit" data-dlqopen="1">✍️ Changer mes objectifs</button>`:''}</section>`}
+ const SHORT={coran:'Coran',priere:'Prières',matin:'Matin',soir:'Soir',hadith:'Hadith',nom:'Nom d’Allah',tasbih:'Tasbih'},left=G.filter(g=>!dlState(g).ok),R=Math.round(tot?n/tot*100:0);
+ return `<section class="dlcard${tot?'':' empty'}" id="dlc"><div class="dlh"><div><small>MES OBJECTIFS</small><h3>Ma journée sur le chemin</h3></div>${tot?`<span class="dlday">Jour <b>${inE}</b>/${E.dur}</span>`:''}</div>
+ ${tot?`<div class="dlhero"><div class="dlbig${done?' ok':''}" style="--p:${R}"><div><b>${n}<small>/${tot}</small></b><span>aujourd’hui</span></div></div>
+  <div class="dlst3"><div class="s1${st?'':' off'}"><i>🔥</i><b>${st}</b><small>jour${st>1?'s':''} de suite</small></div><div><i>✅</i><b>${won}</b><small>journée${won>1?'s':''} tenue${won>1?'s':''}</small></div><div><i>🏆</i><b>${Math.max(d.best||0,st)}</b><small>meilleure série</small></div></div></div>
+  <div class="dlleft">${done?`<b>Journée tenue, al-hamdulillah 🤍</b>`:`<span>Il te reste :</span>${left.map(g=>`<em>${g[1]} ${SHORT[g[0]]||g[2]}</em>`).join('')}`}</div>
+  ${fin?`<p class="dlfin">Objectifs tenus jusqu’au bout : ${E.dur} jours ! Fixe-en de nouveaux pour continuer.</p>`:''}
+  <div class="dlitems">${rows}</div>
+  <div class="dlweek">${wk}</div>
+  <button type="button" class="dledit" data-dlqopen="1">✍️ Changer mes objectifs</button>`:`<div class="dlcta"><p>Choisis ce qui t’intéresse et fixe tes propres objectifs, en quelques questions.</p><button type="button" class="btn gold wide" data-dlqopen="1">✨ Commencer</button></div>`}</section>`}
 let DLW=null;
 const DLWQ={coran:['Combien de versets du Coran chaque jour ?',[3,5,10,20,50],'versets'],tasbih:['Combien de dhikr au tasbih chaque jour ?',[33,100,300,1000],'dhikr'],matin:['Combien d’invocations du matin chaque jour ?',null,'invocations'],soir:['Combien d’invocations du soir chaque jour ?',null,'invocations']};
 const DLWD={coran:'Lire chaque jour quelques versets',priere:'Cocher tes 5 prières',matin:'Les invocations du matin',soir:'Les invocations du soir',hadith:'Méditer le hadith du jour',nom:'Apprendre ou réviser un nom d’Allah',tasbih:'Faire ton dhikr au tasbih'};
