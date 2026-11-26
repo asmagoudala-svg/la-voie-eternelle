@@ -1859,6 +1859,22 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .dlfl1 i{font-style:normal;font-size:20px;line-height:1}.dlfl1 b{font:800 17px Mulish,sans-serif;color:#ffc56e}
 .dlfl1.off{background:rgba(255,255,255,.05);border-color:rgba(217,185,119,.3)}.dlfl1.off i{filter:grayscale(1);opacity:.45}.dlfl1.off b{color:#a99f84}
 #phone.light .dlfl1{background:#fff4e2;border-color:#f0c98a}#phone.light .dlfl1 b{color:#c2620f}#phone.light .dlfl1.off{background:#f7f0e0;border-color:#e3d2a8}#phone.light .dlfl1.off b{color:#9a8a68}
+
+/* v117 rappel du jour + signature */
+.hrap{margin:20px 16px 0;padding:18px 16px 14px;border-radius:22px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 0,rgba(226,200,142,.16),transparent 70%),rgba(255,255,255,.03);border:1px solid rgba(217,185,119,.35)}
+.hrap-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.hrap-h span{font:800 11px Mulish,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#e2c88e}
+.hrap-h em{font-style:normal;font:700 11px Mulish,sans-serif;padding:3px 10px;border-radius:999px;background:rgba(217,185,119,.14);color:#e2c88e}
+.hrap-ar{margin:0;font-family:'Amiri Quran','Amiri',serif;font-size:25px;line-height:2;color:#f1d79c}
+.hrap-fr{margin:8px 0 0;font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.45;color:#f3ead2}
+.hrap-f{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(217,185,119,.18)}
+.hrap-f small{font:700 12px Mulish,sans-serif;color:#bdb49a}
+.hrap-f button{min-height:36px;padding:0 14px;border-radius:999px;border:0;background:linear-gradient(135deg,#b8945a,#e2c88e);color:#1a2a1f;font:800 13px Mulish,sans-serif;cursor:pointer}
+.hsig{display:flex;flex-direction:column;align-items:center;gap:4px;margin:30px 0 10px;opacity:.85}
+.hsig b{font-family:'Cormorant Garamond',serif;font-size:22px;color:#e2c88e;font-weight:600}
+.hsig small{font:700 11px Mulish,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#bdb49a}
+#phone.light .hrap{background:radial-gradient(ellipse 80% 60% at 50% 0,rgba(226,200,142,.25),transparent 70%),#fffdf7;border-color:#e3d2a8}
+#phone.light .hrap-ar{color:#8a6a2c}#phone.light .hrap-fr{color:#1f3a2b}#phone.light .hrap-h span,#phone.light .hrap-h em{color:#8a6a2c}#phone.light .hrap-f small,#phone.light .hsig small{color:#7a6e55}#phone.light .hsig b{color:#8a6a2c}
 </style>
 </head>
 <body>
@@ -2054,13 +2070,8 @@ function home(){
    const nq=(S.qnotes||[]).length,COR=[['#sourate-'+(S.ql?S.ql.s:1),nicon('coran','spi'),'Mushaf',S.ql?`Reprendre : sourate ${S.ql.s}, verset ${S.ql.v}`:'Lire le Coran, page par page',1],['#coran-trad','<span class="spe">🌐</span>','Traduction','Le sens en français, la phonétique et les mots'],['#coran-bequille','<span class="spe">🪜</span>','Béquille','Apprendre par cœur en masquant les mots, du plus facile au plus difficile'],['#coran-carnet','<span class="spe">📒</span>','Carnet',nq?`${nq} note${nq>1?'s':''} à revoir`:'Tes notes et mots à revoir'],['#prophetes','<span class="spe">📜</span>','Histoires des prophètes','D’après le Coran et les hadiths authentiques, avec un quiz']],DAY=[['#hadith',nicon('hadith','spi'),'Hadith','Un hadith à méditer chaque jour'],['#invocations',nicon('invocations','spi'),'Invocations','Adhkâr du matin, du soir et du quotidien'],['#parcours',nicon('noms','spi'),'99 Noms','Apprendre les noms d’Allah, étape par étape'],['#tasbih',nicon('tasbih','spi'),'Tasbih','Compter ton dhikr'],['#priere',nicon('priere','spi'),'Prière','Horaires de ta mosquée et Qibla'],['#partage','<span class="spe">🤍</span>','Partage un rappel','Des cartes prêtes à envoyer à tes proches'],['#calendrier','<span class="spe">🗓️</span>','Calendrier hégirien','Les fêtes et dates religieuses selon la lune']];
    const col=(cls,ic,t,sub,txt,it,go,gl)=>`<section class="spc ${cls}"><header class="sph"><span class="sphi">${ic}</span><h3>${t}</h3><p class="sps">${sub}</p><p class="spt">${txt}</p></header><div class="spl">${it.map(([h,ico,l,d,q])=>`<a href="${h}" class="spit" ${q&&S.ql?'data-qjump="1"':''}><span class="spic">${ico}</span><span class="spx"><b>${l}</b><small>${d}</small></span></a>`).join('')}</div><a class="spgo" href="${go}" ${cls==='cor'&&S.ql?'data-qjump="1"':''}>${gl} →</a></section>`;
    return `<div class="allr spaces"><div class="spint"><h2>Deux espaces, un même chemin</h2><p>À gauche, tout pour le Coran. À droite, ton rappel de chaque jour. Tu les retrouves aussi dans la barre du bas.</p></div><div class="spg">${col('cor',nicon('coran','sph-i'),'Le Coran','Lire · Comprendre · Mémoriser','Le Mushaf, sa traduction et ta mémorisation.',COR,'#sourate-'+(S.ql?S.ql.s:1),'Ouvrir le Coran')}${col('day',nicon('invocations','sph-i'),'Au quotidien','Prier · Invoquer · Se souvenir','Les rappels qui rythment ta journée.',DAY,'#hadith','Ouvrir le quotidien')}</div></div>`})()}
-  <div class="card verse" style="margin-top:18px">
-   <div class="lab">Parole d'Allah</div>
-   <div class="ar" lang="ar">وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا</div>
-   <p>« C'est à Allah qu'appartiennent les plus beaux noms : invoquez-Le donc par eux. »</p>
-   <div class="ref">Sourate Al-A'râf (7), verset 180</div>
-  </div>
-  <div class="card"><div class="lab">La promesse du Prophète ﷺ</div><p style="margin:0">« Allah possède quatre-vingt-dix-neuf noms, cent moins un. Quiconque les dénombre (<i>ahsâhâ</i>) entrera au Paradis. »</p><div class="src">Al-Bukhârî n° 2736 et 7392, Muslim n° 2677 · <a href="#sources">D'où vient la liste ?</a></div></div>`;
+  ${(()=>{const R=HRAP[Math.floor(Date.now()/864e5)%HRAP.length],[su,v,t,ar,fr]=R,nm={2:'Al-Baqara',29:'Al-ʿAnkabût',94:'Ash-Sharh',39:'Az-Zumar'}[su]||('Sourate '+su);return `<section class="hrap"><div class="hrap-h"><span>✦ Le rappel du jour</span><em>${t}</em></div><p class="hrap-ar" lang="ar" dir="rtl">${ar}</p><p class="hrap-fr">«&nbsp;${fr.trim()}&nbsp;»</p><div class="hrap-f"><small>Sourate ${nm} · ${su}:${v}</small><button type="button" data-hrap="${su}:${v}">📖 Lire dans le Mushaf</button></div></section>`})()}
+  <footer class="hsig"><svg width="26" height="31" viewBox="0 0 34 40" aria-hidden="true"><path d="M2 39V18C2 8 17 1 17 1s15 7 15 17v21z" fill="none" stroke="#C9A465" stroke-width="2"/><path d="M17 12l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#C9A465"/></svg><b>La Voie Éternelle</b><small>Lire · Prier · Se souvenir</small></footer>`;
 }
 /* ---------- Fiche ---------- */
 function fiche(n){
@@ -3082,6 +3093,8 @@ function dlqClick(e){const b=e.target.closest('[data-dlq]');if(!b)return;const [
   toast('Objectifs fixés, bismillah 🤲',`${n} objectif${n>1?'s':''} à valider chaque jour pendant ${du} jours.`)}}
 setTimeout(()=>{if((S.onb||0)<3)dlqOpen(1)},60);
 V.addEventListener('click',e=>{const b=e.target.closest('[data-dlqopen]');if(!b)return;e.preventDefault();e.stopPropagation();dlqOpen()},true);
+const HRAP=[[2, 152, "Le rappel", "فَٱذْكُرُونِىٓ أَذْكُرْكُمْ وَٱشْكُرُوا۟ لِى وَلَا تَكْفُرُونِ", "Souvenez-vous de Moi donc, Je Me souviendrai de vous. Remerciez- Moi et ne soyez pas ingrats envers Moi !"], [29, 45, "La prière", "ٱتْلُ مَآ أُوحِىَ إِلَيْكَ مِنَ ٱلْكِتَٰبِ وَأَقِمِ ٱلصَّلَوٰةَ إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ وَلَذِكْرُ ٱللَّهِ أَكْبَرُ وَٱللَّهُ يَعْلَمُ مَا تَصْنَعُونَ", "Récite ce qui t’est révélé du Livre et accomplis la prière (As-Salât). En vérité la prière (As-Salât) préserve de la turpitude et du blâmable. Et le rappel d’Allah est certes ce qu’il y a de plus grand. Et Allah sait ce que vous faites."], [2, 186, "L’invocation", "وَإِذَا سَأَلَكَ عِبَادِى عَنِّى فَإِنِّى قَرِيبٌ أُجِيبُ دَعْوَةَ ٱلدَّاعِ إِذَا دَعَانِ فَلْيَسْتَجِيبُوا۟ لِى وَلْيُؤْمِنُوا۟ بِى لَعَلَّهُمْ يَرْشُدُونَ", "Et quand Mes serviteurs t’interrogent sur Moi, alors Je suis tout proche: Je réponds à l’appel de celui qui M’invoque quand il M’invoque. Qu’ils répondent donc à Mon appel, et qu’ils croient en Moi, afin qu’ils soient bien guidés."], [94, 5, "L’espoir", "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا", "A côté de la difficulté est, certes, une facilité !"], [39, 53, "La miséricorde", "قُلْ يَٰعِبَادِىَ ٱلَّذِينَ أَسْرَفُوا۟ عَلَىٰٓ أَنفُسِهِمْ لَا تَقْنَطُوا۟ مِن رَّحْمَةِ ٱللَّهِ إِنَّ ٱللَّهَ يَغْفِرُ ٱلذُّنُوبَ جَمِيعًا إِنَّهُۥ هُوَ ٱلْغَفُورُ ٱلرَّحِيمُ", "Dis : \"Ô Mes serviteurs qui avez commis des excès à votre propre détriment, ne désespérez pas de la miséricorde d’Allah. Car Allah pardonne tous les péchés. Oui, c’est Lui le Pardonneur, le Très Miséricordieux.\""]];
+document.addEventListener('click',e=>{const b=e.target.closest('[data-hrap]');if(!b)return;e.preventDefault();const [a,c]=b.dataset.hrap.split(':').map(Number);S.qrange=null;save();qGoTo(a,c)});
 let QSHS=1,QNOTE=null;
 function qSheetClose(){const sh=$('#qsheet');sh&&sh.classList.remove('on')}
 function fillSurList(){const el=$('#qlist');if(!el||!QIDX)return;const q=norm(QQ);
