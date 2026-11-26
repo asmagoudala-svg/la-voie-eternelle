@@ -1891,7 +1891,7 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .hd-lamp{animation:hdS 5s ease-in-out infinite;transform-origin:200px 120px}@keyframes hdS{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
 .hd-q{position:absolute;left:18px;right:18px;top:26px;margin:0;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.3;color:#fff3d1;text-shadow:0 2px 12px rgba(0,0,0,.45)}
 
-.hrd{margin:22px 16px 10px}.hrd .sht{margin:0 0 10px}
+.hrd{margin:22px 16px 14px}.hrd .hcard{margin:0}.hrd .sht{margin:0 0 10px}
 </style>
 </head>
 <body>
@@ -2087,23 +2087,7 @@ function home(){
    const nq=(S.qnotes||[]).length,COR=[['#sourate-'+(S.ql?S.ql.s:1),nicon('coran','spi'),'Mushaf',S.ql?`Reprendre : sourate ${S.ql.s}, verset ${S.ql.v}`:'Lire le Coran, page par page',1],['#coran-trad','<span class="spe">🌐</span>','Traduction','Le sens en français, la phonétique et les mots'],['#coran-bequille','<span class="spe">🪜</span>','Béquille','Apprendre par cœur en masquant les mots, du plus facile au plus difficile'],['#coran-carnet','<span class="spe">📒</span>','Carnet',nq?`${nq} note${nq>1?'s':''} à revoir`:'Tes notes et mots à revoir'],['#prophetes','<span class="spe">📜</span>','Histoires des prophètes','D’après le Coran et les hadiths authentiques, avec un quiz']],DAY=[['#hadith',nicon('hadith','spi'),'Hadith','Un hadith à méditer chaque jour'],['#invocations',nicon('invocations','spi'),'Invocations','Adhkâr du matin, du soir et du quotidien'],['#parcours',nicon('noms','spi'),'99 Noms','Apprendre les noms d’Allah, étape par étape'],['#tasbih',nicon('tasbih','spi'),'Tasbih','Compter ton dhikr'],['#priere',nicon('priere','spi'),'Prière','Horaires de ta mosquée et Qibla'],['#partage','<span class="spe">🤍</span>','Partage un rappel','Des cartes prêtes à envoyer à tes proches'],['#calendrier','<span class="spe">🗓️</span>','Calendrier hégirien','Les fêtes et dates religieuses selon la lune']];
    const col=(cls,ic,t,sub,txt,it,go,gl)=>`<section class="spc ${cls}"><header class="sph"><span class="sphi">${ic}</span><h3>${t}</h3><p class="sps">${sub}</p><p class="spt">${txt}</p></header><div class="spl">${it.map(([h,ico,l,d,q])=>`<a href="${h}" class="spit" ${q&&S.ql?'data-qjump="1"':''}><span class="spic">${ico}</span><span class="spx"><b>${l}</b><small>${d}</small></span></a>`).join('')}</div><a class="spgo" href="${go}" ${cls==='cor'&&S.ql?'data-qjump="1"':''}>${gl} →</a></section>`;
    return `<div class="allr spaces"><div class="spint"><h2>Deux espaces, un même chemin</h2><p>À gauche, tout pour le Coran. À droite, ton rappel de chaque jour. Tu les retrouves aussi dans la barre du bas.</p></div><div class="spg">${col('cor',nicon('coran','sph-i'),'Le Coran','Lire · Comprendre · Mémoriser','Le Mushaf, sa traduction et ta mémorisation.',COR,'#sourate-'+(S.ql?S.ql.s:1),'Ouvrir le Coran')}${col('day',nicon('invocations','sph-i'),'Au quotidien','Prier · Invoquer · Se souvenir','Les rappels qui rythment ta journée.',DAY,'#hadith','Ouvrir le quotidien')}</div></div>`})()}
-  <section class="hdawn"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>
-<linearGradient id="hdS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f2a1e"/><stop offset=".45" stop-color="#2f5a3e"/><stop offset=".72" stop-color="#c9a465"/><stop offset=".86" stop-color="#f1d79c"/></linearGradient>
-<radialGradient id="hdU" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3d1"/><stop offset=".35" stop-color="#f6dca0" stop-opacity=".9"/><stop offset="1" stop-color="#f1d79c" stop-opacity="0"/></radialGradient>
-<linearGradient id="hdD1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8945a"/><stop offset="1" stop-color="#7a5a2c"/></linearGradient>
-<linearGradient id="hdD2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d4a2a"/><stop offset="1" stop-color="#1c2a1b"/></linearGradient>
-<linearGradient id="hdD3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16291e"/><stop offset="1" stop-color="#0a1711"/></linearGradient></defs>
-<rect width="400" height="300" fill="url(#hdS)"/>
-<circle cx="200" cy="205" r="120" fill="url(#hdU)" class="hd-sun"/><circle cx="200" cy="205" r="34" fill="#fff1c9"/>
-<g stroke="#fff3d1" stroke-opacity=".18" stroke-width="2" class="hd-rays"><path d="M200 205L60 60M200 205L120 30M200 205L200 10M200 205L280 30M200 205L340 60"/></g>
-<g fill="#f6e7bf" opacity=".7"><circle cx="40" cy="30" r="1"/><circle cx="90" cy="55" r="1.2"/><circle cx="350" cy="40" r="1"/><circle cx="310" cy="18" r="1.3"/><circle cx="25" cy="80" r=".8"/><circle cx="375" cy="90" r=".9"/></g>
-<path d="M0 215Q70 190 140 210T280 205T400 200V300H0Z" fill="url(#hdD1)" opacity=".85"/>
-<path d="M0 240Q90 215 190 238T400 228V300H0Z" fill="url(#hdD2)"/>
-<path d="M0 268Q110 248 230 266T400 260V300H0Z" fill="url(#hdD3)"/>
-<g fill="#0a1711"><path d="M58 262c2-30 1-52-3-70l3-1c5 20 6 42 4 71z"/><path d="M56 194c-14-6-28-4-38 4 12-3 24-2 36 2-12 2-22 8-28 16 10-7 22-11 32-12-6 6-10 14-11 22 6-8 12-14 20-18 4 8 6 16 6 24 2-9 1-18-3-26 10 2 18 8 24 15-4-9-12-16-21-19 12-1 24 2 33 9-8-10-20-15-33-15 10-6 22-8 33-6-12-6-26-5-37 2-1-8-5-14-11-18 3 6 4 12 3 18-2-1-3-1-5-2z"/>
-<path d="M336 266c3-24 3-44 0-58l3-1c4 16 4 37 1 59z"/><path d="M335 210c-11-5-23-3-31 3 10-2 19-1 29 2-10 2-18 7-23 13 8-6 18-9 26-10-5 5-8 11-9 18 5-6 10-11 16-14 3 6 5 13 5 19 2-7 1-14-2-21 8 2 14 6 19 12-3-7-10-13-17-15 10-1 19 2 26 7-6-8-16-12-26-12 8-5 18-6 26-5-10-5-21-4-29 2-1-6-4-11-9-14 2 5 3 10 2 14z"/></g>
-</svg><p class="hd-q">Chaque jour est une nouvelle chance de se rapprocher d’Allah.</p></section>
-  <section class="hrd"><h3 class="sht">Ton rappel du jour 🌙</h3><div id="hrdc"><p class="muted pad">Chargement…</p></div></section>`;
+  <section class="hrd"><h3 class="sht">Le rappel du jour 🌙</h3>${homeHadith()}</section>`;
 }
 /* ---------- Fiche ---------- */
 function fiche(n){
