@@ -1890,6 +1890,8 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .hd-flame{animation:hdF 1.6s ease-in-out infinite;transform-origin:200px 160px}@keyframes hdF{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.15)}}
 .hd-lamp{animation:hdS 5s ease-in-out infinite;transform-origin:200px 120px}@keyframes hdS{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
 .hd-q{position:absolute;left:18px;right:18px;top:26px;margin:0;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.3;color:#fff3d1;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+
+.hrd{margin:22px 16px 10px}.hrd .sht{margin:0 0 10px}
 </style>
 </head>
 <body>
@@ -2100,7 +2102,8 @@ function home(){
 <path d="M0 268Q110 248 230 266T400 260V300H0Z" fill="url(#hdD3)"/>
 <g fill="#0a1711"><path d="M58 262c2-30 1-52-3-70l3-1c5 20 6 42 4 71z"/><path d="M56 194c-14-6-28-4-38 4 12-3 24-2 36 2-12 2-22 8-28 16 10-7 22-11 32-12-6 6-10 14-11 22 6-8 12-14 20-18 4 8 6 16 6 24 2-9 1-18-3-26 10 2 18 8 24 15-4-9-12-16-21-19 12-1 24 2 33 9-8-10-20-15-33-15 10-6 22-8 33-6-12-6-26-5-37 2-1-8-5-14-11-18 3 6 4 12 3 18-2-1-3-1-5-2z"/>
 <path d="M336 266c3-24 3-44 0-58l3-1c4 16 4 37 1 59z"/><path d="M335 210c-11-5-23-3-31 3 10-2 19-1 29 2-10 2-18 7-23 13 8-6 18-9 26-10-5 5-8 11-9 18 5-6 10-11 16-14 3 6 5 13 5 19 2-7 1-14-2-21 8 2 14 6 19 12-3-7-10-13-17-15 10-1 19 2 26 7-6-8-16-12-26-12 8-5 18-6 26-5-10-5-21-4-29 2-1-6-4-11-9-14 2 5 3 10 2 14z"/></g>
-</svg><p class="hd-q">Chaque jour est une nouvelle chance de se rapprocher d’Allah.</p></section>`;
+</svg><p class="hd-q">Chaque jour est une nouvelle chance de se rapprocher d’Allah.</p></section>
+  <section class="hrd"><h3 class="sht">Ton rappel du jour 🌙</h3><div id="hrdc"><p class="muted pad">Chargement…</p></div></section>`;
 }
 /* ---------- Fiche ---------- */
 function fiche(n){
@@ -3124,6 +3127,9 @@ setTimeout(()=>{if((S.onb||0)<3)dlqOpen(1)},60);
 V.addEventListener('click',e=>{const b=e.target.closest('[data-dlqopen]');if(!b)return;e.preventDefault();e.stopPropagation();dlqOpen()},true);
 const HRAP=[[2, 152, "Le rappel", "فَٱذْكُرُونِىٓ أَذْكُرْكُمْ وَٱشْكُرُوا۟ لِى وَلَا تَكْفُرُونِ", "Souvenez-vous de Moi donc, Je Me souviendrai de vous. Remerciez- Moi et ne soyez pas ingrats envers Moi !"], [29, 45, "La prière", "ٱتْلُ مَآ أُوحِىَ إِلَيْكَ مِنَ ٱلْكِتَٰبِ وَأَقِمِ ٱلصَّلَوٰةَ إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ وَلَذِكْرُ ٱللَّهِ أَكْبَرُ وَٱللَّهُ يَعْلَمُ مَا تَصْنَعُونَ", "Récite ce qui t’est révélé du Livre et accomplis la prière (As-Salât). En vérité la prière (As-Salât) préserve de la turpitude et du blâmable. Et le rappel d’Allah est certes ce qu’il y a de plus grand. Et Allah sait ce que vous faites."], [2, 186, "L’invocation", "وَإِذَا سَأَلَكَ عِبَادِى عَنِّى فَإِنِّى قَرِيبٌ أُجِيبُ دَعْوَةَ ٱلدَّاعِ إِذَا دَعَانِ فَلْيَسْتَجِيبُوا۟ لِى وَلْيُؤْمِنُوا۟ بِى لَعَلَّهُمْ يَرْشُدُونَ", "Et quand Mes serviteurs t’interrogent sur Moi, alors Je suis tout proche: Je réponds à l’appel de celui qui M’invoque quand il M’invoque. Qu’ils répondent donc à Mon appel, et qu’ils croient en Moi, afin qu’ils soient bien guidés."], [94, 5, "L’espoir", "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا", "A côté de la difficulté est, certes, une facilité !"], [39, 53, "La miséricorde", "قُلْ يَٰعِبَادِىَ ٱلَّذِينَ أَسْرَفُوا۟ عَلَىٰٓ أَنفُسِهِمْ لَا تَقْنَطُوا۟ مِن رَّحْمَةِ ٱللَّهِ إِنَّ ٱللَّهَ يَغْفِرُ ٱلذُّنُوبَ جَمِيعًا إِنَّهُۥ هُوَ ٱلْغَفُورُ ٱلرَّحِيمُ", "Dis : \"Ô Mes serviteurs qui avez commis des excès à votre propre détriment, ne désespérez pas de la miséricorde d’Allah. Car Allah pardonne tous les péchés. Oui, c’est Lui le Pardonneur, le Très Miséricordieux.\""]];
 document.addEventListener('click',e=>{const b=e.target.closest('[data-hrap]');if(!b)return;e.preventDefault();const [a,c]=b.dataset.hrap.split(':').map(Number);S.qrange=null;save();qGoTo(a,c)});
+
+async function fillHomeRappel(){const el=$('#hrdc');if(!el)return;try{const L=await shLib();const e2=$('#hrdc');if(!e2)return;e2.innerHTML=shThumb(shDaily(L),1)}catch(_){const e2=$('#hrdc');e2&&(e2.closest('.hrd').style.display='none')}}
+new MutationObserver(()=>{const e=$('#hrdc');if(e&&!e.dataset.f){e.dataset.f=1;fillHomeRappel()}}).observe(document.getElementById('view')||document.body,{childList:true,subtree:true});
 let QSHS=1,QNOTE=null;
 function qSheetClose(){const sh=$('#qsheet');sh&&sh.classList.remove('on')}
 function fillSurList(){const el=$('#qlist');if(!el||!QIDX)return;const q=norm(QQ);
