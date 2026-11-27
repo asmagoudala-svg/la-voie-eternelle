@@ -1897,7 +1897,7 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .prmix{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;margin:10px 0 4px;padding:13px 14px;border-radius:18px;text-decoration:none;color:inherit;background:linear-gradient(135deg,rgba(201,164,101,.22),rgba(31,90,64,.25));border:1px solid rgba(226,200,142,.5)}
 .prmix>span:first-child{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:rgba(0,0,0,.2)}
 .prmix b{display:block;font:800 15.5px Mulish,sans-serif}.prmix small{display:block;font:600 12px/1.4 Mulish,sans-serif;opacity:.8}.prmix i{font-style:normal;font-size:22px;color:#e2c88e}
-.pqtag{color:#e2c88e;text-decoration:none;text-transform:none;letter-spacing:0}
+.pqsc{color:#9fd0ac;font-weight:800}.pqtag{color:#e2c88e;text-decoration:none;text-transform:none;letter-spacing:0}
 #phone.light .prmix{background:linear-gradient(135deg,#fbf3e2,#eef6f0);border-color:#e3d2a8}#phone.light .prmix i,#phone.light .pqtag{color:#8a6a2c}
 
 .pqz-l{display:grid;gap:8px;margin:12px 0 6px}
@@ -3000,7 +3000,7 @@ function qJump(s2,v2){if(!(QPLAY&&QPLAY.seq))return qGoTo(s2,v2);const imm=QPLAY
 /* ---------- v91 Histoires des prophètes (Coran + hadiths authentiques) ---------- */
 const PR=()=>window.PROPH||{groups:[],list:[]};
 const prGet=id=>/^mix/.test(id)?(PQZ&&PQZ.mix):PR().list.find(p=>p.id===id);
-function prMix(g){const all=[],G=g?PR().groups.find(x=>x.id===g):null;PR().list.filter(p=>!g||p.g===g).forEach(p=>p.q.forEach(x=>all.push([...x.slice(0,4),p.n,p.id])));for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]]}return {id:g?'mix'+g:'mix',n:G?G.t:'Tous les prophètes',q:all.slice(0,10)}}
+function prMix(g){const all=[],G=g?PR().groups.find(x=>x.id===g):null;PR().list.filter(p=>!g||p.g===g).forEach(p=>p.q.forEach(x=>all.push([...x.slice(0,4),p.n,p.id])));for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]]}return {id:g?'mix'+g:'mix',n:G?G.t:'Tous les prophètes',q:g?all.slice(0,10):all}}
 const prOk=id=>{const x=(S.pq||{})[id];return x&&x.b===x.t};
 const prRef=r=>`<button class="prref" data-prref="${r}">📖 ${r.replace('-','–')}</button>`;
 function prNode(id,cls=''){const p=prGet(id);if(!p)return '';return `<a class="prt-n${prOk(id)?' ok':''} ${cls}" href="#prophete-${id}"><i>${p.em}</i><span>${p.n}</span></a>`}
@@ -3034,7 +3034,7 @@ function prophetes(){const P=PR(),done=P.list.filter(p=>prOk(p.id)).length;
  return `<div class="shp prp"><div class="shh"><h1>Histoires des prophètes</h1><p>D’après le Coran et des hadiths authentiques (al-Bukhârî, Muslim) uniquement. Quand les textes se taisent, nous le disons.</p></div>
  <div class="prstat"><span>🧠 Quiz réussis</span><b>${done} / ${P.list.length}</b><i style="--w:${Math.round(done/P.list.length*100)}%"></i></div>
  
- <div class="pqz-l">${[['mix','🧠','Quiz général','Toutes les histoires mélangées · 10 questions',PR().list]].map(([id,ic,t,sub,L])=>{const b=(S.pq||{})[id],nq=Math.min(10,L.reduce((a,p)=>a+p.q.length,0));return `<a class="pqz-i${b&&b.b===b.t?' ok':''}${id==='mix'?' all':''}" href="#quiz-${id}"><span class="pqz-n">${b&&b.b===b.t?'✓':ic}</span><span class="pqz-t"><b>${t}</b><small>${sub}</small><span class="pqz-b"><i style="width:${b?Math.round(b.b/b.t*100):0}%"></i></span><small>${b?`Meilleur score : ${b.b}/${b.t}`:`${nq} questions`}</small></span><i class="pqz-c">›</i></a>`}).join('')}</div>
+ <div class="pqz-l">${[['mix','🧠','Quiz général',`Toutes les histoires mélangées · ${PR().list.reduce((a,p)=>a+p.q.length,0)} questions`,PR().list]].map(([id,ic,t,sub,L])=>{const b=(S.pq||{})[id],nq=L.reduce((a,p)=>a+p.q.length,0);return `<a class="pqz-i${b&&b.b===b.t?' ok':''}${id==='mix'?' all':''}" href="#quiz-${id}"><span class="pqz-n">${b&&b.b===b.t?'✓':ic}</span><span class="pqz-t"><b>${t}</b><small>${sub}</small><span class="pqz-b"><i style="width:${b?Math.round(b.b/b.t*100):0}%"></i></span><small>${b?`Meilleur score : ${b.b}/${b.t}`:`${nq} questions`}</small></span><i class="pqz-c">›</i></a>`}).join('')}</div>
  <h3 class="prh">L’arbre des générations</h3>${prTree()}
  ${P.groups.map(g=>{const L=P.list.filter(p=>p.g===g.id);return L.length?`<h3 class="prh">${g.t}</h3><p class="prgs">${g.s}</p><div class="prl">${L.map(prCard).join('')}</div>`:''}).join('')}
  </div>`}
@@ -3061,7 +3061,7 @@ function prQuizHTML(){const p=prGet(PQZ.id);if(!p)return '<p class="muted pad">Q
   return `${top}<div class="pqend"><span class="prbig">${sc===n?'🏆':'📖'}</span><h2>${sc} / ${n}</h2><p>${msg}</p>${best?`<small>Meilleur score : ${best.b} / ${best.t}</small>`:''}
   <button class="btn gold wide" data-pqa="again">${mx?'Nouvelle série de questions':'Recommencer'}</button>${mx?'<a class="btn ghost wide" href="#prophetes">Revoir les histoires</a>':`<a class="btn ghost wide" href="#prophete-${p.id}">Relire l’histoire</a>`}${nx?`<a class="btn ghost wide" href="#prophete-${nx.id}">Histoire suivante : ${nx.n} ›</a>`:''}</div>`}
  const [q,o,a,e]=Q[PQZ.i],pk=PQZ.pick;
- return `${top}<div class="pqbar"><i style="--w:${Math.round(PQZ.i/n*100)}%"></i></div><p class="pqc">Question ${PQZ.i+1} sur ${n}${mx&&Q[PQZ.i][4]?` · <a class="pqtag" href="#prophete-${Q[PQZ.i][5]}">${Q[PQZ.i][4]}</a>`:''}</p><h2 class="pqq">${q}</h2>
+ return `${top}<div class="pqbar"><i style="--w:${Math.round(PQZ.i/n*100)}%"></i></div><p class="pqc">${mx?`<b class="pqsc">✓ ${PQZ.sc}</b> · `:''}Question ${PQZ.i+1} sur ${n}${mx&&Q[PQZ.i][4]?` · <a class="pqtag" href="#prophete-${Q[PQZ.i][5]}">${Q[PQZ.i][4]}</a>`:''}</p><h2 class="pqq">${q}</h2>
  <div class="pqo">${o.map((t,k)=>`<button data-pqo="${k}" class="${pk===null?'':k===a?'good':k===pk?'bad':'dim'}"${pk===null?'':' disabled'}><span>${'ABCD'[k]}</span>${t}</button>`).join('')}</div>
  ${pk===null?'':`<div class="pqe ${pk===a?'good':'bad'}"><b>${pk===a?'Bonne réponse ✓':'Ce n’est pas ça'}</b><p>${pk===a?'':`Bonne réponse : <b>${o[a]}</b>. `}${e}</p></div><button class="btn gold wide" data-pqa="next">${PQZ.i+1<n?'Question suivante':'Voir mon score'}</button>`}`}
 function prQBind(){const el=$('#prqz');if(!el)return;el.onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset,p=prGet(PQZ.id);
