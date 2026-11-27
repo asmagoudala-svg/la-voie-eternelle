@@ -1900,7 +1900,7 @@ nav.sp-coran svg.nvi{width:28px!important;height:28px!important}
 .pqtag{color:#e2c88e;text-decoration:none;text-transform:none;letter-spacing:0}
 #phone.light .prmix{background:linear-gradient(135deg,#fbf3e2,#eef6f0);border-color:#e3d2a8}#phone.light .prmix i,#phone.light .pqtag{color:#8a6a2c}
 
-.pqz-l{display:grid;gap:8px;margin-bottom:6px}
+.pqz-l{display:grid;gap:8px;margin:12px 0 6px}
 .pqz-i{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:11px;padding:11px 12px;border-radius:16px;text-decoration:none;color:inherit;background:rgba(255,255,255,.04);border:1px solid rgba(217,185,119,.25)}
 .pqz-i.all{background:linear-gradient(135deg,rgba(201,164,101,.22),rgba(31,90,64,.25));border-color:rgba(226,200,142,.5)}
 .pqz-n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:800 16px Mulish,sans-serif;color:#1a2a1f;background:linear-gradient(135deg,#b8945a,#e2c88e)}
@@ -3033,8 +3033,8 @@ function prCard(p){const x=(S.pq||{})[p.id];return `<a class="prc" href="#prophe
 function prophetes(){const P=PR(),done=P.list.filter(p=>prOk(p.id)).length;
  return `<div class="shp prp"><div class="shh"><h1>Histoires des prophètes</h1><p>D’après le Coran et des hadiths authentiques (al-Bukhârî, Muslim) uniquement. Quand les textes se taisent, nous le disons.</p></div>
  <div class="prstat"><span>🧠 Quiz réussis</span><b>${done} / ${P.list.length}</b><i style="--w:${Math.round(done/P.list.length*100)}%"></i></div>
- <h3 class="prh">Quiz</h3><p class="prgs">Teste-toi par époque ou sur toutes les histoires. Tout est ouvert, dans l’ordre que tu veux.</p>
- <div class="pqz-l">${[['mix','🧠','Tous les prophètes','10 questions mélangées, nouvelle série à chaque fois',PR().list]].concat(PR().groups.map((g,k)=>['mix'+g.id,String(k+1),g.t,PR().list.filter(p=>p.g===g.id).map(p=>p.n).join(' · '),PR().list.filter(p=>p.g===g.id)])).map(([id,ic,t,sub,L])=>{const b=(S.pq||{})[id],nq=Math.min(10,L.reduce((a,p)=>a+p.q.length,0));return `<a class="pqz-i${b&&b.b===b.t?' ok':''}${id==='mix'?' all':''}" href="#quiz-${id}"><span class="pqz-n">${b&&b.b===b.t?'✓':ic}</span><span class="pqz-t"><b>${t}</b><small>${sub}</small><span class="pqz-b"><i style="width:${b?Math.round(b.b/b.t*100):0}%"></i></span><small>${b?`Meilleur score : ${b.b}/${b.t}`:`${nq} questions`}</small></span><i class="pqz-c">›</i></a>`}).join('')}</div>
+ 
+ <div class="pqz-l">${[['mix','🧠','Quiz général','Toutes les histoires mélangées · 10 questions',PR().list]].map(([id,ic,t,sub,L])=>{const b=(S.pq||{})[id],nq=Math.min(10,L.reduce((a,p)=>a+p.q.length,0));return `<a class="pqz-i${b&&b.b===b.t?' ok':''}${id==='mix'?' all':''}" href="#quiz-${id}"><span class="pqz-n">${b&&b.b===b.t?'✓':ic}</span><span class="pqz-t"><b>${t}</b><small>${sub}</small><span class="pqz-b"><i style="width:${b?Math.round(b.b/b.t*100):0}%"></i></span><small>${b?`Meilleur score : ${b.b}/${b.t}`:`${nq} questions`}</small></span><i class="pqz-c">›</i></a>`}).join('')}</div>
  <h3 class="prh">L’arbre des générations</h3>${prTree()}
  ${P.groups.map(g=>{const L=P.list.filter(p=>p.g===g.id);return L.length?`<h3 class="prh">${g.t}</h3><p class="prgs">${g.s}</p><div class="prl">${L.map(prCard).join('')}</div>`:''}).join('')}
  </div>`}
